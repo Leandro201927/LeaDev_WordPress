@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const TerserPlugin = require('terser-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // Función para obtener todos los archivos JavaScript en un directorio y sus subdirectorios
 function getJavaScriptFiles(dir, files = {}) {
@@ -50,6 +51,14 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
+      }),
+      // Recargar la página automáticamente al encontrar cambios
+      new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 3000,
+        proxy: 'http://localhost/', // Este debería ser la URL de tu aplicación WordPress
+        files: '**/*', // Observa todos los archivos de tu proyecto
+        notify: false
       })
     ],
   },

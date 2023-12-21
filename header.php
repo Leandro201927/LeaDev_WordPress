@@ -8,7 +8,7 @@
 
     <!-- Script y Style globales -->
     <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet"/>
-    <script src="<?php bloginfo('template_url'); ?>/js/index.js"></script>
+    <script src="<?php bloginfo('template_url'); ?>/js/index.min.js"></script>
 
     <!-- Script de librerías -->
     <?php
@@ -17,10 +17,6 @@
       <?php
       }
     ?>
-
-    <!-- Start of HubSpot Embed Code -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/139702754.js"></script>
-    <!-- End of HubSpot Embed Code -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +39,7 @@
 
         <div class="nav-supercontainer">
           
-          <button class="fill primary hs-cta-trigger-button hs-cta-trigger-button-83872067054">
+          <button class="fill primary">
             Contáctanos
           </button>
         </div>

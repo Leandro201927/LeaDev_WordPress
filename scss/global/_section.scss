@@ -1,7 +1,7 @@
 @import "mixins";
 @import "sass_variables";
 
-section.movier-component-section, footer {
+section.leadev-component-section, footer {
   @include display-flex(row, space-between);
   width: 100%;
   &:first-of-type {
