@@ -1,0 +1,4 @@
+# Impide el acceso a archivos dentro de la carpeta 'private/'
+# dentro del tema LeaDev_Template
+RewriteEngine On
+RewriteRule ^private/ - [F,L]
