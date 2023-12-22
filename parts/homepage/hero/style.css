@@ -1,2 +1,26 @@
-div.part-homepage-hero {
-  background-color: aqua; }
+section.part-homepage-hero {
+  position: relative;
+  background-color: var(--rich-black);
+  height: 100%;
+  width: 100%;
+  min-height: 100vh; }
+  section.part-homepage-hero.leadev-component-section:first-of-type {
+    padding-top: 0;
+    padding-left: 25px;
+    padding-right: 25px; }
+  section.part-homepage-hero div.logo-3js {
+    position: absolute;
+    top: calc(50% - calc(70px / 2));
+    left: calc(50% - calc(380px / 2) + 39px); }
+    section.part-homepage-hero div.logo-3js svg {
+      width: 380px;
+      height: 70px;
+      overflow: hidden; }
+      section.part-homepage-hero div.logo-3js svg path:nth-of-type(1), section.part-homepage-hero div.logo-3js svg path:nth-of-type(2) {
+        transform: translateY(calc(100% + 10px));
+        transition: .8s ease-in-out; }
+  section.part-homepage-hero div.lock__ui {
+    display: flex; }
+    section.part-homepage-hero div.lock__ui .left {
+      width: 50%;
+      height: 100%; }

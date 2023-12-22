@@ -2,42 +2,69 @@
 
 :root {
   // principal
-  --main-color: #00A7E1;
-  --accent-color: #003459;
+  --main-color: #00FF8F;
+  --accent-color: #00A1FF;
+
+  /**
+   * armonía extraida de https://www.color-hex.com/color/36393d
+   */
+
+  // -- main color --
+
   // claros
-  --main-color-0: #425466
-  --main-color-10: #F9FDFF;
-  --main-color-20: #EBFAFF;
-  --main-color-30: #D6F5FF;
-  --main-color-40: #C2F0FF;
-  --main-color-50: #ADEBFF;
-  --main-color-60: #99E6FF;
-  --accent-color-10: #EBF7FF;
-  --accent-color-20: #D6EFFF;
-  --accent-color-30: #C2E8FF;
-  --accent-color-40: #ADDEFF;
-  --accent-color-50: #99D6FF;
-  --accent-color-60: #85CEFF;
+  --main-color-90: #19ff9a;
+  --main-color-80: #32ffa5;
+  --main-color-70: #4cffb0;
+  --main-color-60: #66ffbb;
+  --main-color-50: #7fffc7;
+  --main-color-40: #99ffd2;
+  --main-color-30: #b2ffdd;
+  --main-color-20: #ccffe8;
+  --main-color-10: #e5fff3;
   // oscuros
-  --main-color-160: #00171F;
-  --main-color-150: #002938;
-  --main-color-140: #003B50;
-  --main-color-130: #005F80;
-  --main-color-120: #0083B1;
-  --main-color-110: #0096CC;
-  --accent-color-140: #000C14;
-  --accent-color-140: #001829;
-  --accent-color-140: #00243D;
-  --accent-color-140: #003052;
+  --main-color-110: #00e580;
+  --main-color-120: #00cc72;
+  --main-color-130: #00b264;
+  --main-color-140: #009955;
+  --main-color-150: #007f47;
+  --main-color-160: #006639;
+  --main-color-170: #004c2a;
+  --main-color-180: #00331c;
+  --main-color-190: #00190e;
+
+  // -- accent color --
+
+  // claros
+  --accent-color-90: #19aaff;
+  --accent-color-80: #32b3ff;
+  --accent-color-70: #4cbdff;
+  --accent-color-60: #66c6ff;
+  --accent-color-50: #7fd0ff;
+  --accent-color-40: #99d9ff;
+  --accent-color-30: #b2e2ff;
+  --accent-color-20: #ccecff;
+  --accent-color-10: #e5f5ff;
+  // oscuros
+  --accent-color-110: #0090e5;
+  --accent-color-120: #0080cc;
+  --accent-color-130: #0070b2;
+  --accent-color-140: #006099;
+  --accent-color-150: #00507f;
+  --accent-color-160: #004066;
+  --accent-color-170: #00304c;
+  --accent-color-180: #002033;
+  --accent-color-190: #001019;
+
   // neutros
-  --rich-black: #000C14;
-  --soft-black: #323738;
-  --light-black: #677479;
-  --gray: #A3B2B8;
-  --medium-gray: #CBD7DC;
-  --light-gray: #DCE4E7;
-  --soft-gray: #EDF1F2;
-  --light: #F8F8F8;
+  --rich-black: #060607;
+  --soft-black: #36393D;
+  --light-black: #5e6063;
+  --gray: #86888a;
+  --medium-gray: #aeafb1;
+  --light-gray: #c2c3c4;
+  --soft-gray: #d6d7d8;
+  --light: #eaebeb;
+
   // otros
   --dark-green: #44A980;
   --green: #38DB99;

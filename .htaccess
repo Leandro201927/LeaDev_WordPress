@@ -2,3 +2,5 @@
 # dentro del tema LeaDev_Template
 RewriteEngine On
 RewriteRule ^private/ - [F,L]
+# Comentar cuando suba a prod
+Header set Access-Control-Allow-Origin "*"

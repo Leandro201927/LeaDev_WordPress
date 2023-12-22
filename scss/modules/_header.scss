@@ -1,0 +1,131 @@
+@mixin desktop-nav() {
+  .nav-supercontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    nav.nav-container {
+      width: 100%;
+      ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        height: 100%;
+        padding-right: 40px;
+        margin-right: 40px;
+        border-right: 1px solid rgba(255, 255, 255, 0.29);
+        list-style: none;
+        li {
+          display: flex;
+          &:not(:last-of-type) {
+            margin-right: 35px;
+          }
+          a {
+            display: block;
+            margin: auto 0;
+          }
+        }
+      }
+    }
+    button {
+
+    }
+  }
+}
+@mixin mobile-nav() {}
+@mixin burger-menu() {
+  /**
+    * Burger pointer (nav)
+    */
+    input[type=checkbox].menu-btn {
+    display: none;
+    //add checked event to input[type=checkbox]
+    &:checked {
+      //select all the nav-supercontainer next to input[type=checkbox].menu-btn (:checked only works with '~' and '+')
+      ~ div.nav-supercontainer {
+        display: flex;
+      }
+    }
+  }
+  /**
+   * BURGER-STYLED MENU
+   */
+  label.menu-icon {
+    // espacio sobrante entre el viewport - lock__ui (se divide en 2 para obtener el márgen por cada lado)
+    $lock__ui-half-margin: calc((100vw - var(--default-lock__ui-size) ) / 2);
+
+    display: none;
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background-color: var(--main-color);
+    right: $lock__ui-half-margin;
+    top: 50%;
+    @media screen and (max-width: $desktop-extra-small) {
+      display: block;
+    }
+    @media screen and (max-width: 700px) {
+      right: 25px;
+    }
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 2px;
+      background-color: var(--main-color);
+      right: 0;
+      top: 0;
+    }
+    &::before {
+      transform: translateY(-8px);
+      @media screen and (max-width: 425px) {
+        transform: translateY(-5px);
+      }
+    }
+    &::after {
+      transform: translateY(8px);
+      @media screen and (max-width: 425px) {
+        transform: translateY(5px);
+      }
+    }
+    &:hover { cursor: pointer; }
+    &::after:hover { cursor: pointer; }
+    &::before:hover { cursor: pointer; }
+  }
+}
+
+header {
+  background-color: var(--rich-black);
+  display: flex;
+  width: 100%;
+  height: 90px;
+  z-index: 9;
+  position: fixed;
+  font-size: 14px;
+  padding: 0 25px;
+  transition: .1s;
+  top: 0;
+  transform: translateY(-90px);
+  @media screen and (max-width: $mobile-large) {
+    height: 68px;
+    transform: translateY(-68px);
+  }
+  .lock__ui {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a.logo {
+      padding: 20px 0;
+      svg {
+        width: 180px;
+        height: auto;
+      }
+    }
+    @include burger-menu();
+    @media screen and (min-width: $desktop-extra-small) {
+      @include desktop-nav();
+    }
+    @media screen and (max-width: $desktop-extra-small) {
+      @include mobile-nav();
+    }
+  }
+}

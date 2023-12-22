@@ -32,6 +32,12 @@ module.exports = {
     // Usa el nombre del archivo de entrada para el archivo de salida
     filename: '[name].min.js',
   },
+  // Permitir invocacion de scripts hacia localhost:3000
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  },
   module: {
     rules: [
       {

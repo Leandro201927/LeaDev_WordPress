@@ -3,7 +3,7 @@ const path = require('path');
 const sass = require('node-sass');
 const chokidar = require('chokidar');
 
-const scssDir = path.join(__dirname, 'scss', 'parts');
+const scssDir = path.join(__dirname, '..', 'scss', 'parts');
 
 const compileSection = (scssFileModified) => {
   /**
@@ -16,7 +16,7 @@ const compileSection = (scssFileModified) => {
   let category = splitScssDir[splitScssDir.length - 3]
   
   // 2. construir el directorio style.css del /part al que se va a renderizar el scss victima
-  const targetDir = path.join(__dirname, 'parts', category, name, 'style.css')
+  const targetDir = path.join(__dirname, '..', 'parts', category, name, 'style.css')
 
   // 3. checkear que el archivo destino (style.css de /parts) exista
   if(fs.statSync(scssFileModified).isFile()) {
