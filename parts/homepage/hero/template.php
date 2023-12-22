@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/parts/homepage/hero/style.css">
 <!-- < Component > -->
 <section class="leadev-component-section part-homepage-hero" id="<?php echo $component_key; ?>">
-  <canvas id="webgl-canvas" class="webgl"></canvas>
+  <canvas id="webgl1" class="webgl"></canvas>
+  <canvas id="webgl2" class="webgl"></canvas>
   <div class="logo-3js">
     <svg width="953" height="161" viewBox="0 0 953 161" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M119.698 124.433V161H0V0H39.4608V124.433H119.698ZM139.691 0H259.389V36.567H179.152V62.348H243.605V98.915H179.152V124.433H259.389V161H139.691V0Z" fill="white"/>

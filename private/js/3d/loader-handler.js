@@ -12,8 +12,6 @@ registerComponent(() => {
 	const templateUrl = queryParams.get('templateUrl');
 	const componentName = queryParams.get('componentName');
 
-  console.log(uniqueId, templateUrl, componentName)
-
   /**
 	 * 2. Global (component-scope) variables
 	 * 
@@ -23,7 +21,6 @@ registerComponent(() => {
   const canvas = parentEl.querySelector("canvas.webgl")
 
   const mainScript = document.createElement('script');
-  mainScript.type = 'module';
   mainScript.src = `${templateUrl}/js/parts/${componentName}/script.min.js?key=${uniqueId}&templateUrl=${templateUrl}`;
   document.head.appendChild(mainScript);
 

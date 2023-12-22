@@ -27,7 +27,7 @@ export function registerComponent(callback) {
 export function renderLoaderScreen(canvas, position) {
   let isOpened = true
 
-  canvas.parentElement.innerHTML = `
+  canvas.parentElement.innerHTML += `
     <div class="background-loader">
       <div class="penrose-loader ${position}">
         <svg width="91" height="79" viewBox="0 0 91 79" fill="none" xmlns="http://www.w3.org/2000/svg">
