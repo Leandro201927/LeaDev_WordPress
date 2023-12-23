@@ -18,14 +18,13 @@ registerComponent(() => {
 	const parentEl = document.getElementById(uniqueId)
   const canvas = parentEl.querySelector("canvas.webgl")
 
-  const mainScript = document.createElement('script');
-	mainScript.type = 'module'
-  mainScript.src = `${templateUrl}/js/parts/${componentName}/script.js?key=${uniqueId}&templateUrl=${templateUrl}`;
-  document.body.appendChild(mainScript);
-
-
   function enable3d() {
     window.loaderHandler = renderLoaderScreen(canvas, 'center')
+
+		const mainScript = document.createElement('script');
+		mainScript.type = 'module'
+		mainScript.src = `${templateUrl}/js/parts/${componentName}/script.js?key=${uniqueId}&templateUrl=${templateUrl}`;
+		document.body.appendChild(mainScript);
   }
 
   enable3d()

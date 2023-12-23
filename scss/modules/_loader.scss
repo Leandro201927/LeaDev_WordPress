@@ -5,6 +5,8 @@ div.background-loader {
   width: 100%;
   height: 100%;
   display: flex;
+  opacity: 1;
+  transition: .25s;
   @keyframes penrose-loading {
     0% {
       opacity: 1;
@@ -19,9 +21,9 @@ div.background-loader {
   div.penrose-loader {
     margin: auto;
     svg {
-      width: 80px;
-      height: auto;
       animation: penrose-loading 2s ease-in-out 0s infinite;
+      width: 154px;
+      height: auto;
     }
   }
 }

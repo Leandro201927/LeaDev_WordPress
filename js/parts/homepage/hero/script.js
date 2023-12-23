@@ -225,6 +225,8 @@ registerComponent(async () => {
   }
 
   new Promise((resolve, reject) => {
+    canvas.style.opacity = 0
+
     gltfLoader.load(
       `${templateUrl}/assets/3d/homepage/delivery machine addon + animation.glb`,
       (gltf) => {
@@ -245,8 +247,8 @@ registerComponent(async () => {
           let position = gltfCamera.position;
           let quaternion = gltfCamera.quaternion;
 
-          let factorMove = 5
-          position.y += factorMove / 2
+          let factorMove = 3.5
+          position.y += factorMove - 2.4
           position.x += factorMove
           // position.y += 5
 
@@ -374,29 +376,25 @@ registerComponent(async () => {
     let path1 = document.querySelector('.logo-3js svg path:nth-of-type(1)');
     let path2 = document.querySelector('.logo-3js svg path:nth-of-type(2)');
 
-    // Cambia el estilo de transformación para cada elemento
     function beginLogoShow() {
       path1.style.transform = 'translateY(0)';
+      path2.style.transform = 'translateY(0)';
+      path1.style.opacity = 1;
+      path2.style.opacity = 1;
 
-      setTimeout(() => {
-        path2.style.transform = 'translateY(0)';
-  
-        beginLogoHide()
-      }, 200)
+      beginLogoHide()
     }
-    beginLogoShow()
-    
     function beginLogoHide() {
       setTimeout(() => {
-        // path1.style.transform = 'translateX(150px)';
-        // path2.style.transform = 'translateX(-150px)';
+        /**
+         * UI
+         */
+        const header = document.querySelector('header')
+        path1.style.transform = 'translateY(calc(100% + 10px))';
+        path2.style.transform = 'translateY(calc(100% + 10px))';
         path1.style.opacity = '0';
         path2.style.opacity = '0';
-
-        let path1Finished = false
-        let path2Finished = false
-        let penroseMaterialTransitionFinished = false
-        let background2Finished = false
+        header.style.transform = 'translateY(0px)'
 
         mixer.addEventListener('finished', function(e) {
           const actionName = e.action.getClip().name
@@ -442,7 +440,7 @@ registerComponent(async () => {
         playActions(spawnFactoryActions)
 
         /**
-         * Camara
+         * Camera
          */
         // Zoom
         let start = { value: FRUSTRUM_SIZE };
@@ -462,22 +460,28 @@ registerComponent(async () => {
           })
           .start();
         // Translate X
-        let factorMove = 6
+        let factorMove = 4
         new TWEEN.Tween(camera.position)
-          .to({ x: camera.position.x - factorMove, y: camera.position.y - (factorMove / 2.2) }, 1500) // transición durante 2000 ms
+          .to({ x: camera.position.x - factorMove, y: camera.position.y - (factorMove / 3) }, 1500) // transición durante 2000 ms
           .easing(TWEEN.Easing.Quadratic.InOut)
           .onComplete(() => {
           })
           .start();
-
-        path1.addEventListener('transitionend', function() {
-          path1Finished = true
-        })
-        path2.addEventListener('transitionend', function() {
-          path2Finished = true
-        })
-      }, 2000)
+      }, 1000)
     }
+
+    const loaderElement = loaderHandler.getLoaderParentElement()
+    new TWEEN.Tween(loaderElement.style)
+    .to({ opacity: 0 }, 500)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onComplete(() => {
+      canvas.addEventListener('transitionend', function() {
+        beginLogoShow()
+      })
+      loaderElement.style.display = 'none'
+      canvas.style.opacity = 1
+    })
+    .start()
   })
 
   function playActions(actions) {
