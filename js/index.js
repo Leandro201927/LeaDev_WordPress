@@ -14,17 +14,17 @@
  * @param {() => void} callback
  * @returns {() => void}
  */
-export function registerComponent(callback) {
+function registerComponent(callback) {
   return callback()
 }
 
 /**
  * 
- * @param {HTMLCanvasElement} canvas 
+ * @param {HTMLCanvasElement} canvas
  * @param {'right' | 'left' | 'center'} position
  * @returns {{ checkIfIsOpened: () => boolean; finish: () => void; changeLoaderLabelState: (state: any) => void; }}
  */
-export function renderLoaderScreen(canvas, position) {
+function renderLoaderScreen(canvas, position) {
   let isOpened = true
 
   canvas.parentElement.innerHTML += `

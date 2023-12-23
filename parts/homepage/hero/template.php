@@ -19,5 +19,5 @@
   </div> -->
 </section>
 <!-- < Script > -->
-<script src="<?php bloginfo('template_url'); ?>/js/3d/performance-monitor.min.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/3d/loader-handler.min.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>
+<!-- <script type="module" src="<?php bloginfo('template_url'); ?>/js/3d/performance-monitor.js"></script> -->
+<script src="<?php bloginfo('template_url'); ?>/js/3d/loader-handler.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>

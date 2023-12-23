@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <head>
+    <script type="importmap">
+      {
+        "imports": {
+          "lil-gui": "https://cdn.skypack.dev/lil-gui",
+          "tween": "https://cdn.skypack.dev/@tweenjs/tween.js",
+          "three": "https://unpkg.com/three@0.156.1/build/three.module.js",
+          "three/renderers/CSS3DRenderer": "https://unpkg.com/three@0.156.1/examples/jsm/renderers/CSS3DRenderer.js",
+          "three/controls/OrbitControls": "https://unpkg.com/three@0.156.1/examples/jsm/controls/OrbitControls.js",
+          "three/loaders/DRACOLoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/DRACOLoader.js",
+          "three/loaders/GLTFLoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/GLTFLoader.js",
+          "three/loaders/RGBELoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/RGBELoader.js",
+          "three/loaders/EXRLoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/EXRLoader.js",
+          "three/addons/CurveModifier": "https://unpkg.com/three@0.156.1/examples/jsm/modifiers/CurveModifier.js",
+          "three/postprocessing/EffectComposer": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/EffectComposer.js",
+          "three/postprocessing/UnrealBloomPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "three/postprocessing/GlitchPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/GlitchPass.js",
+          "three/postprocessing/RenderPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/RenderPass.js",
+          "three/postprocessing/ShaderPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/ShaderPass.js",
+          "three/shaders/GammaCorrectionShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/GammaCorrectionShader.js",
+          "three/shaders/RGBShiftShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/RGBShiftShader.js",
+          "three/shaders/FXAAShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/FXAAShader.js",
+          "three/math/MathUtils": "https://unpkg.com/three@0.156.1/src/math/MathUtils.js"
+        }
+      }
+    </script>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +34,7 @@
 
     <!-- Script y Style globales -->
     <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet"/>
-    <script src="<?php bloginfo('template_url'); ?>/js/index.min.js"></script>
+    <script src="<?php bloginfo('template_url'); ?>/js/index.js"></script>
 
     <!-- Script de librerías -->
     <?php

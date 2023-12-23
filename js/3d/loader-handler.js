@@ -1,5 +1,3 @@
-import { registerComponent, renderLoaderScreen } from "..";
-
 registerComponent(() => {
   /**
 	 * 1. Key
@@ -21,8 +19,10 @@ registerComponent(() => {
   const canvas = parentEl.querySelector("canvas.webgl")
 
   const mainScript = document.createElement('script');
-  mainScript.src = `${templateUrl}/js/parts/${componentName}/script.min.js?key=${uniqueId}&templateUrl=${templateUrl}`;
-  document.head.appendChild(mainScript);
+	mainScript.type = 'module'
+  mainScript.src = `${templateUrl}/js/parts/${componentName}/script.js?key=${uniqueId}&templateUrl=${templateUrl}`;
+  document.body.appendChild(mainScript);
+
 
   function enable3d() {
     window.loaderHandler = renderLoaderScreen(canvas, 'center')

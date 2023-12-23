@@ -8,6 +8,12 @@ section.part-homepage-hero {
     padding-top: 0;
     padding-left: 25px;
     padding-right: 25px; }
+  section.part-homepage-hero canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
   section.part-homepage-hero div.logo-3js {
     position: absolute;
     top: calc(50% - calc(70px / 2));
