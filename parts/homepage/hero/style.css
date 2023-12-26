@@ -6,8 +6,8 @@ section.part-homepage-hero {
   min-height: 100vh; }
   section.part-homepage-hero.leadev-component-section:first-of-type {
     padding-top: 0;
-    padding-left: 25px;
-    padding-right: 25px; }
+    padding-left: 100px;
+    padding-right: 100px; }
   section.part-homepage-hero canvas {
     position: absolute;
     top: 0;
@@ -31,4 +31,14 @@ section.part-homepage-hero {
     display: flex; }
     section.part-homepage-hero div.lock__ui .left {
       width: 50%;
-      height: 100%; }
+      height: 100%;
+      max-width: 530px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      section.part-homepage-hero div.lock__ui .left span.category-parent {
+        margin-bottom: 15px; }
+      section.part-homepage-hero div.lock__ui .left p.description {
+        margin: 25px 0 40px 0; }
+      section.part-homepage-hero div.lock__ui .left button {
+        max-width: max-content; }

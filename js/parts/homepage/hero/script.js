@@ -41,14 +41,20 @@ registerComponent(async () => {
 	const templateUrl = queryParams.get('templateUrl');
 	const componentName = queryParams.get('componentName');
 
-  console.log('melo no', queryParams)
-
   /**
    * 2. Global (component-scope) variables
    * 
    * @description Crear controles y lógica sólo para el contenedor con el id único
    */
   const parentEl = document.getElementById(uniqueId)
+  const sliderElement = parentEl.querySelector('.slider-container')
+  const sliderController = new SliderController(sliderElement)
+
+  // function setupSlider() {
+  //   setTimeout(() => {
+  //     console.log('sisass', sliderController)
+  //   }, 3000)
+  // }; setupSlider()
 
   let gltfModel, penroseTriangleMesh = []
   let mixer
@@ -372,28 +378,12 @@ registerComponent(async () => {
   }).then(() => {
     setupAnimations()
 
-    // Selecciona los elementos
-    let path1 = document.querySelector('.logo-3js svg path:nth-of-type(1)');
-    let path2 = document.querySelector('.logo-3js svg path:nth-of-type(2)');
-
-    function beginLogoShow() {
-      path1.style.transform = 'translateY(0)';
-      path2.style.transform = 'translateY(0)';
-      path1.style.opacity = 1;
-      path2.style.opacity = 1;
-
-      beginLogoHide()
-    }
     function beginLogoHide() {
       setTimeout(() => {
         /**
          * UI
          */
         const header = document.querySelector('header')
-        path1.style.transform = 'translateY(calc(100% + 10px))';
-        path2.style.transform = 'translateY(calc(100% + 10px))';
-        path1.style.opacity = '0';
-        path2.style.opacity = '0';
         header.style.transform = 'translateY(0px)'
 
         mixer.addEventListener('finished', function(e) {
@@ -429,6 +419,7 @@ registerComponent(async () => {
           } else if (actionName === 'SpawnLTransformMachine') {
             playActions(infiniteFactoryCycleActions)
             beginConveyorItemsFlow()
+            sliderController.renderFirstSlide()
           }
           // Aquí puedes poner el código que quieras ejecutar cuando la animación termine
         });
@@ -468,7 +459,7 @@ registerComponent(async () => {
           })
           .start();
       }, 1000)
-    }
+    }; beginLogoHide()
 
     const loaderElement = loaderHandler.getLoaderParentElement()
     new TWEEN.Tween(loaderElement.style)

@@ -5,7 +5,7 @@ $options: ();
 @mixin button($options) {
   padding: 10px 20px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   transition: .25s;
   color: map-get($options, 'font-color');

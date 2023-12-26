@@ -11,14 +11,18 @@
 
 h1, h2, h3, h4, h5, h6, p, span {
   // user-select: none;
+  color: white;
 }
 p {
   font-size: 15px;
   line-height: 160%;
   height: max-content;
+  letter-spacing: 0.5px;
 }
 h1 {
-  font-size: 48px;
+  font-size: 62px;
+  font-weight: 900;
+  line-height: 100%;
   @media screen and (max-width: $desktop-extra-small) {
     font-size: 37px;
   }
@@ -53,4 +57,58 @@ button {
 a {
   text-decoration: none;
   color: white;
+  letter-spacing: .5px;
+  font-weight: 500;
+}
+span {
+  &.green {
+    color: var(--main-color);
+  }
+  &.category{ 
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+/**
+ * Animation section
+ */
+.animate {
+  // Vertical reveal
+  &.vertical-reveal {
+    display: inline-block;
+    overflow: hidden;
+    span {
+      display: inline-block;
+      transform: translateY(100%);
+      transition: .5s ease-in-out;
+    }
+    &.show {
+      span {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+  // Fade reveal
+  &.vertical-fade-reveal {
+    transition: .5s ease-in-out !important;
+    transform: translateY(100px);
+    opacity: 0;
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  &.horizontal-fade-reveal {
+    transition: transform .5s ease-in-out, opacity .5s ease-in-out;
+    transform: translateX(-50px);
+    opacity: 0;
+    &.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }

@@ -6,18 +6,52 @@
 <section class="leadev-component-section part-homepage-hero" id="<?php echo $component_key; ?>">
   <canvas id="webgl1" class="webgl"></canvas>
   <canvas id="webgl2" class="webgl"></canvas>
-  <div class="logo-3js">
-    <svg width="953" height="161" viewBox="0 0 953 161" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M119.698 124.433V161H0V0H39.4608V124.433H119.698ZM139.691 0H259.389V36.567H179.152V62.348H243.605V98.915H179.152V124.433H259.389V161H139.691V0Z" fill="white"/>
-      <path d="M548.505 161H491.944V0H548.505C597.699 0 631.372 32.0948 631.372 80.5C631.372 130.221 595.858 161 548.505 161ZM531.405 36.567V124.433H548.505C576.39 124.433 591.912 106.807 591.912 80.5C591.912 74.4493 591.123 68.9248 589.544 63.4003C582.704 44.1961 567.709 36.567 548.505 36.567H531.405ZM655.838 0H775.536V36.567H695.299V62.348H759.752V98.915H695.299V124.433H775.536V161H655.838V0ZM909.176 0H952.32L887.868 161H848.407L783.954 0H826.835L868.137 116.015L909.176 0Z" fill="white"/>
-    </svg>
-  </div>
-  <!-- <div class="lock__ui">
+  <div class="lock__ui">
     <div class="left">
-      
+      <div class="slider-container">
+        <div class="slider-indicator animate horizontal-fade-reveal">
+          <span id="raw-indicator" class="raw-indicator">01</span>
+          <div class="line-container">
+            <div class="track-line"></div>
+            <div class="line-current-active-track"></div>
+          </div>
+          <p class="scroll-label">Scroll</p>
+          <span id="scroll-down-arrow" class="material-symbols-outlined">
+            arrow_back_ios
+          </span>
+        </div>
+        <div class="slider-sections">
+          <div class="slide slide-0">
+            <span class="category-parent animate vertical-reveal">
+              <span class="category"> Soluciones Digitales </span>
+            </span>
+            <h1>
+              <span class="animate vertical-reveal">
+                <span> Transforma tu </span>
+              </span>
+              <span class="animate vertical-reveal">
+                <span> presencia en línea </span>
+              </span>
+            </h1>
+            <p class="description animate vertical-fade-reveal">
+              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
+            </p>
+            <button class="fill primary animate vertical-fade-reveal">
+              Contáctanos
+            </button>
+          </div>
+          <div class="slide slide-1">
+            <!-- Acá irá la sección del acordión de servicios -->
+          </div>
+          <div class="slide slide-2">
+            <!-- Acá irá la sección de páginas hechas -->
+          </div>
+        </div>
+      </div>
     </div>
-  </div> -->
+  </div>
 </section>
 <!-- < Script > -->
 <!-- <script type="module" src="<?php bloginfo('template_url'); ?>/js/3d/performance-monitor.js"></script> -->
+<script src="<?php bloginfo('template_url'); ?>/js/controllers/slider-controller.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/3d/loader-handler.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>
