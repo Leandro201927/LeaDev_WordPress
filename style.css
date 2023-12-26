@@ -66,36 +66,6 @@ span.category {
   font-size: 12px;
   font-weight: 600; }
 
-/**
- * Animation section
- */
-.animate.vertical-reveal {
-  display: inline-block;
-  overflow: hidden; }
-  .animate.vertical-reveal span {
-    display: inline-block;
-    transform: translateY(100%);
-    transition: .5s ease-in-out; }
-  .animate.vertical-reveal.show span {
-    transform: translateY(0);
-    opacity: 1; }
-
-.animate.vertical-fade-reveal {
-  transition: .5s ease-in-out !important;
-  transform: translateY(100px);
-  opacity: 0; }
-  .animate.vertical-fade-reveal.show {
-    opacity: 1;
-    transform: translateY(0); }
-
-.animate.horizontal-fade-reveal {
-  transition: transform .5s ease-in-out, opacity .5s ease-in-out;
-  transform: translateX(-50px);
-  opacity: 0; }
-  .animate.horizontal-fade-reveal.show {
-    opacity: 1;
-    transform: translateX(0); }
-
 section.leadev-component-section, footer {
   display: flex;
   flex-direction: row;
@@ -595,7 +565,7 @@ div.background-loader {
     height: 100%;
     max-height: 330px;
     position: absolute;
-    left: -77px;
+    left: -89px;
     top: calc(50% - (330px / 2)); }
     .slider-container .slider-indicator .raw-indicator {
       font-weight: 700;
@@ -641,6 +611,38 @@ div.background-loader {
     display: flex;
     flex-direction: column;
     justify-content: center; }
+    .slider-container .slider-sections .slide:not(.show) {
+      display: none; }
+
+/**
+ * Animation section
+ */
+.animate.vertical-reveal {
+  display: inline-block;
+  overflow: hidden; }
+  .animate.vertical-reveal span {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: .5s ease-in-out; }
+  .animate.vertical-reveal.show span {
+    transform: translateY(0);
+    opacity: 1; }
+
+.animate.vertical-fade-reveal {
+  transition: .5s ease-in-out !important;
+  transform: translateY(100px);
+  opacity: 0; }
+  .animate.vertical-fade-reveal.show {
+    opacity: 1;
+    transform: translateY(0); }
+
+.animate.horizontal-fade-reveal {
+  transition: transform .5s ease-in-out, opacity .5s ease-in-out;
+  transform: translateX(-50px);
+  opacity: 0; }
+  .animate.horizontal-fade-reveal.show {
+    opacity: 1;
+    transform: translateX(0); }
 
 header {
   background-color: transparent;

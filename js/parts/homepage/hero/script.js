@@ -200,7 +200,6 @@ registerComponent(async () => {
       const cycleItemsHandler = (e) => {
         const actionName = e.action.getClip().name
         if(actionName === 'BoxTransformedCycleTranslate') {
-          console.log('terminó el BoxTransformedCycleTranslate')
           mixer.removeEventListener('finished', cycleItemsHandler)
           assignedItem = assignedItem + 1 > itemsInOrder.length - 1 ? 0 : assignedItem + 1
           // beginBoxTransformedPlusImplicatedItem()
@@ -218,7 +217,6 @@ registerComponent(async () => {
       const cycleCrateHandler = (e) => {
         const actionName = e.action.getClip().name
         if(actionName === 'CrateAction') {
-          console.log('terminó el crate')
           mixer.removeEventListener('finished', cycleCrateHandler)
           beginBoxTransformedPlusImplicatedItem()
         }
@@ -486,7 +484,7 @@ registerComponent(async () => {
 
   function playAction(actions, actionName) {
     const action = actions[actionName].action
-    console.log('play singular encontrado', action)
+    // console.log('play singular encontrado', action)
     action.reset()
     action.setEffectiveTimeScale(1)
     action.play();

@@ -6,11 +6,26 @@ class SliderController {
     this.trackCurrentActiveLine = sliderElement.querySelector('div.line-current-active-track')
     this.scrollDownArrow = sliderElement.querySelector('span#scroll-down-arrow')
     
+    this.prevIndex = 0
     this.currentIndex = 0
     this.listeners = {}
+
+    this._init()
+
+    this.animationInProgress = false;
+    // Add a scroll sensitivity property
+    this.scrollSensitivity = 0; // Adjust this value to your needs
+
+    // Bind the scroll event to the parent element
+    this.parentEl.addEventListener('wheel', this._handleScroll.bind(this));
+
+    // Bind the transitionend handler to this and store it as a property so it can be referenced later
+    this.boundHandleTransitionEndOnSlideHide = this._handleTransitionEndOnSlideHide.bind(this);
+    this.parentEl.addEventListener('transitionend', this.boundHandleTransitionEndOnSlideHide);
   }
   _init() {
     const numSlides = document.querySelectorAll('.slider-sections .slide').length;
+    this.numSlides = numSlides
     const trackHeight = 100 / numSlides;
     // Aplica la altura a cada track
     const track = document.querySelector('.line-current-active-track');
@@ -22,6 +37,50 @@ class SliderController {
       this.listeners[event].forEach(callback => callback(data))
     }
   }
+  _handleTransitionEndOnSlideHide(event) {
+    // Check if the event target has the 'animate' class
+    if(event.target.classList.contains('animate')) {
+      // Set the animationInProgress flag to false when the animation ends
+      this.animationInProgress = false;
+
+      const lastSlide = this.parentEl.querySelectorAll('.slider-sections .slide')[this.prevIndex]
+      lastSlide.style.display = 'none'
+
+      const currentSlide = this.parentEl.querySelectorAll('.slider-sections .slide')[this.currentIndex]
+      const firstSlideElements = currentSlide.querySelectorAll('.animate')
+      currentSlide.style.display = 'block'
+      setTimeout(() => {
+        firstSlideElements.forEach(el => {
+          el.classList.add('show')
+        })
+      }, 0)
+    }
+  }
+  _handleScroll(event) {
+    // Check if an animation is in progress
+    if (!this.animationInProgress) {
+      // Check the scroll direction
+      if (event.deltaY < -this.scrollSensitivity) {
+        // Scrolling up
+        this.previousPage();
+      } else if (event.deltaY > this.scrollSensitivity) {
+        // Scrolling down
+        this.nextPage();
+      }
+    }
+  }
+  _renderNewSlide() {
+    this.animationInProgress = true;
+    // 1. Remove every .show class in every element
+    const allElements = this.parentEl.querySelectorAll('.animate')
+
+    allElements.forEach(el => {
+      if(!el.classList.contains('slider-indicator')) {
+        el.classList.remove('show')
+        // ... (Check _handleTransitionEndOnSlideHide for next slide entry animation)
+      }
+    })
+  }
   on(event, callback) {
     if(this.listeners[event]) {
       this.listeners[event].push(callback)
@@ -30,15 +89,41 @@ class SliderController {
     }
   }
   nextPage() {
+    // Increase the index and limit it to the number of slides
+    this.prevIndex = this.currentIndex
+    this.currentIndex = Math.min(this.currentIndex + 1, this.numSlides - 1);
 
+    console.log(this.prevIndex, this.currentIndex)
+
+    if (this.currentIndex !== this.prevIndex) {
+      this._renderNewSlide();
+      // Trigger the onSlideChange event
+      this._on('onSlideChange', this.currentIndex);
+    }
   }
   previousPage() {
+    // Decrease the index and ensure it doesn't go below 0
+    this.prevIndex = this.currentIndex
+    this.currentIndex = Math.max(this.currentIndex - 1, 0);
 
+    console.log(this.prevIndex, this.currentIndex)
+
+    if (this.currentIndex !== this.prevIndex) {
+      this._renderNewSlide();
+      // Trigger the onSlideChange event
+      this._on('onSlideChange', this.currentIndex);
+    }
   }
   renderFirstSlide() {
-    const allAnimateElements = this.parentEl.querySelectorAll('.animate')
-    allAnimateElements.forEach(el => {
-      el.classList.add('show')
-    })
+    const firstSlide = this.parentEl.querySelectorAll('.slider-sections .slide')[0]
+    const firstSlideElements = firstSlide.querySelectorAll('.animate')
+    const sliderIndicator = this.parentEl.querySelector('.slider-indicator')
+    firstSlide.style.display = 'block'
+    setTimeout(() => {
+      firstSlideElements.forEach(el => {
+        el.classList.add('show')
+      })
+      sliderIndicator.classList.add('show')
+    }, 0)
   }
 }

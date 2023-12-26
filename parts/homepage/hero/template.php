@@ -41,10 +41,42 @@
             </button>
           </div>
           <div class="slide slide-1">
-            <!-- Acá irá la sección del acordión de servicios -->
+            <span class="category-parent animate vertical-reveal">
+              <span class="category"> Soluciones Digitales 2 </span>
+            </span>
+            <h1>
+              <span class="animate vertical-reveal">
+                <span> Transforma tu </span>
+              </span>
+              <span class="animate vertical-reveal">
+                <span> presencia en línea 2 </span>
+              </span>
+            </h1>
+            <p class="description animate vertical-fade-reveal">
+              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar. 2
+            </p>
+            <button class="fill primary animate vertical-fade-reveal">
+              Contáctanos 2
+            </button>
           </div>
           <div class="slide slide-2">
-            <!-- Acá irá la sección de páginas hechas -->
+            <span class="category-parent animate vertical-reveal">
+              <span class="category"> Soluciones Digitales 3 </span>
+            </span>
+            <h1>
+              <span class="animate vertical-reveal">
+                <span> Transforma tu </span>
+              </span>
+              <span class="animate vertical-reveal">
+                <span> presencia en línea 3 </span>
+              </span>
+            </h1>
+            <p class="description animate vertical-fade-reveal">
+              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar. 3
+            </p>
+            <button class="fill primary animate vertical-fade-reveal">
+              Contáctanos 3
+            </button>
           </div>
         </div>
       </div>
