@@ -32,6 +32,7 @@ $container-height: 330px;
         margin: 0 auto;
       }
       .line-current-active-track {
+        transition: .5s;
         $width: 4px;
         height: 33%;
         width: $width;
@@ -98,7 +99,7 @@ $container-height: 330px;
   // Fade reveal
   &.vertical-fade-reveal {
     transition: .5s ease-in-out !important;
-    transform: translateY(100px);
+    transform: translateY(20px);
     opacity: 0;
     &.show {
       opacity: 1;

@@ -17,7 +17,7 @@ class SliderController {
     this.scrollSensitivity = 0; // Adjust this value to your needs
 
     // Bind the scroll event to the parent element
-    this.parentEl.addEventListener('wheel', this._handleScroll.bind(this));
+    document.addEventListener('wheel', this._handleScroll.bind(this));
 
     // Bind the transitionend handler to this and store it as a property so it can be referenced later
     this.boundHandleTransitionEndOnSlideHide = this._handleTransitionEndOnSlideHide.bind(this);
@@ -39,10 +39,7 @@ class SliderController {
   }
   _handleTransitionEndOnSlideHide(event) {
     // Check if the event target has the 'animate' class
-    if(event.target.classList.contains('animate')) {
-      // Set the animationInProgress flag to false when the animation ends
-      this.animationInProgress = false;
-
+    if(event.target.classList.contains('animate') && !event.target.classList.contains('show')) {
       const lastSlide = this.parentEl.querySelectorAll('.slider-sections .slide')[this.prevIndex]
       lastSlide.style.display = 'none'
 
@@ -51,6 +48,11 @@ class SliderController {
       currentSlide.style.display = 'block'
       setTimeout(() => {
         firstSlideElements.forEach(el => {
+          this.parentEl.addEventListener('transitionend', (event) => {
+            if(event.target.classList.contains('animate') && event.target.classList.contains('show')) {
+              this.animationInProgress = false
+            }
+          });
           el.classList.add('show')
         })
       }, 0)
@@ -74,6 +76,8 @@ class SliderController {
     // 1. Remove every .show class in every element
     const allElements = this.parentEl.querySelectorAll('.animate')
 
+    this._renderTrackerPosition()
+
     allElements.forEach(el => {
       if(!el.classList.contains('slider-indicator')) {
         el.classList.remove('show')
@@ -81,6 +85,21 @@ class SliderController {
       }
     })
   }
+  _renderTrackerPosition() {
+    // const trackHeight = 100 / this.numSlides;
+    const yDistance = 100 * this.currentIndex
+    const track = this.parentEl.querySelector('.line-current-active-track');
+    track.style.transform = `translateY(${yDistance}%)`;
+
+    const rawIndicator = this.parentEl.querySelector('#raw-indicator');
+    rawIndicator.innerText = `0${this.currentIndex + 1}`
+  }
+
+  /**
+   * -----------------------------------------
+   * ----------- Public methods --------------
+   * -----------------------------------------
+   */
   on(event, callback) {
     if(this.listeners[event]) {
       this.listeners[event].push(callback)

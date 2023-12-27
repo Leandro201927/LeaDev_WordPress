@@ -582,6 +582,7 @@ div.background-loader {
         opacity: 0.28;
         margin: 0 auto; }
       .slider-container .slider-indicator .line-container .line-current-active-track {
+        transition: .5s;
         height: 33%;
         width: 4px;
         filter: drop-shadow(0px -1.934px 7.639px var(--main-color));
@@ -630,7 +631,7 @@ div.background-loader {
 
 .animate.vertical-fade-reveal {
   transition: .5s ease-in-out !important;
-  transform: translateY(100px);
+  transform: translateY(20px);
   opacity: 0; }
   .animate.vertical-fade-reveal.show {
     opacity: 1;
