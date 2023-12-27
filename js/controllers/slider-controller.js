@@ -9,6 +9,7 @@ class SliderController {
     this.prevIndex = 0
     this.currentIndex = 0
     this.listeners = {}
+    this.canScroll = false
 
     this._init()
 
@@ -59,15 +60,17 @@ class SliderController {
     }
   }
   _handleScroll(event) {
-    // Check if an animation is in progress
-    if (!this.animationInProgress) {
-      // Check the scroll direction
-      if (event.deltaY < -this.scrollSensitivity) {
-        // Scrolling up
-        this.previousPage();
-      } else if (event.deltaY > this.scrollSensitivity) {
-        // Scrolling down
-        this.nextPage();
+    if(this.canScroll) {
+      // Check if an animation is in progress
+      if (!this.animationInProgress) {
+        // Check the scroll direction
+        if (event.deltaY < -this.scrollSensitivity) {
+          // Scrolling up
+          this.previousPage();
+        } else if (event.deltaY > this.scrollSensitivity) {
+          // Scrolling down
+          this.nextPage();
+        }
       }
     }
   }
@@ -116,8 +119,8 @@ class SliderController {
 
     if (this.currentIndex !== this.prevIndex) {
       this._renderNewSlide();
-      // Trigger the onSlideChange event
-      this._on('onSlideChange', this.currentIndex);
+      // Trigger the onslidechange event
+      this._on('onslidechange', this.currentIndex);
     }
   }
   previousPage() {
@@ -129,8 +132,8 @@ class SliderController {
 
     if (this.currentIndex !== this.prevIndex) {
       this._renderNewSlide();
-      // Trigger the onSlideChange event
-      this._on('onSlideChange', this.currentIndex);
+      // Trigger the onslidechange event
+      this._on('onslidechange', this.currentIndex);
     }
   }
   renderFirstSlide() {
@@ -143,6 +146,9 @@ class SliderController {
         el.classList.add('show')
       })
       sliderIndicator.classList.add('show')
+      sliderIndicator.addEventListener('transitionend', () => {
+        this.canScroll = true
+      })
     }, 0)
   }
 }

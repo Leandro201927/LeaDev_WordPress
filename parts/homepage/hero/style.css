@@ -12,9 +12,9 @@ section.part-homepage-hero {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    transition: .25s; }
+    width: 100% !important;
+    height: 100% !important;
+    transition: .5s; }
   section.part-homepage-hero div.logo-3js {
     position: absolute;
     top: calc(50% - calc(70px / 2) - 3px);

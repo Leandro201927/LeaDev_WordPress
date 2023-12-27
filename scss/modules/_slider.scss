@@ -87,6 +87,7 @@ $container-height: 330px;
     span {
       display: inline-block;
       transform: translateY(100%);
+      opacity: 0;
       transition: .5s ease-in-out;
     }
     &.show {

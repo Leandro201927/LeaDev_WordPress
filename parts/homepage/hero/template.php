@@ -6,6 +6,7 @@
 <section class="leadev-component-section part-homepage-hero" id="<?php echo $component_key; ?>">
   <canvas id="webgl1" class="webgl"></canvas>
   <canvas id="webgl2" class="webgl"></canvas>
+  <video style="display: none;" id="movier-video" src="<?php bloginfo('template_url'); ?>/assets/3d/homepage/movier.mp4" width="19.2" height="10.8" playsinline webkit-playsinline></video>
   <div class="lock__ui">
     <div class="left">
       <div class="slider-container">
@@ -42,40 +43,40 @@
           </div>
           <div class="slide slide-1">
             <span class="category-parent animate vertical-reveal">
-              <span class="category"> Soluciones Digitales 2 </span>
+              <span class="category"> Soluciones Digitales </span>
             </span>
             <h1>
               <span class="animate vertical-reveal">
                 <span> Transforma tu </span>
               </span>
               <span class="animate vertical-reveal">
-                <span> presencia en línea 2 </span>
+                <span> presencia en línea </span>
               </span>
             </h1>
             <p class="description animate vertical-fade-reveal">
-              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar. 2
+              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
             </p>
             <button class="fill primary animate vertical-fade-reveal">
-              Contáctanos 2
+              Contáctanos
             </button>
           </div>
           <div class="slide slide-2">
             <span class="category-parent animate vertical-reveal">
-              <span class="category"> Soluciones Digitales 3 </span>
+              <span class="category"> Soluciones Digitales </span>
             </span>
             <h1>
               <span class="animate vertical-reveal">
                 <span> Transforma tu </span>
               </span>
               <span class="animate vertical-reveal">
-                <span> presencia en línea 3 </span>
+                <span> presencia en línea </span>
               </span>
             </h1>
             <p class="description animate vertical-fade-reveal">
-              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar. 3
+              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
             </p>
             <button class="fill primary animate vertical-fade-reveal">
-              Contáctanos 3
+              Contáctanos
             </button>
           </div>
         </div>

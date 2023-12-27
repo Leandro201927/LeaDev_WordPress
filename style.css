@@ -624,6 +624,7 @@ div.background-loader {
   .animate.vertical-reveal span {
     display: inline-block;
     transform: translateY(100%);
+    opacity: 0;
     transition: .5s ease-in-out; }
   .animate.vertical-reveal.show span {
     transform: translateY(0);
