@@ -288,14 +288,11 @@ registerComponent(async () => {
     /**
      * Environment
      */
-    const hdrEquirect = new RGBELoader().load(
-      `${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.hdr`,
-      (texture) => {
-        hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
-        envmap = texture
-        scene.environment = envmap
-      }
-    );
+    const hdrEquirect = new RGBELoader()
+    const texture = await hdrEquirect.loadAsync(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.hdr`);
+    hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
+    envmap = texture;
+    scene.environment = envmap;
   
     // Crea una textura de color sólido
     const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, () => {
@@ -342,13 +339,13 @@ registerComponent(async () => {
     const initialObjectsHidden = [] // Los objetos que vayan a ser escondidos debido a la animación del logo inicial, se encolarán acá para hacerlos aparecer después.
     let initialPenroseRotateAnimations, initialPenroseRotateActions = {}, initialPenroseRotateNameFilter = 'PenroseInitRotate';
     let spawnFactoryAnimations, spawnFactoryActions = {}, spawnFactoryNameFilter = [
-      'SpawnUpperConveyorBelt', 'SpawnLowerConveyorBelt', 'SpawnLTransformMachine', 'SpawnTransformMachine'
+      'SpawnUpperConveyorBelt', 'SpawnLowerConveyorBelt', 'SpawnLTransformMachine', 'SpawnTransformMachine', 'SpawnALogo', 'SpawnALogoContainer', 'SpawnTuNegocioCover', 'SpawnTuNegocio'
     ];
     let infiniteFactoryCycleAnimations, infiniteFactoryCycleActions = {}, infiniteFactoryCycleNameFilter = [
-      'CycleTranslateUpperConveyorBelt', 'CycleTranslateLowerConveyorBelt'
+      'CycleTranslateUpperConveyorBelt', 'CycleTranslateLowerConveyorBelt', 'CicleFloatingLogoContainer', 'CicleFloatingLogo', 'CicleFloatingTuNegocioCover', 'CicleFloatingTuNegocio'
     ];
     let controlledManuallyAnimations, controlledManuallyActions = {}, controlledManuallyNameFilter = [
-      'CrateAction', 'BoxTransformedCycleTranslate', 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'
+      /*'CrateAction', 'BoxTransformedCycleTranslate', 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'*/
     ];
   
     function beginConveyorItemsFlow() {
@@ -385,7 +382,7 @@ registerComponent(async () => {
         playAction(controlledManuallyActions, 'CrateAction')
       }
   
-      beginCrate()
+      // beginCrate()
     }
   
     new Promise((resolve, reject) => {
@@ -461,11 +458,17 @@ registerComponent(async () => {
   
               // Conveyor base transparency
               if(child.name === 'LowerConveyorBelt_1' || child.name === 'UpperConveyorBelt_1') {
-                child.material = new THREE.MeshPhysicalMaterial({
-                  transmission: 1,
-                  roughness: 0.2,
+                child.material = new THREE.MeshBasicMaterial({
+                  color: 0x333333
                 })
               }
+
+              // if(child.name === 'TransformMachine_5') {
+              //   child.material = new THREE.MeshPhysicalMaterial({
+              //     transmission: 1,
+              //     roughness: 0.2,
+              //   })
+              // }
   
               if(child.name === 'Crate_2') {
                 child.material = new THREE.MeshBasicMaterial({
@@ -474,11 +477,11 @@ registerComponent(async () => {
               }
   
               let emissiveObjects = [
-                // 'PenroseTriangle_2',
+                'ALogo',
                 'UpperConveyorBelt_2',
                 'LowerConveyorBelt_2',
-                'TransformMachine_1',
-                'TransformMachine_3',
+                'TransformMachine_2',
+                'TuNegocioText',
                 'LTransformMachine_2',
                 'LTransformMachine_3',
                 'Crate_3',
@@ -602,7 +605,7 @@ registerComponent(async () => {
            */
           // Zoom
           let start = { value: FRUSTRUM_SIZE };
-          let end = { value: 6.5 };
+          let end = { value: 6.25 };
           new TWEEN.Tween(start)
             .to(end, 1500) // Duración de la transición en milisegundos
             .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -618,7 +621,7 @@ registerComponent(async () => {
             })
             .start();
           // Translate X
-          let factorMove = 4
+          let factorMove = 3.25
           new TWEEN.Tween(camera1.position)
             .to({ x: camera1.position.x - factorMove, y: camera1.position.y - (factorMove / 3) }, 1500) // transición durante 2000 ms
             .easing(TWEEN.Easing.Quadratic.InOut)
@@ -649,6 +652,7 @@ registerComponent(async () => {
     }
   
     function playAction(actions, actionName) {
+      console.log('intentando reproducir accion', actionName)
       const action = actions[actionName].action
       // console.log('play singular encontrado', action)
       action.reset()

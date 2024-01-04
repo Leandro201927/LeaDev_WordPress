@@ -43,22 +43,28 @@
           </div>
           <div class="slide slide-1">
             <span class="category-parent animate vertical-reveal">
-              <span class="category"> Soluciones Digitales </span>
+              <span class="category"> Servicios </span>
             </span>
-            <h1>
-              <span class="animate vertical-reveal">
-                <span> Transforma tu </span>
-              </span>
-              <span class="animate vertical-reveal">
-                <span> presencia en línea </span>
-              </span>
-            </h1>
-            <p class="description animate vertical-fade-reveal">
-              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
-            </p>
-            <button class="fill primary animate vertical-fade-reveal">
-              Contáctanos
-            </button>
+            <div class="accordion-container animate vertical-fade-reveal">
+              <div class="illustration">
+                <img src="" alt="">
+              </div>
+              <div class="accordion-info">
+                <div class="summary">
+                  <h4 class="title">
+                    Páginas web en 3D
+                  </h4>
+                  <div class="complete">
+                    <p>
+                      Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                    </p>
+                    <button class="fill primary">
+                      Solicitar servicio
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="slide slide-2">
             <span class="category-parent animate vertical-reveal">
