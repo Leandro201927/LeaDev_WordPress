@@ -74,7 +74,7 @@ registerComponent(async () => {
          * Scene 1: zoom camera IN
          */
         let start = { value: 7.5 };
-        let end = { value: 6.5 };
+        let end = { value: 6.25 };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -127,7 +127,7 @@ registerComponent(async () => {
         /**
          * Scene 1: zoom camera OUT
          */
-        let start = { value: 6.5 };
+        let start = { value: 6.25 };
         let end = { value: 7.5 };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
@@ -255,7 +255,7 @@ registerComponent(async () => {
    * @param {() => void} preLoadScene2Resources preload 2nd scene resources 
    * @returns 
    */
-  let envmap;
+  let envMap;
   async function loadScene1(preLoadScene2Resources) {
     let gltfModel, penroseTriangleMesh = []
     let mixer
@@ -288,11 +288,18 @@ registerComponent(async () => {
     /**
      * Environment
      */
-    const hdrEquirect = new RGBELoader()
-    const texture = await hdrEquirect.loadAsync(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.hdr`);
-    hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
-    envmap = texture;
-    scene.environment = envmap;
+    const texture = await textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
+    console.log('sisaassss', texture)
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    envMap = texture;
+
+    // const hdrEquirect = new RGBELoader()
+    // hdrEquirect.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.hdr`, (texture) => {
+    //   hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
+    //   envmap = texture;
+    //   scene.environment = envmap;
+    // });
   
     // Crea una textura de color sólido
     const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, () => {
@@ -345,7 +352,7 @@ registerComponent(async () => {
       'CycleTranslateUpperConveyorBelt', 'CycleTranslateLowerConveyorBelt', 'CicleFloatingLogoContainer', 'CicleFloatingLogo', 'CicleFloatingTuNegocioCover', 'CicleFloatingTuNegocio'
     ];
     let controlledManuallyAnimations, controlledManuallyActions = {}, controlledManuallyNameFilter = [
-      /*'CrateAction', 'BoxTransformedCycleTranslate', 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'*/
+      'CrateAction', /*''BoxTransformedCycleTranslate', 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'*/
     ];
   
     function beginConveyorItemsFlow() {
@@ -375,14 +382,14 @@ registerComponent(async () => {
           const actionName = e.action.getClip().name
           if(actionName === 'CrateAction') {
             mixer.removeEventListener('finished', cycleCrateHandler)
-            beginBoxTransformedPlusImplicatedItem()
+            // beginBoxTransformedPlusImplicatedItem()
           }
         }
         mixer.addEventListener('finished', cycleCrateHandler)
         playAction(controlledManuallyActions, 'CrateAction')
       }
   
-      // beginCrate()
+      beginCrate()
     }
   
     new Promise((resolve, reject) => {
@@ -423,8 +430,27 @@ registerComponent(async () => {
   
             if(child instanceof THREE.Mesh) {
               console.log(child.name)
-  
               child.material = bakedMaterial
+
+              if(child.name === 'Crate_1') {
+                child.material = new THREE.MeshStandardMaterial({
+                  color: 0xaaaaaa,
+                  metalness: 1,
+                  roughness: 0.2,
+                  envMap,
+                  envMapIntensity: 5
+                })
+              }
+
+              if(child.name === 'Crate_3') {
+                child.material = new THREE.MeshPhongMaterial({
+                  color: 0xFF0000,
+                  emissive: 0xFF0000,
+                  emissiveIntensity: 10,
+                  // transparent: true,
+                  // opacity: 0
+                })
+              }
   
               // Hologram effect items
               if(child.name.includes('Megaphone') || child.name.includes('AIBot') || child.name.includes('WWW_Internet')) {
@@ -470,12 +496,6 @@ registerComponent(async () => {
               //   })
               // }
   
-              if(child.name === 'Crate_2') {
-                child.material = new THREE.MeshBasicMaterial({
-                  color: 0x02c972
-                })
-              }
-  
               let emissiveObjects = [
                 'ALogo',
                 'UpperConveyorBelt_2',
@@ -484,7 +504,7 @@ registerComponent(async () => {
                 'TuNegocioText',
                 'LTransformMachine_2',
                 'LTransformMachine_3',
-                'Crate_3',
+                // 'Crate_3',
                 'BoxTransformed_2',
                 'Megaphone_2',
                 'AIBot_2',
@@ -621,7 +641,7 @@ registerComponent(async () => {
             })
             .start();
           // Translate X
-          let factorMove = 3.25
+          let factorMove = 3
           new TWEEN.Tween(camera1.position)
             .to({ x: camera1.position.x - factorMove, y: camera1.position.y - (factorMove / 3) }, 1500) // transición durante 2000 ms
             .easing(TWEEN.Easing.Quadratic.InOut)
@@ -1029,8 +1049,8 @@ registerComponent(async () => {
                 if(child.name === 'Plane002_1') {
                   child.material = new THREE.MeshStandardMaterial({
                     color: 0x3C3C3C,
-                    envMap: envmap,
-                    envMapIntensity: 0.4
+                    envMap,
+                    envMapIntensity: 0.8
                   })
                 }
     
