@@ -22,7 +22,8 @@
           "three/shaders/GammaCorrectionShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/GammaCorrectionShader.js",
           "three/shaders/RGBShiftShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/RGBShiftShader.js",
           "three/shaders/FXAAShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/FXAAShader.js",
-          "three/math/MathUtils": "https://unpkg.com/three@0.156.1/src/math/MathUtils.js"
+          "three/math/MathUtils": "https://unpkg.com/three@0.156.1/src/math/MathUtils.js",
+          "threejs/environment/RoomEnvironment": "https://unpkg.com/three@0.156.1/examples/jsm/environments/RoomEnvironment.js"
         }
       }
     </script>

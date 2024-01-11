@@ -13,6 +13,7 @@
 // import * as TWEEN from 'tween';
 
 import * as THREE from 'three';
+import * as dat from 'lil-gui'
 import { GLTFLoader } from 'three/loaders/GLTFLoader';
 import { RGBELoader } from 'three/loaders/RGBELoader';
 import { DRACOLoader } from 'three/loaders/DRACOLoader';
@@ -26,6 +27,7 @@ import { RGBShiftShader } from 'three/shaders/RGBShiftShader';
 import { FXAAShader } from 'three/shaders/FXAAShader';
 import { MathUtils } from 'three/math/MathUtils';
 import { OrbitControls } from 'three/controls/OrbitControls';
+import { RoomEnvironment } from 'threejs/environment/RoomEnvironment';
 import * as TWEEN from 'tween';
 
 registerComponent(async () => {
@@ -221,6 +223,33 @@ registerComponent(async () => {
   sliderController.on('onslidechange', onSlideChange)
 
   /**
+   * Sizes
+   */
+  const sizes = {
+    width: canvas2.clientWidth,
+    height: canvas2.clientHeight
+  }
+
+  /**
+   * Renderer
+   */
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true
+  })
+  renderer.setSize(sizes.width, sizes.height)
+  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.physicallyCorrectLights = true; // hacer mas realista la luz
+  renderer.toneMapping = THREE.LinearToneMapping
+  renderer.toneMappingExposure = 1.04
+
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(window.devicePixelRatio); // Limit DPR to a maximum of 2
+  const pmremGenerator = new THREE.PMREMGenerator( renderer );
+
+  /**
    * Loaders
    */
   // Texture loader
@@ -234,13 +263,13 @@ registerComponent(async () => {
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
 
-  const loadTexture = (url) => {
+  const loadTexture = (url, flipY = false) => {
     return new Promise((resolve, reject) => {
       const loader = new THREE.TextureLoader();
       loader.load(
         url,
         (texture) => {
-          texture.flipY = false;
+          texture.flipY = flipY;
           texture.colorSpace = THREE.SRGBColorSpace;
           resolve(texture);
         },
@@ -266,19 +295,21 @@ registerComponent(async () => {
     // Scene
     const scene = new THREE.Scene()
 
-    const baseColorMap = textureLoader.load(`${templateUrl}/assets/3d/homepage/delivery_machine_4k_baked.jpg`, () => {
-      baseColorMap.flipY = false
-      baseColorMap.colorSpace = THREE.SRGBColorSpace
+    const baseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/delivery_machine_4k_baked.jpg`)
+    const crateBaseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/crate_baked.jpg`)
+
+    const crateBakedMaterial = new THREE.MeshBasicMaterial({
+      map: crateBaseColorMap,
     });
-  
     const bakedMaterial = new THREE.MeshBasicMaterial({
       map: baseColorMap,
     });
-    const shadowPortalAlphaMap = textureLoader.load(`${templateUrl}/assets/3d/homepage/shadow.png`, () => {
-      shadowPortalAlphaMap.flipY = false
-      shadowPortalAlphaMap.colorSpace = THREE.SRGBColorSpace
-    })
-    const portalShadowMaterial = new THREE.MeshBasicMaterial({ color: 0x00FF8F, transparent: true, alphaMap: shadowPortalAlphaMap, opacity: 1 })
+
+    // const shadowPortalAlphaMap = textureLoader.load(`${templateUrl}/assets/3d/homepage/shadow.png`, () => {
+    //   shadowPortalAlphaMap.flipY = false
+    //   shadowPortalAlphaMap.colorSpace = THREE.SRGBColorSpace
+    // })
+    // const portalShadowMaterial = new THREE.MeshBasicMaterial({ color: 0x00FF8F, transparent: true, alphaMap: shadowPortalAlphaMap, opacity: 1 })
   
     const boxTransformedProjectionAlphaMap = await loadTexture(`${templateUrl}/assets/3d/homepage/alphamap proyection.png`)
     const boxTransformedProjectionMaterial = new THREE.MeshBasicMaterial({
@@ -288,11 +319,20 @@ registerComponent(async () => {
     /**
      * Environment
      */
-    const texture = await textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
-    console.log('sisaassss', texture)
-    texture.mapping = THREE.EquirectangularReflectionMapping;
-    texture.colorSpace = THREE.SRGBColorSpace;
-    envMap = texture;
+    let envMap2;
+    // envMap = await loadTexture(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
+    textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`, function (texture) {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      texture.colorSpace = THREE.SRGBColorSpace;
+      envMap2 = texture;
+    })
+    envMap = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
+    // scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
+
+    // const texture = await textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
+    // texture.mapping = THREE.EquirectangularReflectionMapping;
+    // texture.colorSpace = THREE.SRGBColorSpace;
+    // envMap = texture;
 
     // const hdrEquirect = new RGBELoader()
     // hdrEquirect.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.hdr`, (texture) => {
@@ -302,9 +342,11 @@ registerComponent(async () => {
     // });
   
     // Crea una textura de color sólido
-    const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, () => {
+    let envMapWhite;
+    const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, (texture) => {
       baseColorMap.flipY = false
       baseColorMap.colorSpace = THREE.SRGBColorSpace
+      envMapWhite = texture
     })
     const penroseBaseMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -352,18 +394,18 @@ registerComponent(async () => {
       'CycleTranslateUpperConveyorBelt', 'CycleTranslateLowerConveyorBelt', 'CicleFloatingLogoContainer', 'CicleFloatingLogo', 'CicleFloatingTuNegocioCover', 'CicleFloatingTuNegocio'
     ];
     let controlledManuallyAnimations, controlledManuallyActions = {}, controlledManuallyNameFilter = [
-      'CrateAction', /*''BoxTransformedCycleTranslate', 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'*/
+      'CrateAction', /*'BoxTransformedCycleTranslate'*/, 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'
     ];
   
     function beginConveyorItemsFlow() {
-      let itemsInOrder = ['AIBotAction', 'WWW_InternetAction', 'MegaphoneAction.001']
+      let itemsInOrder = ['MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction']
       let assignedItem = 0
   
       function beginBoxTransformedPlusImplicatedItem() {
         // Logica del 'Crate' manual loop
         const cycleItemsHandler = (e) => {
           const actionName = e.action.getClip().name
-          if(actionName === 'BoxTransformedCycleTranslate') {
+          if(actionName === 'AIBotAction' || actionName === 'WWW_InternetAction' || actionName === 'MegaphoneAction.001') {
             mixer.removeEventListener('finished', cycleItemsHandler)
             assignedItem = assignedItem + 1 > itemsInOrder.length - 1 ? 0 : assignedItem + 1
             // beginBoxTransformedPlusImplicatedItem()
@@ -372,7 +414,7 @@ registerComponent(async () => {
         }
         mixer.addEventListener('finished', cycleItemsHandler)
   
-        playAction(controlledManuallyActions, 'BoxTransformedCycleTranslate')
+        // playAction(controlledManuallyActions, 'BoxTransformedCycleTranslate')
         playAction(controlledManuallyActions, itemsInOrder[assignedItem])
       }
   
@@ -382,7 +424,7 @@ registerComponent(async () => {
           const actionName = e.action.getClip().name
           if(actionName === 'CrateAction') {
             mixer.removeEventListener('finished', cycleCrateHandler)
-            // beginBoxTransformedPlusImplicatedItem()
+            beginBoxTransformedPlusImplicatedItem()
           }
         }
         mixer.addEventListener('finished', cycleCrateHandler)
@@ -391,6 +433,34 @@ registerComponent(async () => {
   
       beginCrate()
     }
+
+    // Crear la luz puntual
+    const lightPosition = {
+      x: -100,
+      y: 24.6,
+      z: -39.2
+    };
+
+    const pointLight = new THREE.PointLight(0x00A1FF, 10000, 100);
+    pointLight.position.set(lightPosition.x, lightPosition.y, lightPosition.z);
+
+    // Añadir la luz a la escena
+    scene.add(pointLight);
+
+    // Añadir la posición de la luz al GUI
+    const gui = new dat.GUI({
+      width: 400
+    })
+    const lightFolder = gui.addFolder('Light Position');
+    lightFolder.add(lightPosition, 'x', -100, 100).onChange(function(value) {
+        pointLight.position.x = value;
+    });
+    lightFolder.add(lightPosition, 'y', -100, 100).onChange(function(value) {
+        pointLight.position.y = value;
+    });
+    lightFolder.add(lightPosition, 'z', -100, 100).onChange(function(value) {
+        pointLight.position.z = value;
+    });
   
     new Promise((resolve, reject) => {
       canvas.style.opacity = 0
@@ -430,47 +500,100 @@ registerComponent(async () => {
   
             if(child instanceof THREE.Mesh) {
               console.log(child.name)
+
+              // if(child.name === 'Crate_1') {
+              //   child.material = new THREE.MeshStandardMaterial({
+              //     color: 0xaaaaaa,
+              //     metalness: 1,
+              //     roughness: 0.2,
+              //     envMap,
+              //     envMapIntensity: 5
+              //   })
+              // }
               child.material = bakedMaterial
 
-              if(child.name === 'Crate_1') {
-                child.material = new THREE.MeshStandardMaterial({
-                  color: 0xaaaaaa,
-                  metalness: 1,
-                  roughness: 0.2,
-                  envMap,
-                  envMapIntensity: 5
-                })
+              if(child.name.includes('Crate') || child.name.includes('Megaphone') || child.name.includes('AIBot') || child.name.includes('WWW_Internet')) {
+                child.material = crateBakedMaterial
               }
 
-              if(child.name === 'Crate_3') {
-                child.material = new THREE.MeshPhongMaterial({
-                  color: 0xFF0000,
-                  emissive: 0xFF0000,
-                  emissiveIntensity: 10,
-                  // transparent: true,
-                  // opacity: 0
-                })
-              }
-  
-              // Hologram effect items
-              if(child.name.includes('Megaphone') || child.name.includes('AIBot') || child.name.includes('WWW_Internet')) {
+              // if(!child.name.includes('Crate')) {
+              //   child.material = bakedMaterial
+              // }
+
+              // if(child.name.includes('Crate')) {
+              //   child.castShadow = true
+              //   // child.material.color = new THREE.Color(0x666666)
+              //   // child.material.metalness = 1
+              //   // child.material.envMap = envMap
+              //   // child.material = new THREE.MeshStandardMaterial({
+              //   //   color: 0x333333,
+              //   //   envMap,
+              //   //   envMapIntensity: 1,
+              //   //   roughness: 1,
+              //   // })
+              // }
+
+              if(child.name === 'TransformMachine_1' || child.name === 'LTransformMachine_3') {
                 child.material = new THREE.MeshStandardMaterial({
                   color: 0x00FF8F,
                   transparent: true,
-                  opacity: 0.01,
-                  depthWrite: true,
-                  side: THREE.DoubleSide,
-                  envMapIntensity: 0.4
+                  opacity: 0.06,
+                  envMap,
+                  envMapIntensity: 1,
+                  depthWrite: false,
+                  side: THREE.FrontSide,
+                  // envMapIntensity: 0.4
                 })
+                // child.material = new THREE.MeshPhysicalMaterial({
+                //   color: new THREE.Color(0x00FF8F),
+                //   transmission: 0.9,
+                //   thickness: 0.5,
+                //   roughness: 0.1,
+                //   side: THREE.DoubleSide,
+                //   envMap,
+                //   envMapIntensity: 1
+                // })
               }
+
+              // if(child.name === 'Crate_2') {
+              //   child.material = new THREE.MeshPhongMaterial({
+              //     color: 0xFF0000,
+              //     emissive: 0xFF0000,
+              //     emissiveIntensity: 10,
+              //     // transparent: true,
+              //     // opacity: 0
+              //   })
+              // }
+  
+              // Hologram effect items
+              // if(child.name.includes('Megaphone') || child.name.includes('AIBot') || child.name.includes('WWW_Internet')) {
+              //   child.material = new THREE.MeshStandardMaterial({
+              //     color: 0x00FF8F,
+              //     // transparent: true,
+              //     // opacity: 0.1,
+              //     // depthWrite: false,
+              //     envMap,
+              //     envMapIntensity: 0.3,
+              //     // side: THREE.BackSide,
+              //   })
+              //   // child.material = new THREE.MeshPhysicalMaterial({
+              //   //   color: new THREE.Color(0x00FF8F),
+              //   //   transmission: 1,
+              //   //   thickness: 0,
+              //   //   roughness: 0.4,
+              //   //   side: THREE.DoubleSide,
+              //   //   envMap,
+              //   //   envMapIntensity: 1.5
+              //   // })
+              // }
               if(child.name === 'WWW_Internet_3' || child.name === 'AIBot_3') {
                 child.material = new THREE.MeshBasicMaterial({
                   color: 0x000000,
                 })
               }
-              if(child.name === 'BoxTransformed_3') {
-                child.material = boxTransformedProjectionMaterial
-              }
+              // if(child.name === 'BoxTransformed_3') {
+              //   child.material = boxTransformedProjectionMaterial
+              // }
               
               // Penrose material
               if(child.name.includes('PenroseTriangle')) {
@@ -482,10 +605,13 @@ registerComponent(async () => {
                 }
               }
   
-              // Conveyor base transparency
+              // // Conveyor base transparency
               if(child.name === 'LowerConveyorBelt_1' || child.name === 'UpperConveyorBelt_1') {
+                // child.material.color = new THREE.Color(0x333333)
+                child.receiveShadow = true
                 child.material = new THREE.MeshBasicMaterial({
-                  color: 0x333333
+                  color: 0x333333,
+                  // envMap
                 })
               }
 
@@ -495,6 +621,15 @@ registerComponent(async () => {
               //     roughness: 0.2,
               //   })
               // }
+
+              if(child.name === 'Megaphone_2' || child.name === 'AIBot_2' || child.name === 'WWW_Internet_2') {
+                child.material = new THREE.MeshPhongMaterial({
+                  emissive: 0x00FF8F,
+                  emissiveIntensity: 1.5,
+                  // transparent: true,
+                  // opacity: 0
+                })
+              }
   
               let emissiveObjects = [
                 'ALogo',
@@ -503,32 +638,31 @@ registerComponent(async () => {
                 'TransformMachine_2',
                 'TuNegocioText',
                 'LTransformMachine_2',
-                'LTransformMachine_3',
-                // 'Crate_3',
-                'BoxTransformed_2',
-                'Megaphone_2',
-                'AIBot_2',
-                'WWW_Internet_2'
+                // 'LTransformMachine_3',
+                'Crate_2',
+                // 'Megaphone_2',
+                // 'AIBot_2',
+                // 'WWW_Internet_2'
               ]
               
               if(emissiveObjects.includes(child.name)) {
                 child.material = generalNeonEmisiveMaterial
               }
   
-              if(child.name === 'TransformMachine_1' || child.name === 'LTransformMachine_3') {
-                child.material = portalShadowMaterial
-              }
+              // if(child.name === 'TransformMachine_1' || child.name === 'LTransformMachine_3') {
+              //   child.material = portalShadowMaterial
+              // }
   
               // Objetos iniciales a esconder
               let hideObjectList = [
                 'Floor',
-                'AIBot',
-                'WWW_Internet',
-                'Megaphone',
-                'BoxTransformed',
+                // 'AIBot',
+                // 'WWW_Internet',
+                // 'Megaphone',
+                // 'BoxTransformed',
                 'Crate',
-                'TransformMachine',
-                'LTransformMachine',
+                // 'TransformMachine',
+                // 'LTransformMachine',
                 'LowerConveyorBelt',
                 'UpperConveyorBelt'
               ]
@@ -608,7 +742,6 @@ registerComponent(async () => {
               })
             } else if (actionName === 'SpawnLTransformMachine') {
               playActions(infiniteFactoryCycleActions)
-              beginConveyorItemsFlow()
               sliderController.renderFirstSlide()
             }
             // Aquí puedes poner el código que quieras ejecutar cuando la animación termine
@@ -638,6 +771,9 @@ registerComponent(async () => {
               camera1.top = frustumHalfSize;
               camera1.bottom = -frustumHalfSize;
               camera1.updateProjectionMatrix(); // Actualiza la matriz de proyección de la cámara
+            })
+            .onComplete(function(){
+              beginConveyorItemsFlow()
             })
             .start();
           // Translate X
@@ -827,24 +963,6 @@ registerComponent(async () => {
     //   // extraer información de la cámara cuando orbit controls la altera
     //   // console.log( `[Rotate] ${JSON.stringify(controls.object.quaternion)} \n [Position] ${JSON.stringify(controls.object.position)} \n [Scale] ${JSON.stringify(controls.object.scale)}` );
     // })
-  
-    /**
-     * Renderer
-     */
-    const renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
-      antialias: true,
-      alpha: true
-    })
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.physicallyCorrectLights = true; // hacer mas realista la luz
-    renderer.toneMapping = THREE.LinearToneMapping
-    renderer.toneMappingExposure = 1.04
-  
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(window.devicePixelRatio); // Limit DPR to a maximum of 2
   
     // ---------------------------------------------- Post Processing -------------------------------------------------------
   
@@ -1098,14 +1216,6 @@ registerComponent(async () => {
     
           laptopActions[clip.name] = { action }
         })
-      }
-
-      /**
-       * Sizes
-       */
-      const sizes = {
-        width: canvas2.clientWidth,
-        height: canvas2.clientHeight
       }
     
       function refreshSceneRenderer() {
