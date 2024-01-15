@@ -20,7 +20,9 @@ $options: ();
   } @else if map-get($options, 'type') == 'fill' {
     @include button-shadow();
     border: none;
-    background-color: map-get($options, 'bg-color');
+    // background-color: map-get($options, 'bg-color');
+    background: linear-gradient(to right, map-get($options, 'bg-color'), map-get($options, 'bg-color'));
+    transition: .25s;
   } @else if map-get($options, 'type') == 'disabled' {
     border: none;
     background-color: var(--soft-gray);
@@ -51,18 +53,42 @@ a.disabled, button.disabled {
   @include button($options);
 }
 a.fill.primary, button.fill.primary {
+  position: relative;
   $options: (
     'type': 'fill',
     'bg-color': var(--main-color),
     'font-color': #000000
   );
   @include button($options);
+  &::after {
+    content:"";
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #00FF8F 0%, #00A1FF 100%);
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  &:hover::after {
+    opacity: 1;
+  }
 }
 a.fill.accent, button.fill.accent {
   $options: (
     'type': 'fill',
     'bg-color': var(--accent-color),
     'font-color': #fff
+  );
+  @include button($options);
+}
+a.fill.blank, button.fill.blank {
+  $options: (
+    'type': 'fill',
+    'bg-color': white,
+    'font-color': #000000
   );
   @include button($options);
 }

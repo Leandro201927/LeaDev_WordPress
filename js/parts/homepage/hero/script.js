@@ -51,6 +51,9 @@ registerComponent(async () => {
   const parentEl = document.getElementById(uniqueId)
   const sliderElement = parentEl.querySelector('.slider-container')
   const sliderController = new SliderController(sliderElement)
+  const accordionParentElement = parentEl.querySelector('.slide-1')
+  new AccordionController(accordionParentElement)
+  
   let activeScene = 1
   let camera1, camera2;
 
@@ -285,6 +288,8 @@ registerComponent(async () => {
    * @returns 
    */
   let envMap;
+  let envMap2;
+  let envMapWhite;
   async function loadScene1(preLoadScene2Resources) {
     let gltfModel, penroseTriangleMesh = []
     let mixer
@@ -319,7 +324,6 @@ registerComponent(async () => {
     /**
      * Environment
      */
-    let envMap2;
     // envMap = await loadTexture(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
     textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`, function (texture) {
       texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -342,7 +346,6 @@ registerComponent(async () => {
     // });
   
     // Crea una textura de color sólido
-    let envMapWhite;
     const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, (texture) => {
       baseColorMap.flipY = false
       baseColorMap.colorSpace = THREE.SRGBColorSpace
@@ -436,31 +439,81 @@ registerComponent(async () => {
 
     // Crear la luz puntual
     const lightPosition = {
-      x: -100,
-      y: 24.6,
-      z: -39.2
+      x: 20.8,
+      y: 100,
+      z: 28.6
     };
 
-    const pointLight = new THREE.PointLight(0x00A1FF, 10000, 100);
+    const pointLight = new THREE.PointLight(0x0000FF, 10000, 100);
     pointLight.position.set(lightPosition.x, lightPosition.y, lightPosition.z);
 
     // Añadir la luz a la escena
     scene.add(pointLight);
 
-    // Añadir la posición de la luz al GUI
-    const gui = new dat.GUI({
-      width: 400
-    })
-    const lightFolder = gui.addFolder('Light Position');
-    lightFolder.add(lightPosition, 'x', -100, 100).onChange(function(value) {
-        pointLight.position.x = value;
-    });
-    lightFolder.add(lightPosition, 'y', -100, 100).onChange(function(value) {
-        pointLight.position.y = value;
-    });
-    lightFolder.add(lightPosition, 'z', -100, 100).onChange(function(value) {
-        pointLight.position.z = value;
-    });
+    // // Añadir la posición de la luz al GUI
+    // const gui = new dat.GUI({
+    //   width: 400
+    // })
+    // const lightFolder = gui.addFolder('Light Position');
+    // lightFolder.add(lightPosition, 'x', -100, 100).onChange(function(value) {
+    //     pointLight.position.x = value;
+    // });
+    // lightFolder.add(lightPosition, 'y', -100, 100).onChange(function(value) {
+    //     pointLight.position.y = value;
+    // });
+    // lightFolder.add(lightPosition, 'z', -100, 100).onChange(function(value) {
+    //     pointLight.position.z = value;
+    // });
+
+    // Crear un raycaster
+    const raycaster = new THREE.Raycaster();
+
+    // Crear un vector2 para el mouse
+    const mouse = new THREE.Vector2();
+    const mouseEventCoordinates = new THREE.Vector2();
+
+    // Añadir un event listener para el movimiento del mouse
+    document.addEventListener('mousemove', onMouseMove, false);
+
+    function onMouseMove(event) {
+      // Calcular las coordenadas del mouse en la normalización del espacio (-1 a +1) para Raycaster
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      mouseEventCoordinates.x = event.clientX
+      mouseEventCoordinates.y = event.clientY
+
+      // // Actualizar el picking ray con la cámara y las coordenadas del mouse
+      // raycaster.setFromCamera(mouse, camera1);
+
+      // // Calcular los objetos que intersectan el picking ray
+      // const intersects = raycaster.intersectObjects(scene.children);
+
+      // let found = false;
+      // for (let i = 0; i < intersects.length; i++) {
+      //   // Si el raycaster detecta el 'PenroseTriangle'
+      //   if (intersects[i].object.name === 'PenroseTriangle_1' || intersects[i].object.name === 'PenroseTriangle_2' || intersects[i].object.name.includes('TransformMachine') || intersects[i].object.name.includes('LTransformMachine')) {
+      //     found = true;
+      //     break;
+      //   }
+      // }
+
+      // // Si no se encontró ninguna intersección, iniciar el tween
+      // console.log(found)
+      // if (found) {
+      //   // Mover el eje Y de la posición de la luz
+      //   let y = event.clientY / window.innerHeight * 200 - 100;
+      //   pointLight.position.setY(y);
+      // } else {
+      //   new TWEEN.Tween(pointLight.position)
+      //   .to({ y: -100 }, 250) // transición durante 2000 ms
+      //   .easing(TWEEN.Easing.Quadratic.InOut)
+      //   .onComplete(() => {
+      //   })
+      //   .start();
+      // }
+    }
+
+    let TransformMachine_1, LTransformMachine_3
   
     new Promise((resolve, reject) => {
       canvas.style.opacity = 0
@@ -488,7 +541,6 @@ registerComponent(async () => {
             let factorMove = 3.5
             position.y += factorMove - 2.4
             position.x += factorMove
-            // position.y += 5
   
             // Asigna la posición y la rotación a tu cámara actual
             camera1.position.copy(position);
@@ -499,39 +551,20 @@ registerComponent(async () => {
             count++;
   
             if(child instanceof THREE.Mesh) {
-              console.log(child.name)
+              // console.log(child.name)
 
-              // if(child.name === 'Crate_1') {
-              //   child.material = new THREE.MeshStandardMaterial({
-              //     color: 0xaaaaaa,
-              //     metalness: 1,
-              //     roughness: 0.2,
-              //     envMap,
-              //     envMapIntensity: 5
-              //   })
-              // }
               child.material = bakedMaterial
 
               if(child.name.includes('Crate') || child.name.includes('Megaphone') || child.name.includes('AIBot') || child.name.includes('WWW_Internet')) {
                 child.material = crateBakedMaterial
               }
 
-              // if(!child.name.includes('Crate')) {
-              //   child.material = bakedMaterial
-              // }
-
-              // if(child.name.includes('Crate')) {
-              //   child.castShadow = true
-              //   // child.material.color = new THREE.Color(0x666666)
-              //   // child.material.metalness = 1
-              //   // child.material.envMap = envMap
-              //   // child.material = new THREE.MeshStandardMaterial({
-              //   //   color: 0x333333,
-              //   //   envMap,
-              //   //   envMapIntensity: 1,
-              //   //   roughness: 1,
-              //   // })
-              // }
+              if(child.name === 'TransformMachine_1') {
+                TransformMachine_1 = child
+              }
+              if(child.name === 'LTransformMachine_3') {
+                LTransformMachine_3 = child
+              }
 
               if(child.name === 'TransformMachine_1' || child.name === 'LTransformMachine_3') {
                 child.material = new THREE.MeshStandardMaterial({
@@ -544,57 +577,14 @@ registerComponent(async () => {
                   side: THREE.FrontSide,
                   // envMapIntensity: 0.4
                 })
-                // child.material = new THREE.MeshPhysicalMaterial({
-                //   color: new THREE.Color(0x00FF8F),
-                //   transmission: 0.9,
-                //   thickness: 0.5,
-                //   roughness: 0.1,
-                //   side: THREE.DoubleSide,
-                //   envMap,
-                //   envMapIntensity: 1
-                // })
               }
 
-              // if(child.name === 'Crate_2') {
-              //   child.material = new THREE.MeshPhongMaterial({
-              //     color: 0xFF0000,
-              //     emissive: 0xFF0000,
-              //     emissiveIntensity: 10,
-              //     // transparent: true,
-              //     // opacity: 0
-              //   })
-              // }
-  
-              // Hologram effect items
-              // if(child.name.includes('Megaphone') || child.name.includes('AIBot') || child.name.includes('WWW_Internet')) {
-              //   child.material = new THREE.MeshStandardMaterial({
-              //     color: 0x00FF8F,
-              //     // transparent: true,
-              //     // opacity: 0.1,
-              //     // depthWrite: false,
-              //     envMap,
-              //     envMapIntensity: 0.3,
-              //     // side: THREE.BackSide,
-              //   })
-              //   // child.material = new THREE.MeshPhysicalMaterial({
-              //   //   color: new THREE.Color(0x00FF8F),
-              //   //   transmission: 1,
-              //   //   thickness: 0,
-              //   //   roughness: 0.4,
-              //   //   side: THREE.DoubleSide,
-              //   //   envMap,
-              //   //   envMapIntensity: 1.5
-              //   // })
-              // }
               if(child.name === 'WWW_Internet_3' || child.name === 'AIBot_3') {
                 child.material = new THREE.MeshBasicMaterial({
                   color: 0x000000,
                 })
               }
-              // if(child.name === 'BoxTransformed_3') {
-              //   child.material = boxTransformedProjectionMaterial
-              // }
-              
+
               // Penrose material
               if(child.name.includes('PenroseTriangle')) {
                 penroseTriangleMesh.push(child)
@@ -614,13 +604,6 @@ registerComponent(async () => {
                   // envMap
                 })
               }
-
-              // if(child.name === 'TransformMachine_5') {
-              //   child.material = new THREE.MeshPhysicalMaterial({
-              //     transmission: 1,
-              //     roughness: 0.2,
-              //   })
-              // }
 
               if(child.name === 'Megaphone_2' || child.name === 'AIBot_2' || child.name === 'WWW_Internet_2') {
                 child.material = new THREE.MeshPhongMaterial({
@@ -649,10 +632,6 @@ registerComponent(async () => {
                 child.material = generalNeonEmisiveMaterial
               }
   
-              // if(child.name === 'TransformMachine_1' || child.name === 'LTransformMachine_3') {
-              //   child.material = portalShadowMaterial
-              // }
-  
               // Objetos iniciales a esconder
               let hideObjectList = [
                 'Floor',
@@ -671,12 +650,6 @@ registerComponent(async () => {
                 // console.log(a, child.name, a.includes(child.name))
                 return child.name.includes(a)
               })) {
-                // console.log('sisas', child.name)
-                // const transparentBasicMaterial = new THREE.MeshBasicMaterial({
-                //   transparent: true,
-                //   opacity: 0
-                // })
-                // child.material = transparentMaterial
                 child.material.transparent = true
                 child.material.opacity = 0
                 initialObjectsHidden.push(child)
@@ -1000,12 +973,113 @@ registerComponent(async () => {
     composer.addPass(gammaCorrectionPass);
     composer.addPass(fxaaPass);
 
-    function tick() {
-      // console.log(1)
+    function updateLightGradientRaycaster() {
+      // Actualizar el picking ray con la cámara y las coordenadas del mouse
+      raycaster.setFromCamera(mouse, camera1);
 
+      // Calcular los objetos que intersectan el picking ray
+      const intersects = raycaster.intersectObjects(scene.children);
+
+      let found = false;
+      for (let i = 0; i < intersects.length; i++) {
+        // console.log(intersects[i].object.name)
+        // Si el raycaster detecta el 'PenroseTriangle'
+        if (intersects[i].object.name === 'PenroseTriangle_1' || intersects[i].object.name === 'PenroseTriangle_2' || intersects[i].object.name.includes('TransformMachine') || intersects[i].object.name.includes('LTransformMachine')) {
+          found = true;
+          break;
+        }
+      }
+
+      // Si se encontró una intersección, mover el eje Y de la posición de la luz
+      return found
+    }
+
+    /**
+     * 1. parallel intensity + independent light :y always working on mousemouve
+     * 2. portal color intensity on: transformMachine (up, left), LTransformMachine (center, right)
+     */
+
+    let canAnimateLightIntensityOut = true;
+    let canAnimateLightIntensityIn = true;
+    let found, prevFound;
+    // Crear colores para la interpolación
+    const colorStart = new THREE.Color(0x00FF8F);
+    const colorEnd = new THREE.Color(0xabf7ff);
+
+    // Crear un objeto para el destino de la interpolación
+    const colorObject = {t: 0};
+
+    // Crear un tween que interpole el color
+    const tweenColor = new TWEEN.Tween(colorObject).to({t: 1}, 0); // 2000 ms = 2 segundos
+
+    // Actualizar el color del material en cada frame
+    tweenColor.onUpdate(function() {
+      TransformMachine_1.material.color.lerpColors(colorStart, colorEnd, colorObject.t);
+      LTransformMachine_3.material.color.lerpColors(colorStart, colorEnd, colorObject.t);
+    });
+
+    // Crear un tween que interpole el color de vuelta al color inicial
+    const tweenColorBack = new TWEEN.Tween(colorObject).to({t: 0}, 100); // 500 ms = 0.5 segundos
+
+    // Actualizar el color del material en cada frame
+    tweenColorBack.onUpdate(function() {
+      TransformMachine_1.material.color.lerpColors(colorStart, colorEnd, colorObject.t);
+      LTransformMachine_3.material.color.lerpColors(colorStart, colorEnd, colorObject.t);
+    });
+
+    let canAnimateColorChange = true;
+
+    function tick() {
+      // Mover el eje Y de la posición de la luz siempre
+      let y = mouseEventCoordinates.y / window.innerHeight * 200 - 100;
+      pointLight.position.setY(y);
+
+      
+      prevFound = found ? found : false;
+      found = updateLightGradientRaycaster();
+    
+      if(found === false) {
+        // Se estaba animando el gradiente y ahora debe animarse el lightFadeOut
+        if(canAnimateLightIntensityOut) {
+          canAnimateLightIntensityOut = false;
+          new TWEEN.Tween(pointLight)
+          .to({ intensity: 0 }, 250) // transición durante 2000 ms
+          .easing(TWEEN.Easing.Quadratic.InOut)
+          .onComplete(() => {
+            canAnimateLightIntensityOut = true;
+          })
+          .start(); 
+        }
+    
+        // // Animar el cambio de color de vuelta al color inicial
+        // if (!canAnimateColorChange) {
+        //   canAnimateColorChange = true;
+        //   tweenColorBack.start();
+        // }
+      } else if(found === true) {
+        // No hay lightFade, y se va a animar
+        // pointLight.intensity = 10000;
+        if(canAnimateLightIntensityIn) {
+          canAnimateLightIntensityIn = false;
+          new TWEEN.Tween(pointLight)
+          .to({ intensity: 10000 }, 250) // transición durante 2000 ms
+          .easing(TWEEN.Easing.Quadratic.InOut)
+          .onComplete(() => {
+            canAnimateLightIntensityIn = true;
+          })
+          .start(); 
+        }
+    
+        // // Animar el cambio de color solo la primera vez que se encuentra una intersección
+        // if (canAnimateColorChange) {
+        //   canAnimateColorChange = false;
+        //   tweenColor.start();
+        // }
+      }
+    
       // Render using composer instead of renderer (for PostProcessing)
       composer.render();
-
+    
       mixer && mixer.update( clock.getDelta() );
     }
 
@@ -1018,7 +1092,7 @@ registerComponent(async () => {
     let gltfModel
     let mixer
     let composer
-    let laptopAnimations, laptopActions = {}, laptopFilter = ['ScreenPlateAction', 'ScreenAction.001'];
+    let laptopAnimations, laptopActions = {}, laptopFilter = ['ScreenPlateAction', 'ScreenAction.001', 'ALogoAction'];
     let screenMesh
     const lookAt = new THREE.Vector3();
 
@@ -1159,29 +1233,24 @@ registerComponent(async () => {
                 console.log(child.name)
     
                 child.material = new THREE.MeshBasicMaterial({
-                  map: bakedMap,
-                  // envMap: envmap,
-                  // envMapIntensity: 0.5
+                  map: bakedMap
                 })
     
                 if(child.name === 'Plane002_1') {
                   child.material = new THREE.MeshStandardMaterial({
                     color: 0x3C3C3C,
-                    envMap,
-                    envMapIntensity: 0.8
+                    envMap: envMap2,
                   })
                 }
     
                 if(child.name === 'Plane002_2') {
                   child.material = generalNeonEmisiveMaterial
-                  /**
-                    new THREE.MeshStandardMaterial({
-                    color: 0x00FF8F,
-                    envMap: envmap,
-                    envMapIntensity: 0.6
-                  }) */
                 }
-    
+
+                if(child.name === 'ALogo') {
+                  child.material = generalNeonEmisiveMaterial
+                }
+
                 if(child.name === 'Screen') {
                   screenMesh = child
                 }
