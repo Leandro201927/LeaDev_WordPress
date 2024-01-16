@@ -635,9 +635,9 @@ registerComponent(async () => {
               // Objetos iniciales a esconder
               let hideObjectList = [
                 'Floor',
-                // 'AIBot',
-                // 'WWW_Internet',
-                // 'Megaphone',
+                'AIBot',
+                'WWW_Internet',
+                'Megaphone',
                 // 'BoxTransformed',
                 'Crate',
                 // 'TransformMachine',
