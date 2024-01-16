@@ -108,10 +108,7 @@
                       Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
                     </p>
                     <button class="fill primary">
-                      Solicitar servicio
-                    </button>
-                    <button class="fill blank">
-                      Ver más
+                      Notificarme
                     </button>
                   </div>
                 </div>
@@ -144,10 +141,7 @@
                       Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
                     </p>
                     <button class="fill primary">
-                      Solicitar servicio
-                    </button>
-                    <button class="fill blank">
-                      Ver más
+                      Notificarme
                     </button>
                   </div>
                 </div>
@@ -156,22 +150,33 @@
           </div>
           <div class="slide slide-2">
             <span class="category-parent animate vertical-reveal">
-              <span class="category"> Soluciones Digitales </span>
+              <span class="category"> Obras realizadas </span>
             </span>
-            <h1>
-              <span class="animate vertical-reveal">
-                <span> Transforma tu </span>
-              </span>
-              <span class="animate vertical-reveal">
-                <span> presencia en línea </span>
-              </span>
-            </h1>
-            <p class="description animate vertical-fade-reveal">
-              Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
-            </p>
-            <button class="fill primary animate vertical-fade-reveal">
-              Contáctanos
-            </button>
+            <div class="slider-image-container animate vertical-fade-reveal">
+              <div class="image-container">
+                <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.jpg" alt="">
+              </div>
+              <div class="title-content">
+                <p>
+                  Movier Instalaciones
+                </p>
+                <div class="tag fill primary">
+                  3D
+                </div>
+                <div class="tag fill primary">
+                  Automatización
+                </div>
+              </div>
+              <div class="description">
+                <p> Ac proin neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque </span> ut fermentum risus vivamus alorem tincidunt posuere neque ut feugiat adipiscing in at ullam neque ut feugiat adipiscing in. </p>
+              </div>
+              <button class="next">
+                Siguiente
+                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L6.35101 6.35101L1 11.702" stroke="white" stroke-width="1.34154"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>

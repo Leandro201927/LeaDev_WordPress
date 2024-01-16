@@ -9,6 +9,12 @@
   padding: 3px 6px;
   width: max-content;
   border-radius: 13px;
+  &.fill {
+    &.primary {
+      background-color: var(--main-color);
+      color: black;
+    }
+  }
   .circle-tag {
     margin-right: 4px;
     border-radius: 50%;

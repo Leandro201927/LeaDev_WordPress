@@ -152,3 +152,7 @@ class SliderController {
     }, 0)
   }
 }
+
+class SliderImageController {
+  
+}
