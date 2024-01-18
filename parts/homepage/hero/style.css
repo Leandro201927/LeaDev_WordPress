@@ -98,9 +98,15 @@ section.part-homepage-hero {
           cursor: pointer; }
         section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer .slider-image-container {
           max-width: 450px; }
-          section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer .slider-image-container .image-container img {
-            width: 100%;
-            opacity: 0.9; }
+          section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer .slider-image-container .image-container {
+            aspect-ratio: 16/9; }
+            section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer .slider-image-container .image-container img {
+              width: 100%;
+              opacity: 0.9;
+              border-radius: 5px;
+              transition: .25s; }
+              section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer .slider-image-container .image-container img:hover {
+                opacity: 1; }
           section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer .slider-image-container .title-content {
             display: flex;
             flex-direction: row;

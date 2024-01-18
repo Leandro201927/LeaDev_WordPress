@@ -185,7 +185,7 @@ class SliderImageController {
     this.actualPage = 1;
     this.numSlides = this.sliderElement.querySelectorAll('.slider-image-container').length;
 
-    this.nextButton.addEventListener('click', this._nextPage.bind(this));
+    this.nextButton.addEventListener('click', this.nextPage.bind(this));
     this._init();
   }
 
@@ -200,6 +200,8 @@ class SliderImageController {
 
     lastSlide.style.display = 'none';
     newSlide.style.display = 'flex';
+
+    // this._on('slidechange', this.actualPage);
 
     // Agregar setTimeout para retrasar la llamada a _delayNextSlide
     setTimeout(() => {
@@ -219,9 +221,18 @@ class SliderImageController {
     this._on('slidechange', this.actualPage);
   }
 
-  _nextPage(e) {
+  _init() {
+    this.sliderElement.querySelectorAll('.slider-image-container').forEach(s => {
+      s.style.display = 'none';
+    });
+    this.sliderElement.querySelectorAll('.slider-image-container')[0].style.display = 'flex';
+  }
+
+  prevPage(e) {
+    this._on('preslidechange', this.actualPage);
+
     this.lastPage = this.actualPage;
-    this.actualPage = (this.actualPage + 1 > this.numSlides) ? 1 : this.actualPage + 1;
+    this.actualPage = (this.actualPage - 1 < 1) ? this.numSlides : this.actualPage - 1;
 
     let lastSlide = this.sliderElement.querySelector(`.slider-image-container-${this.lastPage}`);
     let newSlide = this.sliderElement.querySelector(`.slider-image-container-${this.actualPage}`);
@@ -232,11 +243,19 @@ class SliderImageController {
     lastSlide.classList.remove('show');
   }
 
-  _init() {
-    this.sliderElement.querySelectorAll('.slider-image-container').forEach(s => {
-      s.style.display = 'none';
-    });
-    this.sliderElement.querySelectorAll('.slider-image-container')[0].style.display = 'flex';
+  nextPage(e) {
+    this._on('preslidechange', this.actualPage);
+
+    this.lastPage = this.actualPage;
+    this.actualPage = (this.actualPage + 1 > this.numSlides) ? 1 : this.actualPage + 1;
+
+    let lastSlide = this.sliderElement.querySelector(`.slider-image-container-${this.lastPage}`);
+    let newSlide = this.sliderElement.querySelector(`.slider-image-container-${this.actualPage}`);
+
+    this._handleTransitionEndPointer = this._handleTransitionEnd.bind(this, lastSlide, newSlide);
+    lastSlide.addEventListener('transitionend', this._handleTransitionEndPointer);
+
+    lastSlide.classList.remove('show');
   }
 
   on(event, callback) {

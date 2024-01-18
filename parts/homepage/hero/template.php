@@ -174,7 +174,7 @@
               </div>
               <div class="slider-image-container slider-image-container-2 cproc">
                 <div class="image-container">
-                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.jpg" alt="">
+                  <img id="cproc-img" src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.jpg" alt="">
                 </div>
                 <div class="title-content">
                   <p>

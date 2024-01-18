@@ -81,7 +81,7 @@ registerComponent(async () => {
          * Scene 1: zoom camera IN
          */
         let start = { value: 7.5 };
-        let end = { value: 6.25 };
+        let end = { value: 6 };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -134,7 +134,7 @@ registerComponent(async () => {
         /**
          * Scene 1: zoom camera OUT
          */
-        let start = { value: 6.25 };
+        let start = { value: 6 };
         let end = { value: 7.5 };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
@@ -200,7 +200,7 @@ registerComponent(async () => {
       currentActiveSlide = index // currentActiveSlide -> 1
     }
     if(index === 2) {
-      enable3rdSectionAnimations('open')
+      enable3rdSectionAnimations('open', 'movier')
 
       /**
        * Scene 2: zoom camera OUT
@@ -227,8 +227,18 @@ registerComponent(async () => {
   }
   sliderController.on('onslidechange', onSlideChange)
 
+  sliderImageController.on('preslidechange', (index) => {
+    shutDownLaptopScreen()
+  })
   sliderImageController.on('slidechange', (index) => {
-    console.log('image index papa', index)
+    const currentSlide = sliderImageElement.querySelectorAll('.slider-image-container')[index - 1]
+    if(currentSlide.classList.contains('movier')) {
+      projectImgOrVideoInLaptopScreen('movier')
+      console.log('movier')
+    } else if(currentSlide.classList.contains('cproc')) {
+      console.log('cproc')
+      projectImgOrVideoInLaptopScreen('cproc')
+    }
   })
 
   /**
@@ -487,36 +497,6 @@ registerComponent(async () => {
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
       mouseEventCoordinates.x = event.clientX
       mouseEventCoordinates.y = event.clientY
-
-      // // Actualizar el picking ray con la cámara y las coordenadas del mouse
-      // raycaster.setFromCamera(mouse, camera1);
-
-      // // Calcular los objetos que intersectan el picking ray
-      // const intersects = raycaster.intersectObjects(scene.children);
-
-      // let found = false;
-      // for (let i = 0; i < intersects.length; i++) {
-      //   // Si el raycaster detecta el 'PenroseTriangle'
-      //   if (intersects[i].object.name === 'PenroseTriangle_1' || intersects[i].object.name === 'PenroseTriangle_2' || intersects[i].object.name.includes('TransformMachine') || intersects[i].object.name.includes('LTransformMachine')) {
-      //     found = true;
-      //     break;
-      //   }
-      // }
-
-      // // Si no se encontró ninguna intersección, iniciar el tween
-      // console.log(found)
-      // if (found) {
-      //   // Mover el eje Y de la posición de la luz
-      //   let y = event.clientY / window.innerHeight * 200 - 100;
-      //   pointLight.position.setY(y);
-      // } else {
-      //   new TWEEN.Tween(pointLight.position)
-      //   .to({ y: -100 }, 250) // transición durante 2000 ms
-      //   .easing(TWEEN.Easing.Quadratic.InOut)
-      //   .onComplete(() => {
-      //   })
-      //   .start();
-      // }
     }
 
     let TransformMachine_1, LTransformMachine_3
@@ -737,7 +717,7 @@ registerComponent(async () => {
            */
           // Zoom
           let start = { value: FRUSTRUM_SIZE };
-          let end = { value: 6.25 };
+          let end = { value: 6 };
           new TWEEN.Tween(start)
             .to(end, 1500) // Duración de la transición en milisegundos
             .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -1099,8 +1079,17 @@ registerComponent(async () => {
     let mixer
     let composer
     let laptopAnimations, laptopActions = {}, laptopFilter = ['ScreenPlateAction', 'ScreenAction.001', 'ALogoAction'];
+    let ArrowNext, ArrowPrev, Repeat
     let screenMesh
     const lookAt = new THREE.Vector3();
+    let canHoverControls = true
+    let actualLaptopScreenElement
+    const controlsMaterial = new THREE.MeshPhongMaterial({
+      emissive: 0x00FF8F,
+      emissiveIntensity: 1.8,
+      transparent: true,
+      opacity: 0
+    })
 
     // Scene
     const scene = new THREE.Scene()
@@ -1127,7 +1116,98 @@ registerComponent(async () => {
       });
     }
 
-    function enable3rdSectionAnimations(mode) {
+    function updateRepetirControl(shouldDisable) {
+      if(!Repeat) return;
+      if(shouldDisable) {
+        Repeat.visible = false
+        canHoverControls = false
+      } else {
+        Repeat.visible = true
+        canHoverControls = true
+      }
+    }
+
+    function shutDownLaptopScreen() {
+      screenMesh.material = new THREE.MeshBasicMaterial({
+        color: 0x000000
+      }) // videoMaterial;
+    }
+
+    function projectImgOrVideoInLaptopScreen(company) {
+      if(!company) return;
+
+      let texture;
+
+      if(company === 'movier') {
+        const video = document.getElementById('movier-video');
+        video.play();
+        video.muted = true;
+        actualLaptopScreenElement = video
+
+        texture = new THREE.VideoTexture(video);
+        updateRepetirControl(false)
+      } else if('cproc') {
+        const image = document.getElementById('cproc-img'); // Reemplaza 'image-id' con el id de tu imagen
+        actualLaptopScreenElement = image
+
+        texture = new THREE.TextureLoader().load(image.src);
+        updateRepetirControl(true)
+      }
+      
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.flipY = false;
+
+      // Shader for VideoTexture with brightness and contrast tweaks
+      THREE.ShaderLib['customVideoShader'] = {
+        uniforms: {
+          'tDiffuse': { type: 't', value: null },
+          'brightness': { type: 'f', value: 0 },
+          'contrast': { type: 'f', value: 0 },
+        },
+        vertexShader: `
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform sampler2D tDiffuse;
+          uniform float brightness;
+          uniform float contrast;
+          varying vec2 vUv;
+          void main() {
+            vec4 color = texture2D(tDiffuse, vUv);
+            color.rgb += brightness;
+            if (contrast > 0.0) {
+              color.rgb = (color.rgb - 0.5) / (1.0 - contrast) + 0.5;
+            } else {
+              color.rgb = (color.rgb - 0.5) * (1.0 + contrast) + 0.5;
+            }
+            gl_FragColor = color;
+          }
+        `,
+      };
+
+      // Crea tu material con el shader personalizado
+      const customMaterial = new THREE.ShaderMaterial({
+        uniforms: THREE.UniformsUtils.clone(THREE.ShaderLib['customVideoShader'].uniforms),
+        vertexShader: THREE.ShaderLib['customVideoShader'].vertexShader,
+        fragmentShader: THREE.ShaderLib['customVideoShader'].fragmentShader,
+      });
+
+      // Asigna la textura de video al material
+      customMaterial.uniforms['tDiffuse'].value = texture;
+
+      // Ajusta el brillo y el contraste
+      customMaterial.uniforms['brightness'].value = -0.3; // Ajusta este valor para cambiar el brillo
+      customMaterial.uniforms['contrast'].value = -0.4; // Ajusta este valor para cambiar el contraste
+
+      screenMesh.material = customMaterial // videoMaterial;
+    }
+
+    function enable3rdSectionAnimations(mode, company = null) {
       if(mode === 'open') {
         playActions(laptopActions)
 
@@ -1135,72 +1215,32 @@ registerComponent(async () => {
           color: 0x000000
         })
 
-        mixer.addEventListener('finished', function(e) {
+        const onLaptopScreenOpened = (e) => {
           const actionName = e.action.getClip().name
           if(actionName === 'ScreenAction.001') {
+            // Alumbrar controles
+            new TWEEN.Tween(controlsMaterial)
+              .to({ opacity: 1, emissiveIntensity: 1.8 }, 250)
+              .easing(TWEEN.Easing.Quadratic.Out)
+              .start();
+
             // Rotación terminada
             if(screenMesh) {
-              const video = document.getElementById('movier-video');
-              video.play();
-              video.muted = true
-              
-              const videoTexture = new THREE.VideoTexture(video);
-              videoTexture.minFilter = THREE.LinearFilter
-              videoTexture.magFilter = THREE.LinearFilter
-              videoTexture.flipY = false
-
-              // Shader for VideoTexture with brightness and contrast tweaks
-              THREE.ShaderLib['customVideoShader'] = {
-                uniforms: {
-                  'tDiffuse': { type: 't', value: null },
-                  'brightness': { type: 'f', value: 0 },
-                  'contrast': { type: 'f', value: 0 },
-                },
-                vertexShader: `
-                  varying vec2 vUv;
-                  void main() {
-                    vUv = uv;
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                  }
-                `,
-                fragmentShader: `
-                  uniform sampler2D tDiffuse;
-                  uniform float brightness;
-                  uniform float contrast;
-                  varying vec2 vUv;
-                  void main() {
-                    vec4 color = texture2D(tDiffuse, vUv);
-                    color.rgb += brightness;
-                    if (contrast > 0.0) {
-                      color.rgb = (color.rgb - 0.5) / (1.0 - contrast) + 0.5;
-                    } else {
-                      color.rgb = (color.rgb - 0.5) * (1.0 + contrast) + 0.5;
-                    }
-                    gl_FragColor = color;
-                  }
-                `,
-              };
-
-              // Crea tu material con el shader personalizado
-              const customMaterial = new THREE.ShaderMaterial({
-                uniforms: THREE.UniformsUtils.clone(THREE.ShaderLib['customVideoShader'].uniforms),
-                vertexShader: THREE.ShaderLib['customVideoShader'].vertexShader,
-                fragmentShader: THREE.ShaderLib['customVideoShader'].fragmentShader,
-              });
-
-              // Asigna la textura de video al material
-              customMaterial.uniforms['tDiffuse'].value = videoTexture;
-
-              // Ajusta el brillo y el contraste
-              customMaterial.uniforms['brightness'].value = -0.3; // Ajusta este valor para cambiar el brillo
-              customMaterial.uniforms['contrast'].value = -0.4; // Ajusta este valor para cambiar el contraste
-
-              screenMesh.material = customMaterial // videoMaterial;
+              projectImgOrVideoInLaptopScreen(company)
             }
+
+            mixer.removeEventListener('finished', onLaptopScreenOpened);
           }
-        });
+        }
+
+        mixer.addEventListener('finished', onLaptopScreenOpened);
       } else if(mode === 'close') {
         playActionsInReverse(laptopActions)
+
+        new TWEEN.Tween(controlsMaterial)
+          .to({ opacity: 0, emissiveIntensity: 0 }, 250)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
 
         if(screenMesh) {
           screenMesh.material = new THREE.MeshBasicMaterial({
@@ -1252,9 +1292,31 @@ registerComponent(async () => {
                 if(child.name === 'Plane002_2') {
                   child.material = generalNeonEmisiveMaterial
                 }
-
                 if(child.name === 'ALogo') {
                   child.material = generalNeonEmisiveMaterial
+                }
+
+                if(child.name === 'RaycastHoverArrowPrev' || child.name === 'RaycastHoverArrowNext' || child.name === 'RaycastHoverRepeat') {
+                  child.material = new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0
+                  })
+                }
+
+                if(child.name === 'ArrowNext' || child.name === 'ArrowPrev' || child.name === 'Repeat') {
+                  switch(child.name) {
+                    case 'ArrowNext':
+                      ArrowNext = child
+                      break;
+                    case 'ArrowPrev':
+                      ArrowPrev = child
+                      break;
+                    case 'Repeat':
+                      Repeat = child
+                      break;
+                  }
+                  child.material = controlsMaterial
                 }
 
                 if(child.name === 'Screen') {
@@ -1394,8 +1456,8 @@ registerComponent(async () => {
       // Bloom pass
       const unrealBloomPass = new UnrealBloomPass()
     
-      unrealBloomPass.strength = 0.3
-      unrealBloomPass.radius = 0
+      unrealBloomPass.strength = 0.22
+      unrealBloomPass.radius = 0.2
       unrealBloomPass.threshold = 1
     
       // Gamma Correction (make sRGB colors live again)
@@ -1419,7 +1481,6 @@ registerComponent(async () => {
       composer.addPass(gammaCorrectionPass);
     }
 
-
     /**
      * Animate
      */
@@ -1431,19 +1492,118 @@ registerComponent(async () => {
     const LOOKAT_Y_POWER = 0.1
     const LOOKAT_Y_OFFSET = 0.02
 
-		// Añadir un evento de movimiento del ratón para actualizar la posición del puntero
+		/**
+     * Controllers logic
+     */
+    let tween = null;
 		window.addEventListener('mousemove', (event) => {
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 		});
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let hoveredMesh = null;
+    // Agregar un event listener para el movimiento del mouse
+    window.addEventListener('mousemove', (event) => {
+      // Calcular las coordenadas del mouse en la normalización del espacio del dispositivo (-1 a +1)
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    }, false);
+    // Agregar un event listener para el click
+    window.addEventListener('click', () => {
+      // Actualizar el rayo del raycaster
+      raycaster.setFromCamera(mouse, camera2);
 
+      // Obtener los objetos que intersectan con el rayo
+      const intersects = raycaster.intersectObjects(scene.children, true);
+
+      for (let i = 0; i < intersects.length; i++) {
+        if (intersects[i].object.name === 'RaycastHoverArrowNext') {
+          // Ejecutar la acción para ArrowNext
+          sliderImageController.nextPage()
+          console.log('arrownext')
+        } else if (intersects[i].object.name === 'RaycastHoverArrowPrev') {
+          // Ejecutar la acción para ArrowPrev
+          sliderImageController.prevPage()
+          console.log('arrowprev')
+        } else if (intersects[i].object.name === 'RaycastHoverRepeat') {
+          // Ejecutar la acción para Repeat
+          try {
+            actualLaptopScreenElement.pause();
+            actualLaptopScreenElement.currentTime = '0';
+            actualLaptopScreenElement.play();
+          } catch(e) {
+            console.warn('No es un video.')
+          }
+        }
+      }
+    }, false);
     function tick() {
-      // console.log(2)
       if(gltfModel) {
         gltfModel.scene.rotation.y += (((pointer.x) - gltfModel.scene.rotation.y * ROTATE_SENSITIVITY) - CALIBRATE_ANGLE) * (LERP_SPEED * 0.008); // -> 0.008 DISMINUYE LA VELOCIDAD, ENTRE MAS PEQUEÑO MENOR LA VELOCIDAD
         const vertRotationModel = ((((pointer.y * LOOKAT_Y_POWER) - lookAt.y) * 0.5) * LERP_SPEED) - LOOKAT_Y_OFFSET;
         lookAt.y += vertRotationModel
 			  camera2.lookAt(lookAt)
+      }
+
+      /**
+       * Controllers logic (RAF)
+       */
+      let selectedMesh = null;
+      // Actualizar el rayo del raycaster
+      raycaster.setFromCamera(mouse, camera2);
+      // Obtener los objetos que intersectan con el rayo
+      const intersects = raycaster.intersectObjects(scene.children, true);
+
+      for (let i = 0; i < intersects.length; i++) {
+        if (intersects[i].object.name === 'RaycastHoverArrowPrev' || intersects[i].object.name === 'RaycastHoverArrowNext' || intersects[i].object.name === 'RaycastHoverRepeat') {
+          // Cambiar el cursor y escalar el objeto
+          document.body.style.cursor = 'pointer';
+          const objectName = intersects[i].object.name;
+          switch(objectName) {
+            case 'RaycastHoverArrowPrev':
+              selectedMesh = ArrowPrev;
+              break;
+            case 'RaycastHoverArrowNext':
+              selectedMesh = ArrowNext;
+              break;
+            case 'RaycastHoverRepeat':
+              if(!canHoverControls) {
+                // Si está deshabilitado el control 'Repetir' debido a updateRepetirControl(), no debería mostrarse un cursor: pointer. 
+                document.body.style.cursor = 'default';
+              }
+              selectedMesh = Repeat;
+              break;
+          }
+          break;
+        }
+      }
+      
+      if (selectedMesh) {
+        if (hoveredMesh !== selectedMesh) {
+          if (hoveredMesh && (!tween || !tween.isPlaying())) {
+            tween = new TWEEN.Tween(hoveredMesh.scale)
+              .to({ x: 1, y: 1, z: 1 }, 250)
+              .easing(TWEEN.Easing.Quadratic.Out)
+              .start();
+          }
+          hoveredMesh = selectedMesh;
+          tween = new TWEEN.Tween(hoveredMesh.scale)
+            .to({ x: 1.15, y: 1.15, z: 1.15 }, 250)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .start();
+        }
+      } else {
+        document.body.style.cursor = 'default';
+        if (hoveredMesh && (!tween || !tween.isPlaying())) {
+          tween = new TWEEN.Tween(hoveredMesh.scale)
+            .to({ x: 1, y: 1, z: 1 }, 500)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .onComplete(() => {
+              hoveredMesh = null; // Restablecer hoveredMesh cuando no hay objeto seleccionado
+            })
+            .start();
+        }
       }
 
       composer && composer.render();
@@ -1453,14 +1613,16 @@ registerComponent(async () => {
     return {
       RAF_2: tick,
       preLoadResources,
-      enable3rdSectionAnimations
+      enable3rdSectionAnimations,
+      projectImgOrVideoInLaptopScreen,
+      shutDownLaptopScreen
     }
   };
   
   /**
    * Animate
    */  
-  const { RAF_2, preLoadResources, enable3rdSectionAnimations } = prepareScene2()
+  const { RAF_2, preLoadResources, enable3rdSectionAnimations, projectImgOrVideoInLaptopScreen, shutDownLaptopScreen } = prepareScene2()
   const { RAF_1 } = await loadScene1(preLoadResources)
 
   const tick = () => {

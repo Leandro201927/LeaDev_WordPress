@@ -725,6 +725,7 @@ div.background-loader {
       transform: translateY(0); }
 
 header {
+  user-select: none;
   background-color: transparent;
   display: flex;
   width: 100%;
