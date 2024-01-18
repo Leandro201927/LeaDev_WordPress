@@ -176,76 +176,106 @@ class SliderController {
  * @typedef {SliderImageController}
  */
 class SliderImageController {
+  
+  /**
+   * Creates an instance of SliderImageController.
+   * @date 1/17/2024 - 11:24:05 PM
+   *
+   * @constructor
+   * @param {HTMLElement} sliderElement
+   */
   constructor(sliderElement) {
-    this.sliderElement = sliderElement;
-    this.nextButton = sliderElement.querySelector('button.next');
+    this.sliderElement = sliderElement
+    this.nextButton = sliderElement.querySelector('button.next')
 
-    this.listeners = {};
+    this.listeners = {}
 
-    this.actualPage = 1;
-    this.numSlides = this.sliderElement.querySelectorAll('.slider-image-container').length;
+    this.actualPage = 1
+    this.numSlides = this.sliderElement.querySelectorAll('.slider-image-container').length
 
-    this.nextButton.addEventListener('click', this._nextPage.bind(this));
-    this._init();
+    this.nextButton.addEventListener('click', this._nextPage.bind(this))
+    this._init()
   }
-
-  _on(event, data) {
-    if (this.listeners[event]) {
-      this.listeners[event].forEach(callback => callback(data));
+  /**
+   * Llamar los listeners registrados por .on (public method)
+   * @date 1/18/2024 - 12:01:53 AM
+   *
+   * @param {*} event
+   * @param {*} data
+   */
+  _on(event, data) { 
+    if(this.listeners[event]) {
+      this.listeners[event].forEach(callback => callback(data))
     }
   }
+  _handleNewSlideTransitionEnd() {
+    newSlide.removeEventListener('transitionend', this._handleNewSlideTransitionEnd.bind(this));
 
+    this._on('slidechange', this.actualPage)
+  }
+  _delayNextSlide() {
+    let newSlide = this.sliderElement.querySelector(`.slider-image-container-${this.actualPage}`);
+
+    newSlide.addEventListener('transitionend', this._handleNewSlideTransitionEnd.bind(this));
+    newSlide.classList.add('show')
+  }
   _handleTransitionEnd(lastSlide, newSlide) {
-    lastSlide.removeEventListener('transitionend', this._handleTransitionEndPointer);
+    // Elimina el evento 'transitionend'
+    lastSlide.removeEventListener('transitionend', this._handleTransitionEnd.bind(this, lastSlide, newSlide));
 
-    lastSlide.style.display = 'none';
-    newSlide.style.display = 'flex';
+    // Agrega la clase 'show' al newSlide
+    lastSlide.style.display = 'none'
+    newSlide.style.display = 'flex'
 
-    // Agregar setTimeout para retrasar la llamada a _delayNextSlide
-    setTimeout(() => {
-      this._delayNextSlide(newSlide);
-    }, 0);
+    /**
+     * Esperar a que finalice TODA la transición incluso el fade-in del newSlide para poder
+     * emitir el evento 'slidechange' para quienes estén suscritos al .on() desde el exterior.
+     */
+    
+    setTimeout(this._delayNextSlide.bind(this), 0)
   }
-
-  _delayNextSlide(newSlide) {
-    this._handleNewSlideTransitionEndPointer = this._handleNewSlideTransitionEnd.bind(this, newSlide);
-    newSlide.addEventListener('transitionend', this._handleNewSlideTransitionEndPointer);
-    newSlide.classList.add('show');
-  }
-
-  _handleNewSlideTransitionEnd(newSlide) {
-    newSlide.removeEventListener('transitionend', this._handleNewSlideTransitionEndPointer);
-
-    this._on('slidechange', this.actualPage);
-  }
-
   _nextPage(e) {
     this.lastPage = this.actualPage;
     this.actualPage = (this.actualPage + 1 > this.numSlides) ? 1 : this.actualPage + 1;
-
+  
     let lastSlide = this.sliderElement.querySelector(`.slider-image-container-${this.lastPage}`);
     let newSlide = this.sliderElement.querySelector(`.slider-image-container-${this.actualPage}`);
 
-    this._handleTransitionEndPointer = this._handleTransitionEnd.bind(this, lastSlide, newSlide);
-    lastSlide.addEventListener('transitionend', this._handleTransitionEndPointer);
-
+    // Agrega el evento 'transitionend' al lastSlide
+    lastSlide.addEventListener('transitionend', this._handleTransitionEnd.bind(this, lastSlide, newSlide));
+  
+    // Elimina la clase 'show' del lastSlide
     lastSlide.classList.remove('show');
   }
-
+  
+  /**
+   * Recorre todos los slide-images para ponerle el 'display: none' a excepción del primer slide.
+   * @date 1/17/2024 - 11:57:34 PM
+   */
   _init() {
     this.sliderElement.querySelectorAll('.slider-image-container').forEach(s => {
-      s.style.display = 'none';
-    });
-    this.sliderElement.querySelectorAll('.slider-image-container')[0].style.display = 'flex';
+      s.style.display = 'none'
+    })
+    this.sliderElement.querySelectorAll('.slider-image-container')[0].style.display = 'flex'
   }
+  /**
+   * --------------------
+   * -- Public methods --
+   * --------------------
+   */
 
+  /**
+   * Registrar los listeners desde el exterior quien quiera consumirlo
+   * @date 1/18/2024 - 12:01:25 AM
+   *
+   * @param {*} event
+   * @param {*} callback
+   */
   on(event, callback) {
-    if (this.listeners[event]) {
-      this.listeners[event].push(callback);
+    if(this.listeners[event]) {
+      this.listeners[event].push(callback)
     } else {
-      this.listeners[event] = [callback];
+      this.listeners[event] = [callback]
     }
   }
 }
-
-

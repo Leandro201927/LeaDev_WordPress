@@ -52,8 +52,10 @@ registerComponent(async () => {
   const sliderElement = parentEl.querySelector('.slider-container')
   const sliderController = new SliderController(sliderElement)
   const accordionParentElement = parentEl.querySelector('.slide-1')
+  const sliderImageElement = parentEl.querySelector('.slide-2 .slider-image-supercontainer')
   new AccordionController(accordionParentElement)
-  
+  const sliderImageController = new SliderImageController(sliderImageElement) 
+
   let activeScene = 1
   let camera1, camera2;
 
@@ -224,6 +226,10 @@ registerComponent(async () => {
     }
   }
   sliderController.on('onslidechange', onSlideChange)
+
+  sliderImageController.on('slidechange', (index) => {
+    console.log('image index papa', index)
+  })
 
   /**
    * Sizes

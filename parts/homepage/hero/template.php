@@ -152,25 +152,46 @@
             <span class="category-parent animate vertical-reveal">
               <span class="category"> Obras realizadas </span>
             </span>
-            <div class="slider-image-container animate vertical-fade-reveal">
-              <div class="image-container">
-                <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.jpg" alt="">
-              </div>
-              <div class="title-content">
-                <p>
-                  Movier Instalaciones
-                </p>
-                <div class="tag fill primary">
-                  3D
+            <div class="slider-image-supercontainer animate vertical-fade-reveal">
+              <div class="slider-image-container slider-image-container-1 movier show">
+                <div class="image-container">
+                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.jpg" alt="">
                 </div>
-                <div class="tag fill primary">
-                  Automatización
+                <div class="title-content">
+                  <p>
+                    Movier Instalaciones
+                  </p>
+                  <div class="tag fill primary">
+                    3D
+                  </div>
+                  <div class="tag fill primary">
+                    Automatización
+                  </div>
+                </div>
+                <div class="description">
+                  <p> Ac proin neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque </span> ut fermentum risus vivamus alorem tincidunt posuere neque ut feugiat adipiscing in at ullam neque ut feugiat adipiscing in. </p>
                 </div>
               </div>
-              <div class="description">
-                <p> Ac proin neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque </span> ut fermentum risus vivamus alorem tincidunt posuere neque ut feugiat adipiscing in at ullam neque ut feugiat adipiscing in. </p>
+              <div class="slider-image-container slider-image-container-2 cproc">
+                <div class="image-container">
+                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.jpg" alt="">
+                </div>
+                <div class="title-content">
+                  <p>
+                    CPROC
+                  </p>
+                  <div class="tag fill primary">
+                    Automatización
+                  </div>
+                  <div class="tag fill primary">
+                    Nativa
+                  </div>
+                </div>
+                <div class="description">
+                  <p> Ac proin 2 neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque </span> ut fermentum risus vivamus alorem tincidunt posuere neque ut feugiat adipiscing in at ullam neque ut feugiat adipiscing in. </p>
+                </div>
               </div>
-              <button class="next">
+              <button class="next animate vertical-fade-reveal">
                 Siguiente
                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 1L6.35101 6.35101L1 11.702" stroke="white" stroke-width="1.34154"/>
