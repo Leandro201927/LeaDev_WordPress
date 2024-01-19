@@ -8,6 +8,10 @@ section.part-homepage-hero {
     padding-top: 0;
     padding-left: 100px;
     padding-right: 100px;
+    @media screen and (max-width: 1024px) {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
   }
   canvas {
     position: absolute;
@@ -43,6 +47,10 @@ section.part-homepage-hero {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      @media screen and (max-width: 1024px) {
+        width: 100%;
+        max-width: none;
+      }
       span {
         &.category-parent {
           margin-bottom: 15px;

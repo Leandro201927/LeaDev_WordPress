@@ -629,6 +629,9 @@ div.background-loader {
     position: absolute;
     left: -89px;
     top: calc(50% - (330px / 2)); }
+    @media screen and (max-width: 1024px) {
+      .slider-container .slider-indicator {
+        display: none; } }
     .slider-container .slider-indicator .raw-indicator {
       font-weight: 700;
       text-align: center; }
@@ -674,6 +677,9 @@ div.background-loader {
     display: flex;
     flex-direction: column;
     justify-content: center; }
+    @media screen and (max-width: 1024px) {
+      .slider-container .slider-sections {
+        top: 395px; } }
     .slider-container .slider-sections .slide:not(.show) {
       display: none; }
 
@@ -737,6 +743,9 @@ header {
   transition: 1s;
   top: 0;
   transform: translateY(-90px); }
+  @media screen and (max-width: 768px) {
+    header {
+      height: 72px; } }
   @media screen and (max-width: 425px) {
     header {
       height: 68px;
@@ -756,6 +765,9 @@ header {
       header .lock__ui a.logo svg {
         width: 230px;
         height: auto; }
+        @media screen and (max-width: 1024px) {
+          header .lock__ui a.logo svg {
+            width: 170px; } }
     header .lock__ui input[type=checkbox].menu-btn {
       display: none; }
       header .lock__ui input[type=checkbox].menu-btn:checked ~ div.nav-supercontainer {
@@ -821,6 +833,46 @@ header {
               header .lock__ui .nav-supercontainer nav.nav-container ul li a {
                 display: block;
                 margin: auto 0; } }
+    @media screen and (max-width: 1024px) {
+      header .lock__ui .nav-supercontainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: none;
+        flex-direction: column;
+        background-color: var(--soft-black);
+        z-index: -1;
+        padding-top: 70px;
+        padding-left: 25px;
+        padding-right: 25px; }
+        header .lock__ui .nav-supercontainer nav.nav-container, header .lock__ui .nav-supercontainer button {
+          width: 100%;
+          margin: 0 auto; } }
+    @media screen and (max-width: 1024px) and (max-width: 1366px) {
+      header .lock__ui .nav-supercontainer nav.nav-container, header .lock__ui .nav-supercontainer button {
+        max-width: 1200px; } }
+    @media screen and (max-width: 1024px) and (max-width: 1200px) {
+      header .lock__ui .nav-supercontainer nav.nav-container, header .lock__ui .nav-supercontainer button {
+        max-width: 1024px; } }
+    @media screen and (max-width: 1024px) and (max-width: 1024px) {
+      header .lock__ui .nav-supercontainer nav.nav-container, header .lock__ui .nav-supercontainer button {
+        max-width: 650px; } }
+    @media screen and (max-width: 1024px) {
+        header .lock__ui .nav-supercontainer nav.nav-container ul {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          list-style: none; }
+          header .lock__ui .nav-supercontainer nav.nav-container ul li {
+            display: flex;
+            width: 100%; }
+            header .lock__ui .nav-supercontainer nav.nav-container ul li a {
+              display: block;
+              padding: 15px 0;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+              width: 100%; } }
 
 footer {
   background-color: var(--rich-black); }

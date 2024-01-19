@@ -1062,13 +1062,13 @@ registerComponent(async () => {
     scene.add(camera1)
   
     // Controls
-    const controls = new OrbitControls(camera1, canvas)
-    controls.enableDamping = true
+    // const controls = new OrbitControls(camera1, canvas)
+    // controls.enableDamping = true
   
-    controls.addEventListener("change", event => {
-      // extraer información de la cámara cuando orbit controls la altera
-      console.log( `[Rotate] ${JSON.stringify(controls.object.quaternion)} \n [Position] ${JSON.stringify(controls.object.position)} \n [Scale] ${JSON.stringify(controls.object.scale)}` );
-    })
+    // controls.addEventListener("change", event => {
+    //   // extraer información de la cámara cuando orbit controls la altera
+    //   console.log( `[Rotate] ${JSON.stringify(controls.object.quaternion)} \n [Position] ${JSON.stringify(controls.object.position)} \n [Scale] ${JSON.stringify(controls.object.scale)}` );
+    // })
   
     // ---------------------------------------------- Post Processing -------------------------------------------------------
   
