@@ -65,6 +65,9 @@ registerComponent(async () => {
   const canvas = parentEl.querySelector('canvas#webgl1')
   const canvas2 = parentEl.querySelector('canvas#webgl2')
 
+  /**
+   * Parent Slider logic
+   */
   let currentActiveSlide = 0
   function onSlideChange(index) {
     if(index === 0) {
@@ -200,7 +203,7 @@ registerComponent(async () => {
       currentActiveSlide = index // currentActiveSlide -> 1
     }
     if(index === 2) {
-      enable3rdSectionAnimations('open', 'movier')
+      enable3rdSectionAnimations('open', currentCompanyInSliderImage)
 
       /**
        * Scene 2: zoom camera OUT
@@ -227,18 +230,23 @@ registerComponent(async () => {
   }
   sliderController.on('onslidechange', onSlideChange)
 
+  /**
+   * Slider Image logic
+   */
+  let currentCompanyInSliderImage = 'movier'
   sliderImageController.on('preslidechange', (index) => {
     shutDownLaptopScreen()
+    const currentSlide = sliderImageElement.querySelector(`.slider-image-container-${index}`)
+    console.log(index, currentSlide.classList)
+    if(currentSlide.classList.contains('movier')) {
+      currentCompanyInSliderImage = 'movier'
+    } else if(currentSlide.classList.contains('cproc')) {
+      currentCompanyInSliderImage = 'cproc'
+    }
+    console.log(currentCompanyInSliderImage)
   })
   sliderImageController.on('slidechange', (index) => {
-    const currentSlide = sliderImageElement.querySelectorAll('.slider-image-container')[index - 1]
-    if(currentSlide.classList.contains('movier')) {
-      projectImgOrVideoInLaptopScreen('movier')
-      console.log('movier')
-    } else if(currentSlide.classList.contains('cproc')) {
-      console.log('cproc')
-      projectImgOrVideoInLaptopScreen('cproc')
-    }
+    projectImgOrVideoInLaptopScreen(currentCompanyInSliderImage)
   })
 
   /**
@@ -1137,6 +1145,8 @@ registerComponent(async () => {
       if(!company) return;
 
       let texture;
+
+      console.log('company a mostrar', company)
 
       if(company === 'movier') {
         const video = document.getElementById('movier-video');

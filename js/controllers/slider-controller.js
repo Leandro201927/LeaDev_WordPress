@@ -229,10 +229,10 @@ class SliderImageController {
   }
 
   prevPage(e) {
-    this._on('preslidechange', this.actualPage);
-
     this.lastPage = this.actualPage;
     this.actualPage = (this.actualPage - 1 < 1) ? this.numSlides : this.actualPage - 1;
+
+    this._on('preslidechange', this.actualPage);
 
     let lastSlide = this.sliderElement.querySelector(`.slider-image-container-${this.lastPage}`);
     let newSlide = this.sliderElement.querySelector(`.slider-image-container-${this.actualPage}`);
@@ -244,10 +244,10 @@ class SliderImageController {
   }
 
   nextPage(e) {
-    this._on('preslidechange', this.actualPage);
-
     this.lastPage = this.actualPage;
     this.actualPage = (this.actualPage + 1 > this.numSlides) ? 1 : this.actualPage + 1;
+
+    this._on('preslidechange', this.actualPage);
 
     let lastSlide = this.sliderElement.querySelector(`.slider-image-container-${this.lastPage}`);
     let newSlide = this.sliderElement.querySelector(`.slider-image-container-${this.actualPage}`);
