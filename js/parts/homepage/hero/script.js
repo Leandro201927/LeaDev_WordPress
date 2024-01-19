@@ -50,16 +50,152 @@ registerComponent(async () => {
    */
   const parentEl = document.getElementById(uniqueId)
   const sliderElement = parentEl.querySelector('.slider-container')
-  const sliderController = new SliderController(sliderElement)
   const accordionParentElement = parentEl.querySelector('.slide-1')
   const sliderImageElement = parentEl.querySelector('.slide-2 .slider-image-supercontainer')
   new AccordionController(accordionParentElement)
-  const sliderImageController = new SliderImageController(sliderImageElement) 
+  const sliderController = new SliderController(sliderElement)
+  const sliderImageController = new SliderImageController(sliderImageElement)
+  const clock = new THREE.Clock()
+  const lookAt = new THREE.Vector3();
+  
+  /**
+   * Screen
+   */
+  function getActualScreenSize() {
+    if(window.innerWidth > 1366) return 'desktopL'
+    else if(window.innerWidth <= 1366 && window.innerWidth > 1024) return 'desktopM'
+    else if(window.innerWidth <= 1024 && window.innerWidth > 768) return 'desktopS'
+    else if(window.innerWidth <= 768 && window.innerWidth > 425) return 'tablet'
+    else return 'mobile';
+  }
+  let actualScreenSize = getActualScreenSize()
+  console.log('actualscrensize', actualScreenSize)
 
   let activeScene = 1
-  let camera1, camera2;
-
-  const clock = new THREE.Clock()
+  /**
+   * Camera 1 properties
+   */
+  let camera1;
+  const INITIAL_FRUSTRUM_SIZE = 45
+  const camera1Props = {
+    desktopL: {
+      position: {
+        x: 9.89600658416748,
+        y: 13.16525993347168,
+        z: 13.140523910522461
+      },
+      frustrumSizeCamera: 6, // @TODO
+    },
+    desktopM : {
+      position: {
+        x: 9.89600658416748,
+        y: 13.16525993347168,
+        z: 13.140523910522461
+      },
+      frustrumSizeCamera: 9,
+    },
+    desktopS: {
+      // A este punto está literalmente centrada la escena
+      position: {
+        x: 9.89600658416748 + 4,
+        y: 13.16525993347168 - 1,
+        z: 13.140523910522461 + 1
+      },
+      frustrumSizeCamera: 11,
+    },
+    tablet: {
+      // A este punto está literalmente centrada la escena
+      position: {
+        x: 9.89600658416748 + 4.65,
+        y: 13.16525993347168 - 1.5,
+        z: 13.140523910522461 + 1.5
+      },
+      frustrumSizeCamera: 13,
+    },
+    mobile: {
+      // A este punto está literalmente centrada la escena
+      position: {
+        x: 9.89600658416748 + 4.65,
+        y: 13.16525993347168 - 1.5,
+        z: 13.140523910522461 + 1.5
+      },
+      frustrumSizeCamera: 14,
+    }
+  }
+  /**
+   * Camera 2 properties
+   */
+  let camera2;
+  const camera2Props = {
+    desktopL: {
+      position: {
+        x: 5.1674322498544223,
+        y: 9,
+        z: 13.312374668985601
+      },
+      lookAt: {
+        x: -4.5,
+        y: -0.5,
+        z: 0
+      },
+      frustrumSizeCamera: 2
+    },
+    desktopM : {
+      position: {
+        x: 5.1674322498544223,
+        y: 9,
+        z: 13.312374668985601
+      },
+      lookAt: {
+        x: -4.5,
+        y: -0.5,
+        z: 0
+      },
+      frustrumSizeCamera: 2
+    },
+    desktopS: {
+      // A este punto está literalmente centrada la escena
+      position: {
+        x: 5.1674322498544223,
+        y: 9,
+        z: 13.312374668985601
+      },
+      lookAt: {
+        x: -3.5,
+        y: -1.5,
+        z: 0
+      },
+      frustrumSizeCamera: 3
+    },
+    tablet: {
+      // A este punto está literalmente centrada la escena
+      position: {
+        x: 5.1674322498544223,
+        y: 9,
+        z: 13.312374668985601
+      },
+      lookAt: {
+        x: -3.5,
+        y: -1.5,
+        z: 0
+      },
+      frustrumSizeCamera: 3
+    },
+    mobile: {
+      // A este punto está literalmente centrada la escena
+      position: {
+        x: 5.1674322498544223,
+        y: 9,
+        z: 13.312374668985601
+      },
+      lookAt: {
+        x: -3.5,
+        y: -1.5,
+        z: 0
+      },
+      frustrumSizeCamera: 3
+    }
+  }
 
   // Canvas
   const canvas = parentEl.querySelector('canvas#webgl1')
@@ -83,8 +219,8 @@ registerComponent(async () => {
         /**
          * Scene 1: zoom camera IN
          */
-        let start = { value: 7.5 };
-        let end = { value: 6 };
+        let start = { value: camera1Props[actualScreenSize].frustrumSizeCamera + 1.5 };
+        let end = { value: camera1Props[actualScreenSize].frustrumSizeCamera };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -103,8 +239,8 @@ registerComponent(async () => {
         /**
          * Scene 2: zoom camera OUT
          */
-        let start2 = { value: 2 };
-        let end2 = { value: 2.5 };
+        let start2 = { value: camera2Props[actualScreenSize].frustrumSizeCamera };
+        let end2 = { value: camera2Props[actualScreenSize].frustrumSizeCamera + 0.5 };
         new TWEEN.Tween(start2)
           .to(end2, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -137,8 +273,8 @@ registerComponent(async () => {
         /**
          * Scene 1: zoom camera OUT
          */
-        let start = { value: 6 };
-        let end = { value: 7.5 };
+        let start = { value: camera1Props[actualScreenSize].frustrumSizeCamera };
+        let end = { value: camera1Props[actualScreenSize].frustrumSizeCamera + 1.5 };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -157,8 +293,8 @@ registerComponent(async () => {
         /**
          * Scene 2: zoom camera IN
          */
-        let start2 = { value: 2.5 };
-        let end2 = { value: 2 };
+        let start2 = { value: camera2Props[actualScreenSize].frustrumSizeCamera + 0.5 };
+        let end2 = { value: camera2Props[actualScreenSize].frustrumSizeCamera };
         new TWEEN.Tween(start2)
           .to(end2, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -181,8 +317,50 @@ registerComponent(async () => {
         /**
          * Scene 2: zoom camera OUT
          */
-        const start = { value: 1.5 };
-        const end = { value: 2 };
+        if(!(actualScreenSize === 'desktopS' || actualScreenSize === 'tablet' || actualScreenSize === 'mobile')) {
+          // !! Only desktop animation !!
+          const start = { value: camera2Props[actualScreenSize].frustrumSizeCamera - 0.5 };
+          const end = { value: camera2Props[actualScreenSize].frustrumSizeCamera };
+          new TWEEN.Tween(start)
+            .to(end, 1000) // Duración de la transición en milisegundos
+            .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
+            .onUpdate(function() {
+              // Actualiza el frustumSize y la cámara en cada fotograma
+              let newFrustumSize = start.value;
+              const frustumHalfSize = newFrustumSize / 2;
+              const aspect = canvas.clientWidth / canvas.clientHeight;
+              camera2.left = -frustumHalfSize * aspect;
+              camera2.right = frustumHalfSize * aspect;
+              camera2.top = frustumHalfSize;
+              camera2.bottom = -frustumHalfSize;
+              camera2.updateProjectionMatrix(); // Actualiza la matriz de proyección de la cámara
+            })
+            .start();
+        }
+
+        // Camera2 look at (in case if mobile side increased the camera up (look 'if(index === 2) ... new TWEEN.Tween.to(lookAt.y + 0.5)' below))
+        new TWEEN.Tween(lookAt)
+        .to({ y: camera2Props[actualScreenSize].lookAt.y }, 1000) // Duración de la transición en milisegundos
+        .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
+        .onUpdate(function() {
+          // camera2.lookAt(lookAt)
+          // camera2.updateProjectionMatrix(); // Actualiza la matriz de proyección de la cámara
+        })
+        .start();
+      }
+
+      currentActiveSlide = index // currentActiveSlide -> 1
+    }
+    if(index === 2) {
+      enable3rdSectionAnimations('open', currentCompanyInSliderImage)
+
+      /**
+       * Scene 2: zoom camera OUT
+       */
+      if(!(actualScreenSize === 'desktopS' || actualScreenSize === 'tablet' || actualScreenSize === 'mobile')) {
+        // !! Only desktop animation !!
+        const start = { value: camera2Props[actualScreenSize].frustrumSizeCamera };
+        const end = { value: camera2Props[actualScreenSize].frustrumSizeCamera - 0.5 };
         new TWEEN.Tween(start)
           .to(end, 1000) // Duración de la transición en milisegundos
           .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -199,32 +377,18 @@ registerComponent(async () => {
           })
           .start();
       }
-
-      currentActiveSlide = index // currentActiveSlide -> 1
-    }
-    if(index === 2) {
-      enable3rdSectionAnimations('open', currentCompanyInSliderImage)
-
-      /**
-       * Scene 2: zoom camera OUT
-       */
-      const start = { value: 2 };
-      const end = { value: 1.5 };
-      new TWEEN.Tween(start)
-        .to(end, 1000) // Duración de la transición en milisegundos
+      // camera look at
+      if(actualScreenSize === 'desktopS' || actualScreenSize === 'tablet' || actualScreenSize === 'mobile') {
+        // !! Only mobile animation !!
+        new TWEEN.Tween(lookAt)
+        .to({ y: lookAt.y + 0.5 }, 1000) // Duración de la transición en milisegundos
         .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
         .onUpdate(function() {
-          // Actualiza el frustumSize y la cámara en cada fotograma
-          let newFrustumSize = start.value;
-          const frustumHalfSize = newFrustumSize / 2;
-          const aspect = canvas.clientWidth / canvas.clientHeight;
-          camera2.left = -frustumHalfSize * aspect;
-          camera2.right = frustumHalfSize * aspect;
-          camera2.top = frustumHalfSize;
-          camera2.bottom = -frustumHalfSize;
-          camera2.updateProjectionMatrix(); // Actualiza la matriz de proyección de la cámara
+          // camera2.lookAt(lookAt)
+          // camera2.updateProjectionMatrix(); // Actualiza la matriz de proyección de la cámara
         })
         .start();
+      }
       currentActiveSlide = index // currentActiveSlide -> 2
     }
   }
@@ -318,7 +482,6 @@ registerComponent(async () => {
     let gltfModel, penroseTriangleMesh = []
     let mixer
     let splinePointsLength = 4, positions = [];
-    let FRUSTRUM_SIZE = 45 // 6.5
     let scene2Loaded = false
 
     // Scene
@@ -334,17 +497,6 @@ registerComponent(async () => {
       map: baseColorMap,
     });
 
-    // const shadowPortalAlphaMap = textureLoader.load(`${templateUrl}/assets/3d/homepage/shadow.png`, () => {
-    //   shadowPortalAlphaMap.flipY = false
-    //   shadowPortalAlphaMap.colorSpace = THREE.SRGBColorSpace
-    // })
-    // const portalShadowMaterial = new THREE.MeshBasicMaterial({ color: 0x00FF8F, transparent: true, alphaMap: shadowPortalAlphaMap, opacity: 1 })
-  
-    const boxTransformedProjectionAlphaMap = await loadTexture(`${templateUrl}/assets/3d/homepage/alphamap proyection.png`)
-    const boxTransformedProjectionMaterial = new THREE.MeshBasicMaterial({
-      color: 0x00FF8F, transparent: true, alphaMap: boxTransformedProjectionAlphaMap, opacity: 0.3, depthWrite: false
-    })
-  
     /**
      * Environment
      */
@@ -355,20 +507,7 @@ registerComponent(async () => {
       envMap2 = texture;
     })
     envMap = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
-    // scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
-    // const texture = await textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
-    // texture.mapping = THREE.EquirectangularReflectionMapping;
-    // texture.colorSpace = THREE.SRGBColorSpace;
-    // envMap = texture;
-
-    // const hdrEquirect = new RGBELoader()
-    // hdrEquirect.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.hdr`, (texture) => {
-    //   hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
-    //   envmap = texture;
-    //   scene.environment = envmap;
-    // });
-  
     // Crea una textura de color sólido
     const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, (texture) => {
       baseColorMap.flipY = false
@@ -421,7 +560,7 @@ registerComponent(async () => {
       'CycleTranslateUpperConveyorBelt', 'CycleTranslateLowerConveyorBelt', 'CicleFloatingLogoContainer', 'CicleFloatingLogo', 'CicleFloatingTuNegocioCover', 'CicleFloatingTuNegocio'
     ];
     let controlledManuallyAnimations, controlledManuallyActions = {}, controlledManuallyNameFilter = [
-      'CrateAction', /*'BoxTransformedCycleTranslate'*/, 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'
+      'CrateAction', 'MegaphoneAction.001', 'AIBotAction', 'WWW_InternetAction'
     ];
   
     function beginConveyorItemsFlow() {
@@ -441,7 +580,6 @@ registerComponent(async () => {
         }
         mixer.addEventListener('finished', cycleItemsHandler)
   
-        // playAction(controlledManuallyActions, 'BoxTransformedCycleTranslate')
         playAction(controlledManuallyActions, itemsInOrder[assignedItem])
       }
   
@@ -529,12 +667,14 @@ registerComponent(async () => {
           if(gltf.cameras.length) {
             const gltfCamera = gltf.cameras[0]
             // Obtén la posición y la rotación (en quaternión) de la cámara del GLTF
-            let position = gltfCamera.position;
+            // let position = gltfCamera.position;
+            let position = new THREE.Vector3(camera1Props[actualScreenSize].position.x, camera1Props[actualScreenSize].position.y, camera1Props[actualScreenSize].position.z)
+            console.log('camera1Positions[actualScreenSize]', camera1Props[actualScreenSize], actualScreenSize)
             let quaternion = gltfCamera.quaternion;
   
-            let factorMove = 3.5
-            position.y += factorMove - 2.4
-            position.x += factorMove
+            // let factorMove = 3.5
+            // position.y += factorMove - 2.4
+            // position.x += factorMove
   
             // Asigna la posición y la rotación a tu cámara actual
             camera1.position.copy(position);
@@ -615,11 +755,7 @@ registerComponent(async () => {
                 'TransformMachine_2',
                 'TuNegocioText',
                 'LTransformMachine_2',
-                // 'LTransformMachine_3',
                 'Crate_2',
-                // 'Megaphone_2',
-                // 'AIBot_2',
-                // 'WWW_Internet_2'
               ]
               
               if(emissiveObjects.includes(child.name)) {
@@ -632,7 +768,6 @@ registerComponent(async () => {
                 'AIBot',
                 'WWW_Internet',
                 'Megaphone',
-                // 'BoxTransformed',
                 'Crate',
                 // 'TransformMachine',
                 // 'LTransformMachine',
@@ -641,7 +776,6 @@ registerComponent(async () => {
               ]
   
               if(hideObjectList.some(a => {
-                // console.log(a, child.name, a.includes(child.name))
                 return child.name.includes(a)
               })) {
                 child.material.transparent = true
@@ -711,7 +845,6 @@ registerComponent(async () => {
               playActions(infiniteFactoryCycleActions)
               sliderController.renderFirstSlide()
             }
-            // Aquí puedes poner el código que quieras ejecutar cuando la animación termine
           });
   
           /**
@@ -724,15 +857,24 @@ registerComponent(async () => {
            * Camera
            */
           // Zoom
-          let start = { value: FRUSTRUM_SIZE };
-          let end = { value: 6 };
+          let endZoom;
+          if(window.innerWidth > 1366) endZoom = 6
+          else if(window.innerWidth <= 1366 && window.innerWidth > 1024) endZoom = 9
+          else if(window.innerWidth <= 1024 && window.innerWidth > 768) endZoom = 12
+          else if(window.innerWidth <= 768 && window.innerWidth > 425) endZoom = 13
+          else endZoom = 14;
+
+          let start = { value: INITIAL_FRUSTRUM_SIZE };
+          let end = { value: endZoom };
           new TWEEN.Tween(start)
             .to(end, 1500) // Duración de la transición en milisegundos
             .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
             .onUpdate(function() {
               // Actualiza el frustumSize y la cámara en cada fotograma
-              let newFrustumSize = start.value;
+              const newFrustumSize = start.value;
               const frustumHalfSize = newFrustumSize / 2;
+              camera1Props[actualScreenSize].frustrumSizeCamera = newFrustumSize
+
               camera1.left = -frustumHalfSize * aspect;
               camera1.right = frustumHalfSize * aspect;
               camera1.top = frustumHalfSize;
@@ -743,14 +885,14 @@ registerComponent(async () => {
               beginConveyorItemsFlow()
             })
             .start();
-          // Translate X
-          let factorMove = 3
-          new TWEEN.Tween(camera1.position)
-            .to({ x: camera1.position.x - factorMove, y: camera1.position.y - (factorMove / 3) }, 1500) // transición durante 2000 ms
-            .easing(TWEEN.Easing.Quadratic.InOut)
-            .onComplete(() => {
-            })
-            .start();
+          // // Translate X
+          // let factorMove = 3
+          // new TWEEN.Tween(camera1.position)
+          //   .to({ x: camera1.position.x - factorMove, y: camera1.position.y - (factorMove / 3) }, 1500) // transición durante 2000 ms
+          //   .easing(TWEEN.Easing.Quadratic.InOut)
+          //   .onComplete(() => {
+          //   })
+          //   .start();
         }, 1000)
       }; beginLogoHide()
   
@@ -781,10 +923,6 @@ registerComponent(async () => {
       action.reset()
       action.setEffectiveTimeScale(1)
       action.play();
-    }
-  
-    function playActionInReverse() {
-  
     }
   
     function setupAnimations() {
@@ -858,10 +996,13 @@ registerComponent(async () => {
       // Update sizes
       sizes.width = canvas.clientWidth
       sizes.height = canvas.clientHeight
+
+      actualScreenSize = getActualScreenSize()
+      let position = new THREE.Vector3(camera1Props[actualScreenSize].position.x, camera1Props[actualScreenSize].position.y, camera1Props[actualScreenSize].position.z);
+      camera1.position.copy(position);
   
-      // Update camera
       const aspect = sizes.width / sizes.height;
-      const frustumSize = FRUSTRUM_SIZE
+      const frustumSize = camera1Props[actualScreenSize].frustrumSizeCamera
       const frustumHalfSize = frustumSize / 2; // Ajusta este valor según tus necesidades
   
       const left = -frustumHalfSize * aspect
@@ -893,7 +1034,7 @@ registerComponent(async () => {
     // const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 150)
   
     const aspect = canvas.clientWidth / canvas.clientHeight;
-    const frustumSize = FRUSTRUM_SIZE // 6.5; // lejanía de la cámara
+    const frustumSize = INITIAL_FRUSTRUM_SIZE // lejanía de la cámara
     const frustumHalfSize = frustumSize / 2;
   
     camera1 = new THREE.OrthographicCamera(
@@ -904,8 +1045,6 @@ registerComponent(async () => {
       -100, // near
       1000 // far
     );
-  
-    // 0.2801308418021325,0.3644685994588807,0.1159583736286828,0.8804788510038735
   
     // camera.quaternion.x = 0.2801308418021325
     // camera.quaternion.y = 0.3644685994588807
@@ -923,13 +1062,13 @@ registerComponent(async () => {
     scene.add(camera1)
   
     // Controls
-    // const controls = new OrbitControls(camera, canvas)
-    // controls.enableDamping = true
+    const controls = new OrbitControls(camera1, canvas)
+    controls.enableDamping = true
   
-    // controls.addEventListener("change", event => {
-    //   // extraer información de la cámara cuando orbit controls la altera
-    //   // console.log( `[Rotate] ${JSON.stringify(controls.object.quaternion)} \n [Position] ${JSON.stringify(controls.object.position)} \n [Scale] ${JSON.stringify(controls.object.scale)}` );
-    // })
+    controls.addEventListener("change", event => {
+      // extraer información de la cámara cuando orbit controls la altera
+      console.log( `[Rotate] ${JSON.stringify(controls.object.quaternion)} \n [Position] ${JSON.stringify(controls.object.position)} \n [Scale] ${JSON.stringify(controls.object.scale)}` );
+    })
   
     // ---------------------------------------------- Post Processing -------------------------------------------------------
   
@@ -941,7 +1080,6 @@ registerComponent(async () => {
   
     // Bloom pass
     const unrealBloomPass = new UnrealBloomPass()
-  
     unrealBloomPass.strength = 0.29 // 0.3
     unrealBloomPass.radius = 1 // 1.246
     unrealBloomPass.threshold = 0.754
@@ -992,7 +1130,6 @@ registerComponent(async () => {
      * 1. parallel intensity + independent light :y always working on mousemouve
      * 2. portal color intensity on: transformMachine (up, left), LTransformMachine (center, right)
      */
-
     let canAnimateLightIntensityOut = true;
     let canAnimateLightIntensityIn = true;
     let found, prevFound;
@@ -1021,13 +1158,10 @@ registerComponent(async () => {
       LTransformMachine_3.material.color.lerpColors(colorStart, colorEnd, colorObject.t);
     });
 
-    let canAnimateColorChange = true;
-
     function tick() {
       // Mover el eje Y de la posición de la luz siempre
       let y = mouseEventCoordinates.y / window.innerHeight * 200 - 100;
       pointLight.position.setY(y);
-
       
       prevFound = found ? found : false;
       found = updateLightGradientRaycaster();
@@ -1089,7 +1223,6 @@ registerComponent(async () => {
     let laptopAnimations, laptopActions = {}, laptopFilter = ['ScreenPlateAction', 'ScreenAction.001', 'ALogoAction'];
     let ArrowNext, ArrowPrev, Repeat
     let screenMesh
-    const lookAt = new THREE.Vector3();
     let canHoverControls = true
     let actualLaptopScreenElement
     const controlsMaterial = new THREE.MeshPhongMaterial({
@@ -1145,9 +1278,6 @@ registerComponent(async () => {
       if(!company) return;
 
       let texture;
-
-      console.log('company a mostrar', company)
-
       if(company === 'movier') {
         const video = document.getElementById('movier-video');
         video.play();
@@ -1157,7 +1287,7 @@ registerComponent(async () => {
         texture = new THREE.VideoTexture(video);
         updateRepetirControl(false)
       } else if('cproc') {
-        const image = document.getElementById('cproc-img'); // Reemplaza 'image-id' con el id de tu imagen
+        const image = document.getElementById('cproc-img');
         actualLaptopScreenElement = image
 
         texture = new THREE.TextureLoader().load(image.src);
@@ -1369,10 +1499,27 @@ registerComponent(async () => {
         // Update sizes
         sizes.width = canvas2.clientWidth
         sizes.height = canvas2.clientHeight
+
+        actualScreenSize = getActualScreenSize()
     
+        let position = new THREE.Vector3(camera2Props[actualScreenSize].position.x, camera2Props[actualScreenSize].position.y, camera2Props[actualScreenSize].position.z);
+        camera2.position.copy(position);
+
+        lookAt.x = camera2Props[actualScreenSize].lookAt.x
+        // Debido a que en el onSlideChange (index === 2) se hace un lookAt.y + 0.5 para hacer que el portatil quepa en la pantalla movil, al hacer
+        // un resize bruscamente, el lookAt pierde el 0.5, por eso hacemos la validación acá si es el 2do slide y está en modo mobile la escena.
+        lookAt.y = (actualScreenSize === 'desktopS' || actualScreenSize === 'tablet' || actualScreenSize === 'mobile') && currentActiveSlide === 2 ? camera2Props[actualScreenSize].lookAt.y + 0.5 : camera2Props[actualScreenSize].lookAt.y
+        lookAt.z = camera2Props[actualScreenSize].lookAt.z
+
+        camera2.lookAt(
+          lookAt.x,
+          lookAt.y,
+          lookAt.z
+        )
+
         // Update camera
         const aspect = sizes.width / sizes.height;
-        const frustumHalfSize = 15 / 2; // Ajusta este valor según tus necesidades
+        const frustumHalfSize = camera2Props[actualScreenSize].frustrumSizeCamera / 2; // Ajusta este valor según tus necesidades
     
         const left = -frustumHalfSize * aspect
         const right = frustumHalfSize * aspect
@@ -1401,8 +1548,8 @@ registerComponent(async () => {
       // Base camera
       // const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 150)
     
-      const aspect = canvas2.clientWidth / canvas2.clientHeight;
-      const frustumSize = 2; // lejanía de la cámara
+      const aspect = sizes.width / sizes.height;
+      const frustumSize = camera2Props[actualScreenSize].frustrumSizeCamera; // lejanía de la cámara
       const frustumHalfSize = frustumSize / 2;
     
       camera2 = new THREE.OrthographicCamera(
@@ -1413,24 +1560,24 @@ registerComponent(async () => {
         -100, // near
         1000 // far
       );
+      
+      lookAt.x = camera2Props[actualScreenSize].lookAt.x
+      lookAt.y = camera2Props[actualScreenSize].lookAt.y
+      lookAt.z = camera2Props[actualScreenSize].lookAt.z
     
-      // ,,,
-    
+      camera2.position.set(
+        camera2Props[actualScreenSize].position.x,
+        camera2Props[actualScreenSize].position.y,
+        camera2Props[actualScreenSize].position.z
+      )
+
       camera2.rotation.order = 'XYZ'
-      lookAt.x = -4.5
-      lookAt.y = -0.5
-      lookAt.z = 0
-    
       camera2.rotation.set(
         0,
         0,
         0
       )
-      camera2.position.set(
-        5.1674322498544223,
-        9,
-        13.312374668985601
-      )
+
       camera2.lookAt(
         lookAt.x,
         lookAt.y,
@@ -1503,7 +1650,8 @@ registerComponent(async () => {
     const LOOKAT_Y_OFFSET = 0.02
 
 		/**
-     * Controllers logic
+     * Controles de laptop flotantes
+     * ---------- Logica -----------
      */
     let tween = null;
 		window.addEventListener('mousemove', (event) => {
@@ -1548,11 +1696,12 @@ registerComponent(async () => {
         }
       }
     }, false);
+
     function tick() {
       if(gltfModel) {
         gltfModel.scene.rotation.y += (((pointer.x) - gltfModel.scene.rotation.y * ROTATE_SENSITIVITY) - CALIBRATE_ANGLE) * (LERP_SPEED * 0.008); // -> 0.008 DISMINUYE LA VELOCIDAD, ENTRE MAS PEQUEÑO MENOR LA VELOCIDAD
         const vertRotationModel = ((((pointer.y * LOOKAT_Y_POWER) - lookAt.y) * 0.5) * LERP_SPEED) - LOOKAT_Y_OFFSET;
-        lookAt.y += vertRotationModel
+        // lookAt.y += vertRotationModel // @TODO
 			  camera2.lookAt(lookAt)
       }
 
