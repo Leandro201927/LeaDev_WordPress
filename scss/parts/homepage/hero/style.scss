@@ -25,8 +25,14 @@ section.part-homepage-hero {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 40%);
     z-index: 1;
     min-height: 500px;
+    opacity: 0;
+    transition: 1s;
     @media screen and (max-width: 1024px) {
       display: flex;
+      &.show {
+        opacity: 1;
+        transition: 1s;
+      }
     }
   }
   canvas {
@@ -315,6 +321,9 @@ section.part-homepage-hero {
             text-transform: uppercase;
             outline: none;
             border-style: none;
+            @media screen and (max-width: 768px) {
+              font-size: 14px;
+            }
             svg {
               margin-left: 8px;
             }

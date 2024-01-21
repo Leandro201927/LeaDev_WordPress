@@ -22,10 +22,15 @@ section.part-homepage-hero {
     width: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 40%);
     z-index: 1;
-    min-height: 500px; }
+    min-height: 500px;
+    opacity: 0;
+    transition: 1s; }
     @media screen and (max-width: 1024px) {
       section.part-homepage-hero .background-gradient-mobile {
-        display: flex; } }
+        display: flex; }
+        section.part-homepage-hero .background-gradient-mobile.show {
+          opacity: 1;
+          transition: 1s; } }
   section.part-homepage-hero canvas {
     position: absolute;
     top: 0;
@@ -241,6 +246,9 @@ section.part-homepage-hero {
             text-transform: uppercase;
             outline: none;
             border-style: none; }
+            @media screen and (max-width: 768px) {
+              section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer button.next {
+                font-size: 14px; } }
             section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer button.next svg {
               margin-left: 8px; }
             section.part-homepage-hero div.lock__ui .left .slider-container .slider-image-supercontainer button.next:hover {

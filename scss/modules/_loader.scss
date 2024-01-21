@@ -7,6 +7,7 @@ div.background-loader {
   display: flex;
   opacity: 1;
   transition: .25s;
+  z-index: 2;
   @keyframes penrose-loading {
     0% {
       opacity: 1;

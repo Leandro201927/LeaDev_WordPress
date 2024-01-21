@@ -46,6 +46,7 @@ registerComponent(async () => {
    * @description Crear controles y lógica sólo para el contenedor con el id único
    */
   const parentEl = document.getElementById(uniqueId)
+  const backgroundGradientMobile = parentEl.querySelector('.background-gradient-mobile')
   const sliderElement = parentEl.querySelector('.slider-container')
   const accordionParentElement = parentEl.querySelector('.slide-1')
   const sliderImageElement = parentEl.querySelector('.slide-2 .slider-image-supercontainer')
@@ -811,6 +812,8 @@ registerComponent(async () => {
           mixer.addEventListener('finished', function(e) {
             const actionName = e.action.getClip().name
             if(actionName === 'PenroseInitRotate') {
+              backgroundGradientMobile.classList.add('show') // smooth fade-in from background gradient in all sliders
+
               // Rotación terminada, hacer proceso de spawneo de fábrica
               /**
                * Materials (factory | opacity)
