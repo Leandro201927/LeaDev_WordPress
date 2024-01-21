@@ -23,14 +23,17 @@ h1 {
   font-size: 62px;
   font-weight: 900;
   line-height: 100%;
+  @media screen and (max-width: $desktop-medium) {
+    font-size: 54px;
+  }
   @media screen and (max-width: $desktop-extra-small) {
-    font-size: 37px;
+    font-size: 42px;
   }
   @media screen and (max-width: $tablet) {
-    font-size: 32px;
+    font-size: 37px;
   }
   @media screen and (max-width: $mobile-large) {
-    font-size: 28px;
+    font-size: 32px;
   }
 }
 h2 {
@@ -69,5 +72,8 @@ span {
     letter-spacing: 3px;
     font-size: 12px;
     font-weight: 600;
+    @media screen and (max-width: $desktop-medium) {
+      font-size: 11px;
+    }
   }
 }

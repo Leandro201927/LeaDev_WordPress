@@ -1,9 +1,11 @@
 section.part-homepage-hero {
   position: relative;
   background-color: var(--rich-black);
+  // min-height: 100vh;
+  position: fixed;
+  width: 100vw;
   height: 100%;
-  width: 100%;
-  min-height: 100vh;
+  overflow: hidden;
   &.leadev-component-section:first-of-type {
     padding-top: 0;
     padding-left: 100px;
@@ -13,6 +15,20 @@ section.part-homepage-hero {
       padding-right: 25px;
     }
   }
+  .background-gradient-mobile {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 40%);
+    z-index: 1;
+    min-height: 500px;
+    @media screen and (max-width: 1024px) {
+      display: flex;
+    }
+  }
   canvas {
     position: absolute;
     top: 0;
@@ -20,6 +36,9 @@ section.part-homepage-hero {
     width: 100% !important;
     height: 100% !important;
     transition: .5s;
+    @media screen and (max-width: 768px) {
+      max-height: 950px;
+    }
   }
   div.logo-3js {
     $width: 399px;
@@ -52,27 +71,90 @@ section.part-homepage-hero {
         max-width: none;
       }
       span {
+        width: 100%;
+        @media screen and (max-width: 1024px) {
+          text-align: center;
+        }
         &.category-parent {
           margin-bottom: 15px;
+          @media screen and (max-width: 1024px) {
+            min-height: 15px;
+          }
+          @media screen and (max-width: 768px) {
+            margin-bottom: 15px;
+          }
         }
       }
-      h1 {}
+      h1 {
+        @media screen and (max-width: 1024px) {
+          text-align: center;
+        }
+      }
       p.description {
         margin: 25px 0 40px 0;
+        @media screen and (max-width: 1024px) {
+          text-align: center;
+        }
       }
       button {
         max-width: max-content;
+        min-height: 33px;
       }
       .slider-container {
+        .slide-0 {
+          p {
+            @media screen and (max-width: 425px) {
+              font-size: 14px;
+              letter-spacing: 0.35px;
+            }
+          }
+          button {
+            @media screen and (max-width: 1024px) {
+              margin: 0 auto;
+            }
+          }
+        }
+        .slide-1 {
+          // @media screen and (max-width: 1024px) {
+          //   overflow: scroll;
+          // }
+        }
         .accordion-container {
           display: flex;
           flex-direction: row;
           padding: 20px 8px;
           border-radius: 5px;
           // margin-top: 35px;
+          @media screen and (max-width: 1366px) {
+            padding: 13px 8px;
+          }
+          @media screen and (max-width: 768px) {
+            padding: 11px 0px;
+          }
+          &:last-of-type {
+            margin-bottom: 80px;
+          }
+          &:not(.open) {
+            div.illustration {
+              @media screen and (max-width: 425px) {
+                display: flex;
+              }
+              img {
+                @media screen and (max-width: 425px) {
+                  margin: auto;
+                }
+              }
+            }
+          }
           div.illustration {
             max-width: 60px;
             height: auto;
+            @media screen and (max-width: 1366px) {
+              max-width: 50px;
+            }
+            @media screen and (max-width: 425px) {
+              max-width: 43px;
+            }
             img {
               width: 100%;
             }
@@ -92,6 +174,12 @@ section.part-homepage-hero {
                   .title {
                     font-size: 20px;
                     margin: auto 0;
+                    @media screen and (max-width: 1366px) {
+                      font-size: 18px;
+                    }
+                    @media screen and (max-width: 425px) {
+                      font-size: 16px;
+                    }
                   }
                   .arrow-container {
                     transform: rotate(0deg);
@@ -105,12 +193,31 @@ section.part-homepage-hero {
                 transition: .35s ease-in-out;
                 p {
                   font-size: 14px;
+                  @media screen and (max-width: 1366px) {
+                    font-size: 13px;
+                  }
+                  @media screen and (max-width: 425px) {
+                    font-size: 13px;
+                    $line-limit: 3;
+                    display: -webkit-box;
+                    -webkit-line-clamp: $line-limit;
+                    -webkit-box-orient: vertical;  
+                    overflow: hidden;
+                  }
                 }
                 button {
                   padding: 7px 14px;
                   font-weight: 700;
                   font-size: 14px;
                   margin-top: 15px;
+                  @media screen and (max-width: 1366px) {
+                    font-size: 13px;
+                  }
+                  @media screen and (max-width: 425px) {
+                    padding: 9px 11px;
+                    font-size: 13px;
+                    margin-top: 10px;
+                  }
                   &:hover {
                     transform: scale(1.03);
                   }
@@ -136,6 +243,9 @@ section.part-homepage-hero {
                 height: auto;
                 max-height: 150px;
                 transition: .35s ease-in-out;
+                @media screen and (max-width: 768px) {
+                  max-height: 300px;
+                }
               }
             }
           }
@@ -148,10 +258,19 @@ section.part-homepage-hero {
          * 3rd Slide
          */
         .slider-image-supercontainer {
+          max-width: 450px;
+          @media screen and (max-width: 1440px) {
+            max-width: 400px;
+          }
+          @media screen and (max-width: 1024px) {
+            max-width: none;
+          }
           .slider-image-container {
-            max-width: 450px;
             .image-container {
               aspect-ratio: 16/9;
+              @media screen and (max-width: 1024px) {
+                display: none;
+              }
               img {
                 width: 100%;
                 opacity: 0.9;

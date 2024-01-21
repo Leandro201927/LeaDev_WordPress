@@ -29,15 +29,18 @@ h1 {
   font-size: 62px;
   font-weight: 900;
   line-height: 100%; }
+  @media screen and (max-width: 1366px) {
+    h1 {
+      font-size: 54px; } }
   @media screen and (max-width: 1024px) {
     h1 {
-      font-size: 37px; } }
+      font-size: 42px; } }
   @media screen and (max-width: 768px) {
     h1 {
-      font-size: 32px; } }
+      font-size: 37px; } }
   @media screen and (max-width: 425px) {
     h1 {
-      font-size: 28px; } }
+      font-size: 32px; } }
 
 h2 {
   font-size: 29.3px; }
@@ -65,6 +68,9 @@ span.category {
   letter-spacing: 3px;
   font-size: 12px;
   font-weight: 600; }
+  @media screen and (max-width: 1366px) {
+    span.category {
+      font-size: 11px; } }
 
 section.leadev-component-section, footer {
   display: flex;
@@ -107,6 +113,9 @@ section.leadev-component-section, footer {
 
 html {
   margin-top: 0 !important; }
+
+body {
+  overscroll-behavior: contain; }
 
 hr {
   border-style: none; }
@@ -575,6 +584,9 @@ a.underline {
   padding: 3px 6px;
   width: max-content;
   border-radius: 13px; }
+  @media screen and (max-width: 425px) {
+    .tag {
+      font-size: 11px; } }
   .tag.fill.primary {
     background-color: var(--main-color);
     color: black; }
@@ -676,10 +688,15 @@ div.background-loader {
     height: 330px;
     display: flex;
     flex-direction: column;
-    justify-content: center; }
+    justify-content: center;
+    width: 100%; }
     @media screen and (max-width: 1024px) {
       .slider-container .slider-sections {
-        top: 395px; } }
+        top: auto;
+        bottom: 0px;
+        height: 50%; } }
+    .slider-container .slider-sections .slide {
+      flex-direction: column; }
     .slider-container .slider-sections .slide:not(.show) {
       display: none; }
 
@@ -720,6 +737,9 @@ div.background-loader {
 .slider-image-supercontainer {
   display: flex;
   flex-direction: column; }
+  @media screen and (max-width: 1024px) {
+    .slider-image-supercontainer {
+      overflow: scroll; } }
   .slider-image-supercontainer .slider-image-container {
     display: flex;
     flex-direction: column;

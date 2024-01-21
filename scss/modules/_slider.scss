@@ -73,8 +73,15 @@ $container-height: 330px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
     @media screen and (max-width: 1024px) {
-      top: 395px;
+      top: auto;
+      bottom: 0px;
+      height: 50%;
+      // min-height: max-content;
+    }
+    .slide {
+      flex-direction: column;
     }
     .slide:not(.show) {
       display: none;
@@ -130,6 +137,9 @@ $container-height: 330px;
  .slider-image-supercontainer {
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1024px) {
+    overflow: scroll;
+  }
   .slider-image-container {
     display: flex;
     flex-direction: column;

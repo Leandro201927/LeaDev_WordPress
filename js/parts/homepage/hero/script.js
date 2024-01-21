@@ -15,19 +15,16 @@
 import * as THREE from 'three';
 import * as dat from 'lil-gui'
 import { GLTFLoader } from 'three/loaders/GLTFLoader';
-import { RGBELoader } from 'three/loaders/RGBELoader';
 import { DRACOLoader } from 'three/loaders/DRACOLoader';
 import { EffectComposer } from 'three/postprocessing/EffectComposer';
 import { RenderPass } from 'three/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/postprocessing/UnrealBloomPass';
-import { GlitchPass } from 'three/postprocessing/GlitchPass';
 import { ShaderPass } from 'three/postprocessing/ShaderPass';
 import { GammaCorrectionShader } from 'three/shaders/GammaCorrectionShader';
 import { RGBShiftShader } from 'three/shaders/RGBShiftShader';
 import { FXAAShader } from 'three/shaders/FXAAShader';
-import { MathUtils } from 'three/math/MathUtils';
 import { OrbitControls } from 'three/controls/OrbitControls';
-import { RoomEnvironment } from 'threejs/environment/RoomEnvironment';
+import { RoomEnvironment } from 'three/environment/RoomEnvironment';
 import * as TWEEN from 'tween';
 
 registerComponent(async () => {
@@ -89,37 +86,37 @@ registerComponent(async () => {
     desktopM : {
       position: {
         x: 9.89600658416748,
-        y: 13.16525993347168,
-        z: 13.140523910522461
+        y: 13.16525993347168 + 0.25,
+        z: 13.140523910522461 + 0.5
       },
-      frustrumSizeCamera: 9,
+      frustrumSizeCamera: 5.5,
     },
     desktopS: {
       // A este punto está literalmente centrada la escena
       position: {
-        x: 9.89600658416748 + 4,
-        y: 13.16525993347168 - 1,
-        z: 13.140523910522461 + 1
+        x: 9.89600658416748 + 3.5,
+        y: 13.16525993347168 - 0.5,
+        z: 13.140523910522461 + 0.5
       },
-      frustrumSizeCamera: 11,
+      frustrumSizeCamera: 10,
     },
     tablet: {
       // A este punto está literalmente centrada la escena
       position: {
-        x: 9.89600658416748 + 4.65,
-        y: 13.16525993347168 - 1.5,
-        z: 13.140523910522461 + 1.5
+        x: 9.89600658416748 + 4,
+        y: 13.16525993347168 - 0.5,
+        z: 13.140523910522461 + 0.5
       },
-      frustrumSizeCamera: 13,
+      frustrumSizeCamera: 10,
     },
     mobile: {
       // A este punto está literalmente centrada la escena
       position: {
-        x: 9.89600658416748 + 4.65,
-        y: 13.16525993347168 - 1.5,
-        z: 13.140523910522461 + 1.5
+        x: 9.89600658416748 + 4,
+        y: 13.16525993347168 - 0.5,
+        z: 13.140523910522461 + 0.5
       },
-      frustrumSizeCamera: 14,
+      frustrumSizeCamera: 10,
     }
   }
   /**
@@ -190,10 +187,10 @@ registerComponent(async () => {
       },
       lookAt: {
         x: -3.5,
-        y: -1.5,
+        y: -1.15,
         z: 0
       },
-      frustrumSizeCamera: 3
+      frustrumSizeCamera: 2.5
     }
   }
 
@@ -857,15 +854,8 @@ registerComponent(async () => {
            * Camera
            */
           // Zoom
-          let endZoom;
-          if(window.innerWidth > 1366) endZoom = 6
-          else if(window.innerWidth <= 1366 && window.innerWidth > 1024) endZoom = 9
-          else if(window.innerWidth <= 1024 && window.innerWidth > 768) endZoom = 12
-          else if(window.innerWidth <= 768 && window.innerWidth > 425) endZoom = 13
-          else endZoom = 14;
-
           let start = { value: INITIAL_FRUSTRUM_SIZE };
-          let end = { value: endZoom };
+          let end = { value: camera1Props[actualScreenSize].frustrumSizeCamera };
           new TWEEN.Tween(start)
             .to(end, 1500) // Duración de la transición en milisegundos
             .easing(TWEEN.Easing.Quadratic.InOut) // Función de suavizado
@@ -873,7 +863,7 @@ registerComponent(async () => {
               // Actualiza el frustumSize y la cámara en cada fotograma
               const newFrustumSize = start.value;
               const frustumHalfSize = newFrustumSize / 2;
-              camera1Props[actualScreenSize].frustrumSizeCamera = newFrustumSize
+              // camera1Props[actualScreenSize].frustrumSizeCamera = newFrustumSize
 
               camera1.left = -frustumHalfSize * aspect;
               camera1.right = frustumHalfSize * aspect;
@@ -1270,7 +1260,7 @@ registerComponent(async () => {
 
     function shutDownLaptopScreen() {
       screenMesh.material = new THREE.MeshBasicMaterial({
-        color: 0x000000
+        color: 0x282c24
       }) // videoMaterial;
     }
 

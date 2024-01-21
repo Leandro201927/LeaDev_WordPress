@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/parts/homepage/hero/style.css">
 <!-- < Component > -->
 <section class="leadev-component-section part-homepage-hero" id="<?php echo $component_key; ?>">
+  <div class="background-gradient-mobile"></div>
   <canvas id="webgl1" class="webgl"></canvas>
   <canvas id="webgl2" class="webgl"></canvas>
   <video style="display: none;" id="movier-video" src="<?php bloginfo('template_url'); ?>/assets/3d/homepage/movier.mp4" width="19.2" height="10.8" playsinline webkit-playsinline></video>
@@ -45,104 +46,106 @@
             <span class="category-parent animate vertical-reveal">
               <span class="category"> Servicios </span>
             </span>
-            <div class="accordion-container open animate vertical-fade-reveal">
-              <div class="illustration">
-                <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/www_internet-removebg-preview.png" alt="">
-              </div>
-              <div class="accordion-info">
-                <div class="summary">
-                  <div class="content-title">
-                    <div class="tag available hide-expanded">
-                      <div class="circle-tag"></div>
-                        Disponible
-                      </div>
-                      <div class="title-subcontainer">
-                        <h4 class="title">
-                          Páginas web en 3D
-                        </h4>
-                        <div class="arrow-container">
-                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+            <div class="accordions-supercontainer">
+              <div class="accordion-container open animate vertical-fade-reveal">
+                <div class="illustration">
+                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/www_internet-removebg-preview.png" alt="">
+                </div>
+                <div class="accordion-info">
+                  <div class="summary">
+                    <div class="content-title">
+                      <div class="tag available hide-expanded">
+                        <div class="circle-tag"></div>
+                          Disponible
+                        </div>
+                        <div class="title-subcontainer">
+                          <h4 class="title">
+                            Páginas web en 3D
+                          </h4>
+                          <div class="arrow-container">
+                          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="complete">
-                    <p>
-                      Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
-                    </p>
-                    <button class="fill primary">
-                      Solicitar servicio
-                    </button>
-                    <button class="fill blank">
-                      Ver más
-                    </button>
+                    <div class="complete">
+                      <p>
+                        Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                      </p>
+                      <button class="fill primary">
+                        Solicitar servicio
+                      </button>
+                      <button class="fill blank">
+                        Ver más
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="accordion-container animate vertical-fade-reveal">
-              <div class="illustration">
-                <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/ai_bot-removebg-preview.png" alt="">
-              </div>
-              <div class="accordion-info">
-                <div class="summary">
-                  <div class="content-title">
-                    <div class="tag unavailable hide-expanded">
-                      <div class="circle-tag"></div>
-                        Próximamente
-                      </div>
-                      <div class="title-subcontainer">
-                        <h4 class="title">
-                          Inteligencia artificial para marketing
-                        </h4>
-                        <div class="arrow-container">
-                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+              <div class="accordion-container animate vertical-fade-reveal">
+                <div class="illustration">
+                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/ai_bot-removebg-preview.png" alt="">
+                </div>
+                <div class="accordion-info">
+                  <div class="summary">
+                    <div class="content-title">
+                      <div class="tag unavailable hide-expanded">
+                        <div class="circle-tag"></div>
+                          Próximamente
+                        </div>
+                        <div class="title-subcontainer">
+                          <h4 class="title">
+                            Inteligencia artificial para marketing
+                          </h4>
+                          <div class="arrow-container">
+                          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="complete">
-                    <p>
-                      Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
-                    </p>
-                    <button class="fill primary">
-                      Notificarme
-                    </button>
+                    <div class="complete">
+                      <p>
+                        Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                      </p>
+                      <button class="fill primary">
+                        Notificarme
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="accordion-container animate vertical-fade-reveal">
-              <div class="illustration">
-                <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/megaphone-removebg-preview.png" alt="">
-              </div>
-              <div class="accordion-info">
-                <div class="summary">
-                  <div class="content-title">
-                    <div class="tag unavailable hide-expanded">
-                      <div class="circle-tag"></div>
-                        Próximamente
-                      </div>
-                      <div class="title-subcontainer">
-                        <h4 class="title">
-                          Automatizacion de redes sociales y contenido
-                        </h4>
-                        <div class="arrow-container">
-                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+              <div class="accordion-container animate vertical-fade-reveal">
+                <div class="illustration">
+                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/megaphone-removebg-preview.png" alt="">
+                </div>
+                <div class="accordion-info">
+                  <div class="summary">
+                    <div class="content-title">
+                      <div class="tag unavailable hide-expanded">
+                        <div class="circle-tag"></div>
+                          Próximamente
+                        </div>
+                        <div class="title-subcontainer">
+                          <h4 class="title">
+                            Automatizacion de redes sociales y contenido
+                          </h4>
+                          <div class="arrow-container">
+                          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="complete">
-                    <p>
-                      Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
-                    </p>
-                    <button class="fill primary">
-                      Notificarme
-                    </button>
+                    <div class="complete">
+                      <p>
+                        Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                      </p>
+                      <button class="fill primary">
+                        Notificarme
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -169,7 +172,7 @@
                   </div>
                 </div>
                 <div class="description">
-                  <p> Ac proin neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque </span> ut fermentum risus vivamus alorem tincidunt posuere neque ut feugiat adipiscing in at ullam neque ut feugiat adipiscing in. </p>
+                <p> Ac proin 2 neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque</span>. </p>
                 </div>
               </div>
               <div class="slider-image-container slider-image-container-2 cproc">
@@ -188,7 +191,7 @@
                   </div>
                 </div>
                 <div class="description">
-                  <p> Ac proin 2 neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque </span> ut fermentum risus vivamus alorem tincidunt posuere neque ut feugiat adipiscing in at ullam neque ut feugiat adipiscing in. </p>
+                  <p> Ac proin 2 neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque</span>. </p>
                 </div>
               </div>
               <button class="next animate vertical-fade-reveal">

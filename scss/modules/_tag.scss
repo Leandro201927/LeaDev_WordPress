@@ -9,6 +9,9 @@
   padding: 3px 6px;
   width: max-content;
   border-radius: 13px;
+  @media screen and (max-width: 425px) {
+    font-size: 11px;
+  }
   &.fill {
     &.primary {
       background-color: var(--main-color);

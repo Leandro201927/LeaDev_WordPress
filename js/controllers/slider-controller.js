@@ -30,7 +30,7 @@ class SliderController {
 
     this.animationInProgress = false;
     // Add a scroll sensitivity property
-    this.scrollSensitivity = 0; // Adjust this value to your needs
+    this.scrollSensitivity = 4; // Adjust this value to your needs
 
     // Bind the scroll event to the parent element
     document.addEventListener('wheel', this._handleScroll.bind(this));
@@ -39,6 +39,39 @@ class SliderController {
     this.boundHandleTransitionEndOnSlideHide = this._handleTransitionEndOnSlideHide.bind(this);
     this.parentEl.addEventListener('transitionend', this.boundHandleTransitionEndOnSlideHide);
   }
+  /**
+   * Manejador para el evento touchstart en dispositivos móviles.
+   * @param {TouchEvent} event - Objeto de evento touchstart.
+   */
+  _handleTouchStart(event) {
+    if (!this.animationInProgress) {
+      this.startY = event.touches[0].clientY;
+    }
+  }
+
+  /**
+   * Manejador para el evento touchmove en dispositivos móviles.
+   * @param {TouchEvent} event - Objeto de evento touchmove.
+   */
+  _handleTouchMove(event) {
+    if (!this.animationInProgress) {
+      const touchMoved = this.startY - event.touches[0].clientY;
+      this.startY = event.touches[0].clientY;
+
+      if (touchMoved > this.scrollSensitivity) {
+        this.nextPage();
+      } else if (touchMoved < -this.scrollSensitivity) {
+        this.previousPage();
+      }
+    }
+  }
+  _initMobileScroll() {
+    this.boundHandleTouchStart = this._handleTouchStart.bind(this);
+    this.boundHandleTouchMove = this._handleTouchMove.bind(this);
+
+    document.addEventListener('touchstart', this.boundHandleTouchStart);
+    document.addEventListener('touchmove', this.boundHandleTouchMove);
+  }
   _init() {
     const numSlides = document.querySelectorAll('.slider-sections .slide').length;
     this.numSlides = numSlides
@@ -46,6 +79,8 @@ class SliderController {
     // Aplica la altura a cada track
     const track = document.querySelector('.line-current-active-track');
     track.style.height = trackHeight + '%';
+
+    this._initMobileScroll(); // Inicializa los eventos de scroll en dispositivos móviles
   }
   // private .on that will execute every public .on callbacks when event is called
   _on(event, data) { 
@@ -61,7 +96,7 @@ class SliderController {
 
       const currentSlide = this.parentEl.querySelectorAll('.slider-sections .slide')[this.currentIndex]
       const firstSlideElements = currentSlide.querySelectorAll('.animate')
-      currentSlide.style.display = 'block'
+      currentSlide.style.display = 'flex'
       setTimeout(() => {
         firstSlideElements.forEach(el => {
           this.parentEl.addEventListener('transitionend', (event) => {
@@ -74,7 +109,24 @@ class SliderController {
       }, 0)
     }
   }
+  _disableSmoothScroll() {
+    // Deshabilita el desplazamiento suave (fricción)
+    document.body.style.scrollBehavior = 'auto';
+    // Oculta el desbordamiento del cuerpo para desactivar el scroll
+    document.body.style.overflow = 'hidden';
+    // Fija la posición para evitar el desplazamiento
+    document.body.style.position = 'fixed';
+  }
+
+  _enableSmoothScroll() {
+    // Vuelve a habilitar el desplazamiento suave
+    document.body.style.scrollBehavior = 'smooth';
+    // Restaura las propiedades originales de desbordamiento y posición
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+  }
   _handleScroll(event) {
+    console.log(event.target === this.parentEl)
     if(this.canScroll) {
       // Check if an animation is in progress
       if (!this.animationInProgress) {
@@ -91,6 +143,7 @@ class SliderController {
   }
   _renderNewSlide() {
     this.animationInProgress = true;
+    this._disableSmoothScroll();
     // 1. Remove every .show class in every element
     const allElements = this.parentEl.querySelectorAll('.animate')
 
@@ -130,8 +183,6 @@ class SliderController {
     this.prevIndex = this.currentIndex
     this.currentIndex = Math.min(this.currentIndex + 1, this.numSlides - 1);
 
-    console.log(this.prevIndex, this.currentIndex)
-
     if (this.currentIndex !== this.prevIndex) {
       this._renderNewSlide();
       // Trigger the onslidechange event
@@ -143,8 +194,6 @@ class SliderController {
     this.prevIndex = this.currentIndex
     this.currentIndex = Math.max(this.currentIndex - 1, 0);
 
-    console.log(this.prevIndex, this.currentIndex)
-
     if (this.currentIndex !== this.prevIndex) {
       this._renderNewSlide();
       // Trigger the onslidechange event
@@ -155,7 +204,7 @@ class SliderController {
     const firstSlide = this.parentEl.querySelectorAll('.slider-sections .slide')[0]
     const firstSlideElements = firstSlide.querySelectorAll('.animate')
     const sliderIndicator = this.parentEl.querySelector('.slider-indicator')
-    firstSlide.style.display = 'block'
+    firstSlide.style.display = 'flex'
     setTimeout(() => {
       firstSlideElements.forEach(el => {
         el.classList.add('show')

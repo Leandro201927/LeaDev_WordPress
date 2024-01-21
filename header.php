@@ -4,26 +4,20 @@
     <script type="importmap">
       {
         "imports": {
-          "lil-gui": "https://cdn.skypack.dev/lil-gui",
-          "tween": "https://cdn.skypack.dev/@tweenjs/tween.js",
-          "three": "https://unpkg.com/three@0.156.1/build/three.module.js",
-          "three/renderers/CSS3DRenderer": "https://unpkg.com/three@0.156.1/examples/jsm/renderers/CSS3DRenderer.js",
-          "three/controls/OrbitControls": "https://unpkg.com/three@0.156.1/examples/jsm/controls/OrbitControls.js",
-          "three/loaders/DRACOLoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/DRACOLoader.js",
-          "three/loaders/GLTFLoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/GLTFLoader.js",
-          "three/loaders/RGBELoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/RGBELoader.js",
-          "three/loaders/EXRLoader": "https://unpkg.com/three@0.156.1/examples/jsm/loaders/EXRLoader.js",
-          "three/addons/CurveModifier": "https://unpkg.com/three@0.156.1/examples/jsm/modifiers/CurveModifier.js",
-          "three/postprocessing/EffectComposer": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/EffectComposer.js",
-          "three/postprocessing/UnrealBloomPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/UnrealBloomPass.js",
-          "three/postprocessing/GlitchPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/GlitchPass.js",
-          "three/postprocessing/RenderPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/RenderPass.js",
-          "three/postprocessing/ShaderPass": "https://unpkg.com/three@0.156.1/examples/jsm/postprocessing/ShaderPass.js",
-          "three/shaders/GammaCorrectionShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/GammaCorrectionShader.js",
-          "three/shaders/RGBShiftShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/RGBShiftShader.js",
-          "three/shaders/FXAAShader": "https://unpkg.com/three@0.156.1/examples/jsm/shaders/FXAAShader.js",
-          "three/math/MathUtils": "https://unpkg.com/three@0.156.1/src/math/MathUtils.js",
-          "threejs/environment/RoomEnvironment": "https://unpkg.com/three@0.156.1/examples/jsm/environments/RoomEnvironment.js"
+          "lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm",
+          "tween": "https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.esm.min.js",
+          "three": "<?php bloginfo('template_url'); ?>/js/lib/threejs/three.module.js",
+          "three/controls/OrbitControls": "<?php bloginfo('template_url'); ?>/js/lib/threejs/controls/OrbitControls.js",
+          "three/loaders/DRACOLoader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/loaders/DRACOLoader.js",
+          "three/loaders/GLTFLoader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/loaders/GLTFLoader.js",
+          "three/postprocessing/EffectComposer": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/EffectComposer.js",
+          "three/postprocessing/UnrealBloomPass": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/UnrealBloomPass.js",
+          "three/postprocessing/RenderPass": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/RenderPass.js",
+          "three/postprocessing/ShaderPass": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/ShaderPass.js",
+          "three/shaders/GammaCorrectionShader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/shaders/GammaCorrectionShader.js",
+          "three/shaders/RGBShiftShader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/shaders/RGBShiftShader.js",
+          "three/shaders/FXAAShader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/shaders/FXAAShader.js",
+          "three/environment/RoomEnvironment": "<?php bloginfo('template_url'); ?>/js/lib/threejs/environments/RoomEnvironment.js"
         }
       }
     </script>
