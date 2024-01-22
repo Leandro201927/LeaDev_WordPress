@@ -27,5 +27,29 @@ registerComponent(() => {
 		document.body.appendChild(mainScript);
   }
 
+	const script3 = document.createElement('script');
+	script3.type = 'importmap';
+	// "three": "${templateUrl}/js/lib/threejs/three.module.js",
+	script3.innerHTML = `
+		{
+			"imports": {
+				"lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm",
+				"tween": "https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.esm.min.js",
+				"three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.156.1/three.module.min.js",
+				"three/controls/OrbitControls": "${templateUrl}/js/lib/threejs/controls/OrbitControls.js",
+				"three/loaders/DRACOLoader": "${templateUrl}/js/lib/threejs/loaders/DRACOLoader.js",
+				"three/loaders/GLTFLoader": "${templateUrl}/js/lib/threejs/loaders/GLTFLoader.js",
+				"three/postprocessing/EffectComposer": "${templateUrl}/js/lib/threejs/postprocessing/EffectComposer.js",
+				"three/postprocessing/UnrealBloomPass": "${templateUrl}/js/lib/threejs/postprocessing/UnrealBloomPass.js",
+				"three/postprocessing/RenderPass": "${templateUrl}/js/lib/threejs/postprocessing/RenderPass.js",
+				"three/postprocessing/ShaderPass": "${templateUrl}/js/lib/threejs/postprocessing/ShaderPass.js",
+				"three/shaders/GammaCorrectionShader": "${templateUrl}/js/lib/threejs/shaders/GammaCorrectionShader.js",
+				"three/shaders/RGBShiftShader": "${templateUrl}/js/lib/threejs/shaders/RGBShiftShader.js",
+				"three/shaders/FXAAShader": "${templateUrl}/js/lib/threejs/shaders/FXAAShader.js",
+				"three/environment/RoomEnvironment": "${templateUrl}/js/lib/threejs/environments/RoomEnvironment.js"
+			}
+		}
+	`;
+	document.head.appendChild(script3);
   enable3d()
 })

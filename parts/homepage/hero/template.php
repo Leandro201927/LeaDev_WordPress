@@ -7,7 +7,7 @@
   <div class="background-gradient-mobile"></div>
   <canvas id="webgl1" class="webgl"></canvas>
   <canvas id="webgl2" class="webgl"></canvas>
-  <video style="display: none;" id="movier-video" src="<?php bloginfo('template_url'); ?>/assets/3d/homepage/movier.mp4" width="19.2" height="10.8" playsinline webkit-playsinline></video>
+  <!-- <video style="display: none;" id="movier-video" src="<?php bloginfo('template_url'); ?>/assets/3d/homepage/movier.mp4" width="19.2" height="10.8" playsinline webkit-playsinline></video> -->
   <div class="lock__ui">
     <div class="left">
       <div class="slider-container">

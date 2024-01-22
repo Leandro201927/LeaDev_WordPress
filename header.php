@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <head>
-    <script type="importmap">
-      {
-        "imports": {
-          "lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm",
-          "tween": "https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.esm.min.js",
-          "three": "<?php bloginfo('template_url'); ?>/js/lib/threejs/three.module.js",
-          "three/controls/OrbitControls": "<?php bloginfo('template_url'); ?>/js/lib/threejs/controls/OrbitControls.js",
-          "three/loaders/DRACOLoader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/loaders/DRACOLoader.js",
-          "three/loaders/GLTFLoader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/loaders/GLTFLoader.js",
-          "three/postprocessing/EffectComposer": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/EffectComposer.js",
-          "three/postprocessing/UnrealBloomPass": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/UnrealBloomPass.js",
-          "three/postprocessing/RenderPass": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/RenderPass.js",
-          "three/postprocessing/ShaderPass": "<?php bloginfo('template_url'); ?>/js/lib/threejs/postprocessing/ShaderPass.js",
-          "three/shaders/GammaCorrectionShader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/shaders/GammaCorrectionShader.js",
-          "three/shaders/RGBShiftShader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/shaders/RGBShiftShader.js",
-          "three/shaders/FXAAShader": "<?php bloginfo('template_url'); ?>/js/lib/threejs/shaders/FXAAShader.js",
-          "three/environment/RoomEnvironment": "<?php bloginfo('template_url'); ?>/js/lib/threejs/environments/RoomEnvironment.js"
-        }
-      }
-    </script>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

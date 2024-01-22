@@ -1272,9 +1272,13 @@ registerComponent(async () => {
 
       let texture;
       if(company === 'movier') {
-        const video = document.getElementById('movier-video');
+        // const video = document.getElementById('movier-video');
+        const video = document.createElement('video');
+        video.src = `${templateUrl}/assets/3d/homepage/movier.mp4`;
+        video.crossOrigin = 'anonymous'
         video.play();
         video.muted = true;
+        
         actualLaptopScreenElement = video
 
         texture = new THREE.VideoTexture(video);

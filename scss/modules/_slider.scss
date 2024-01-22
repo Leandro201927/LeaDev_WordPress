@@ -66,9 +66,9 @@ $container-height: 330px;
     }
   }
   .slider-sections {
-    position: absolute;
-    top: calc(50% - (#{$container-height} / 2));
-    left: 0;
+    // position: absolute;
+    // top: calc(50% - (#{$container-height} / 2));
+    // left: 0;
     // height: $container-height;
     display: flex;
     flex-direction: column;
@@ -79,6 +79,7 @@ $container-height: 330px;
       bottom: 0px;
       height: 50%;
       min-height: 380px;
+      align-self: end;
       // min-height: max-content;
     }
     .slide {

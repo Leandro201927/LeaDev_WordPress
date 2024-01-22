@@ -112,8 +112,9 @@ section.part-homepage-hero {
           @media screen and (max-width: 768px) {
             section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container {
               padding: 11px 0px; } }
-          section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container:last-of-type {
-            margin-bottom: 80px; }
+          @media screen and (max-width: 1024px) {
+            section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container:last-of-type {
+              margin-bottom: 80px; } }
           @media screen and (max-width: 425px) {
             section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container:not(.open) div.illustration {
               display: flex; } }

@@ -138,7 +138,9 @@ section.part-homepage-hero {
             padding: 11px 0px;
           }
           &:last-of-type {
-            margin-bottom: 80px;
+            @media screen and (max-width: 1024px) {
+              margin-bottom: 80px;
+            }
           }
           &:not(.open) {
             div.illustration {

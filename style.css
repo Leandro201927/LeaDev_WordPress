@@ -683,9 +683,6 @@ div.background-loader {
       transform: rotate(-90deg);
       font-size: 12px; }
   .slider-container .slider-sections {
-    position: absolute;
-    top: calc(50% - (330px / 2));
-    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -695,7 +692,8 @@ div.background-loader {
         top: auto;
         bottom: 0px;
         height: 50%;
-        min-height: 380px; } }
+        min-height: 380px;
+        align-self: end; } }
     .slider-container .slider-sections .slide {
       flex-direction: column; }
     .slider-container .slider-sections .slide:not(.show) {
