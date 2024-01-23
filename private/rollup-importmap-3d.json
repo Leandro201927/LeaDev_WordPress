@@ -3,16 +3,16 @@
     "lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm",
     "tween": "https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.esm.min.js",
     "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.156.1/three.module.min.js",
-    "three/controls/OrbitControls": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/controls/OrbitControls.js",
-    "three/loaders/DRACOLoader": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/loaders/DRACOLoader.js",
-    "three/loaders/GLTFLoader": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/loaders/GLTFLoader.js",
-    "three/postprocessing/EffectComposer": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/EffectComposer.js",
-    "three/postprocessing/UnrealBloomPass": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/UnrealBloomPass.js",
-    "three/postprocessing/RenderPass": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/RenderPass.js",
-    "three/postprocessing/ShaderPass": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/ShaderPass.js",
-    "three/shaders/GammaCorrectionShader": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/shaders/GammaCorrectionShader.js",
-    "three/shaders/RGBShiftShader": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/shaders/RGBShiftShader.js",
-    "three/shaders/FXAAShader": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/shaders/FXAAShader.js",
-    "three/environment/RoomEnvironment": "http://localhost/wp-content/themes/LeaDev_Template/js/lib/threejs/environments/RoomEnvironment.js"
+    "three/controls/OrbitControls": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/controls/OrbitControls.js",
+    "three/loaders/DRACOLoader": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/loaders/DRACOLoader.js",
+    "three/loaders/GLTFLoader": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/loaders/GLTFLoader.js",
+    "three/postprocessing/EffectComposer": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/EffectComposer.js",
+    "three/postprocessing/UnrealBloomPass": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/UnrealBloomPass.js",
+    "three/postprocessing/RenderPass": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/RenderPass.js",
+    "three/postprocessing/ShaderPass": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/postprocessing/ShaderPass.js",
+    "three/shaders/GammaCorrectionShader": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/shaders/GammaCorrectionShader.js",
+    "three/shaders/RGBShiftShader": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/shaders/RGBShiftShader.js",
+    "three/shaders/FXAAShader": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/shaders/FXAAShader.js",
+    "three/environment/RoomEnvironment": "https://leainnova.com/wp-content/themes/LeaDev_Template/js/lib/threejs/environments/RoomEnvironment.js"
   }
 }
