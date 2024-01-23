@@ -43,6 +43,9 @@
   </head>
 
   <body>
+    <script>
+      (function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+    </script>
     <header>
       <div class="lock__ui">
         <a class="logo" href="<?php echo get_home_url(); ?>">
