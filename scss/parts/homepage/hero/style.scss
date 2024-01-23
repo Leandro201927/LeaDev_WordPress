@@ -155,13 +155,13 @@ section.part-homepage-hero {
             }
           }
           div.illustration {
-            max-width: 60px;
+            min-width: 55px;
             height: auto;
             @media screen and (max-width: 1366px) {
-              max-width: 50px;
+              min-width: 50px;
             }
             @media screen and (max-width: 425px) {
-              max-width: 43px;
+              min-width: 43px;
             }
             img {
               width: 100%;

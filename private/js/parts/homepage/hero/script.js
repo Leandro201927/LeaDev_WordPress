@@ -481,9 +481,9 @@ registerComponent(async () => {
     // Scene
     const scene = new THREE.Scene()
 
-    const baseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/delivery_machine_4k_baked.jpg`)
+    const baseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/delivery-machine-4k-baked-ultra-compress.webp`)
     increaseLoaderProgress()
-    const crateBaseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/crate_baked.jpg`)
+    const crateBaseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/crate_baked.webp`)
     increaseLoaderProgress()
 
     const crateBakedMaterial = new THREE.MeshBasicMaterial({
@@ -1392,7 +1392,7 @@ registerComponent(async () => {
     }
 
     function preLoadResources() {
-      const bakedMap = textureLoader.load(`${templateUrl}/assets/3d/homepage/laptop_4k_baked.jpg`, () => {
+      const bakedMap = textureLoader.load(`${templateUrl}/assets/3d/homepage/laptop_4k_baked.webp`, () => {
         bakedMap.flipY = false
         bakedMap.colorSpace = THREE.SRGBColorSpace
       })

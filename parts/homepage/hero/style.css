@@ -122,14 +122,14 @@ section.part-homepage-hero {
             section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container:not(.open) div.illustration img {
               margin: auto; } }
           section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container div.illustration {
-            max-width: 60px;
+            min-width: 55px;
             height: auto; }
             @media screen and (max-width: 1366px) {
               section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container div.illustration {
-                max-width: 50px; } }
+                min-width: 50px; } }
             @media screen and (max-width: 425px) {
               section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container div.illustration {
-                max-width: 43px; } }
+                min-width: 43px; } }
             section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container div.illustration img {
               width: 100%; }
           section.part-homepage-hero div.lock__ui .left .slider-container .accordion-container .accordion-info {

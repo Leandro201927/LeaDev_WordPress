@@ -49,7 +49,7 @@
             <div class="accordions-supercontainer">
               <div class="accordion-container open animate vertical-fade-reveal">
                 <div class="illustration">
-                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/www_internet-removebg-preview.png" alt="">
+                  <img class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/www_internet-removebg-preview.webp" alt="">
                 </div>
                 <div class="accordion-info">
                   <div class="summary">
@@ -85,7 +85,7 @@
               </div>
               <div class="accordion-container animate vertical-fade-reveal">
                 <div class="illustration">
-                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/ai_bot-removebg-preview.png" alt="">
+                  <img class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/ai_bot-removebg-preview.webp" alt="">
                 </div>
                 <div class="accordion-info">
                   <div class="summary">
@@ -118,7 +118,7 @@
               </div>
               <div class="accordion-container animate vertical-fade-reveal">
                 <div class="illustration">
-                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/megaphone-removebg-preview.png" alt="">
+                  <img class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/megaphone-removebg-preview.webp" alt="">
                 </div>
                 <div class="accordion-info">
                   <div class="summary">
@@ -158,7 +158,7 @@
             <div class="slider-image-supercontainer animate vertical-fade-reveal">
               <div class="slider-image-container slider-image-container-1 movier show">
                 <div class="image-container">
-                  <img src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.jpg" alt="">
+                  <img class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.jpg" alt="">
                 </div>
                 <div class="title-content">
                   <p>
@@ -177,7 +177,7 @@
               </div>
               <div class="slider-image-container slider-image-container-2 cproc">
                 <div class="image-container">
-                  <img id="cproc-img" src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.jpg" alt="">
+                  <img id="cproc-img" class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.jpg" alt="">
                 </div>
                 <div class="title-content">
                   <p>
