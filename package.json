@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run compile",
     "watcher": "node private/browser-sync.js",
+    "build-lib:js": "npx rollup --config private/js-lib_rollup.config.js",
+    "compile:js": "npx rollup --config private/js_rollup.config.js -w",
     "compile:sass": "node-sass --watch scss/main.scss style.css",
     "compile:parts": "node private/compile-parts.js --watch",
     "compile": "run-p -l compile:parts compile:sass watcher",
@@ -16,7 +19,13 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.23.6",
-    "node-sass": "^9.0.0"
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "node-sass": "^9.0.0",
+    "rollup": "^4.9.6",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-import-map": "^3.0.0",
+    "rollup-plugin-multi-input": "^1.4.1",
+    "rollup-terser": "^1.0.3"
   },
   "dependencies": {
     "browser-sync": "^2.29.3",

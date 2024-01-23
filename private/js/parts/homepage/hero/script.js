@@ -13,7 +13,7 @@
 // import * as TWEEN from 'tween';
 
 import * as THREE from 'three';
-import * as dat from 'lil-gui'
+// import * as dat from 'lil-gui'
 import { GLTFLoader } from 'three/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/loaders/DRACOLoader';
 import { EffectComposer } from 'three/postprocessing/EffectComposer';
@@ -23,7 +23,7 @@ import { ShaderPass } from 'three/postprocessing/ShaderPass';
 import { GammaCorrectionShader } from 'three/shaders/GammaCorrectionShader';
 import { RGBShiftShader } from 'three/shaders/RGBShiftShader';
 import { FXAAShader } from 'three/shaders/FXAAShader';
-import { OrbitControls } from 'three/controls/OrbitControls';
+// import { OrbitControls } from 'three/controls/OrbitControls';
 import { RoomEnvironment } from 'three/environment/RoomEnvironment';
 import * as TWEEN from 'tween';
 
@@ -923,7 +923,7 @@ registerComponent(async () => {
        * Setup de controlador de animaciones
        */
       mixer = new THREE.AnimationMixer(gltfModel.scene);
-      mixer.timeScale = 1
+      mixer.timeScale = 1.25
       // Setup panel solar
       // spawnFactoryAnimations
       // 
