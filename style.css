@@ -626,6 +626,9 @@ div.background-loader {
       animation: penrose-loading 2s ease-in-out 0s infinite;
       width: 250px;
       height: auto; }
+    div.background-loader div.penrose-loader p#progress-label-loaderscreen {
+      text-align: center;
+      font-weight: 100; }
 
 .slider-container {
   display: flex;

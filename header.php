@@ -34,6 +34,12 @@
 
       gtag('config', 'G-VCBX0R523F');
     </script>
+
+    <!-- Sentry -->
+    <script
+      src="https://js.sentry-cdn.com/386c449fa536da74be96624722af5b42.min.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>

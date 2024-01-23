@@ -53,7 +53,7 @@ function renderLoaderScreen(canvas, position) {
             </filter>
           </defs>
         </svg>
-
+        <div> <p id="progress-label-loaderscreen">Cargando entorno 3D: 0%</p> </div>
       </div>
     </div>`;
 
@@ -67,6 +67,10 @@ function renderLoaderScreen(canvas, position) {
       isOpened = false
       const loaderElement = document.getElementById("loaderElement3d")
       loaderElement.style.display = "none"
+    },
+    updateProgress: function(progress) {
+      const progressLabelElement = document.getElementById("progress-label-loaderscreen")
+      progressLabelElement.innerText = `Cargando entorno 3D: ${progress}%`
     },
     changeLoaderLabelState: (state) => {
       

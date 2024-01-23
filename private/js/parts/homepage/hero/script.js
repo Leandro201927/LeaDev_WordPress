@@ -1,17 +1,8 @@
-// import * as THREE from 'three';
-// import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
-// import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
-// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-// import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
-// import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader';
-// import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader';
-// import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-// import * as TWEEN from 'tween';
-
+/**
+ * @warning estos imports se transpilarán al rollup-importmap-3d.json,
+ * si se desea modificar alguna ruta, modificarla allá y ejecutar el
+ * rollup para actualizar el transpilado.
+ */
 import * as THREE from 'three';
 // import * as dat from 'lil-gui'
 import { GLTFLoader } from 'three/loaders/GLTFLoader';
@@ -55,6 +46,7 @@ registerComponent(async () => {
   const sliderImageController = new SliderImageController(sliderImageElement)
   const clock = new THREE.Clock()
   const lookAt = new THREE.Vector3();
+  let progress = 1, totalProgress = 6
   
   /**
    * Screen
@@ -67,7 +59,7 @@ registerComponent(async () => {
     else return 'mobile';
   }
   let actualScreenSize = getActualScreenSize()
-  console.log('actualscrensize', actualScreenSize)
+  // console.log('actualscrensize', actualScreenSize)
 
   let activeScene = 1
   /**
@@ -468,6 +460,12 @@ registerComponent(async () => {
     });
   };
 
+  const increaseLoaderProgress = () => {
+    progress += 1;
+    let progressPercentage = Math.round((progress / totalProgress) * 100)
+    loaderHandler.updateProgress(progressPercentage)
+  }
+
   /**
    * 
    * @param {() => void} preLoadScene2Resources preload 2nd scene resources 
@@ -475,18 +473,18 @@ registerComponent(async () => {
    */
   let envMap;
   let envMap2;
-  let envMapWhite;
+  // let envMapWhite;
   async function loadScene1(preLoadScene2Resources) {
     let gltfModel, penroseTriangleMesh = []
     let mixer
-    let splinePointsLength = 4, positions = [];
-    let scene2Loaded = false
 
     // Scene
     const scene = new THREE.Scene()
 
     const baseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/delivery_machine_4k_baked.jpg`)
+    increaseLoaderProgress()
     const crateBaseColorMap = await loadTexture(`${templateUrl}/assets/3d/homepage/crate_baked.jpg`)
+    increaseLoaderProgress()
 
     const crateBakedMaterial = new THREE.MeshBasicMaterial({
       map: crateBaseColorMap,
@@ -498,11 +496,11 @@ registerComponent(async () => {
     /**
      * Environment
      */
-    // envMap = await loadTexture(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`)
     textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`, function (texture) {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       texture.colorSpace = THREE.SRGBColorSpace;
       envMap2 = texture;
+      increaseLoaderProgress()
     })
     envMap = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
@@ -510,7 +508,8 @@ registerComponent(async () => {
     const solidColorTexture = textureLoader.load(`${templateUrl}/assets/3d/homepage/white.png`, (texture) => {
       baseColorMap.flipY = false
       baseColorMap.colorSpace = THREE.SRGBColorSpace
-      envMapWhite = texture
+      increaseLoaderProgress()
+      // envMapWhite = texture
     })
     const penroseBaseMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -790,6 +789,8 @@ registerComponent(async () => {
           scene.add(gltf.scene)
         })
     }).then(() => {
+      increaseLoaderProgress()
+
       /**
        * Scene 2 preload
        * (load scehe2 resources in parallel)
@@ -889,6 +890,9 @@ registerComponent(async () => {
         }, 1000)
       }; beginLogoHide()
   
+      /**
+       * Transicion loader -> canvas scene1
+       */
       const loaderElement = loaderHandler.getLoaderParentElement()
       new TWEEN.Tween(loaderElement.style)
       .to({ opacity: 0 }, 500)
