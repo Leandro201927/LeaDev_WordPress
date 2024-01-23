@@ -26,9 +26,10 @@ try {
 			mainScript.type = 'module'
 			// mainScript.src = `${templateUrl}/js/parts/${componentName}/script.js?key=${uniqueId}&templateUrl=${templateUrl}`;
 			mainScript.src = `${templateUrl}/js/parts/${componentName}/script.min.js?key=${uniqueId}&templateUrl=${templateUrl}`;
+			mainScript.id = `test-melo`;
 			document.body.appendChild(mainScript);
 	
-			loaderHandler.updateProgress('llegue 000')
+			loaderHandler.updateProgress(`llegue ${document.getElementById('test-melo').src}`)
 		}
 	
 		const script3 = document.createElement('script');
