@@ -11,12 +11,12 @@
 
     <!-- Script y Style globales -->
     <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet"/>
-    <script src="<?php bloginfo('template_url'); ?>/not-compilable-js/global-utils.js"></script>
+    <script src="<?php bloginfo('template_url'); ?>/js/global-utils.js"></script>
 
     <!-- Script de librerías -->
     <?php
       if(is_page('blogs')) { ?>
-        <script src="<?php bloginfo('template_url'); ?>/not-compilable-js/lib/axios.min.js"></script>
+        <script src="<?php bloginfo('template_url'); ?>/js/lib/axios.min.js"></script>
       <?php
       }
     ?>

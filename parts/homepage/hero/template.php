@@ -209,6 +209,6 @@
 </section>
 <!-- < Script > -->
 <!-- <script type="module" src="<?php bloginfo('template_url'); ?>/js/3d/performance-monitor.js"></script> -->
-<script src="<?php bloginfo('template_url'); ?>/not-compilable-js/controllers/accordion-controller.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/not-compilable-js/controllers/slider-controller.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/not-compilable-js/3d/loader-handler.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/controllers/accordion-controller.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/controllers/slider-controller.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/3d/loader-handler.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>

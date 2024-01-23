@@ -3,16 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run compile",
     "watcher": "node private/browser-sync.js",
-    "build-lib:js": "npx rollup --config private/js-lib_rollup.config.js",
-    "compile:js": "npx rollup --config private/js_rollup.config.js -w",
+    "compile:js": "npx rollup --config private/js_rollup.config.mjs -w",
     "compile:sass": "node-sass --watch scss/main.scss style.css",
     "compile:parts": "node private/compile-parts.js --watch",
-    "compile": "run-p -l compile:parts compile:sass watcher",
+    "compile": "run-p -l compile:parts compile:sass watcher compile:js",
     "create": "node private/create-part.js"
   },
   "author": "",
