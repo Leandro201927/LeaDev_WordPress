@@ -26,6 +26,8 @@ registerComponent(() => {
 		// mainScript.src = `${templateUrl}/js/parts/${componentName}/script.js?key=${uniqueId}&templateUrl=${templateUrl}`;
 		mainScript.src = `${templateUrl}/js/parts/${componentName}/script.min.js?key=${uniqueId}&templateUrl=${templateUrl}`;
 		document.body.appendChild(mainScript);
+
+		loaderHandler.updateProgress('llegue 000')
   }
 
 	const script3 = document.createElement('script');
