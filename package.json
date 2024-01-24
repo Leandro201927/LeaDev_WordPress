@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env NODE_ENV=production webpack --watch",
     "start": "npm run compile",
     "watcher": "node private/browser-sync.js",
-    "compile:js": "npx rollup --config private/js_rollup.config.mjs -w",
+    "compile:js": "cross-env NODE_ENV=development webpack --watch",
     "compile:sass": "node-sass --watch scss/main.scss style.css",
     "compile:parts": "node private/compile-parts.js --watch",
     "compile": "run-p -l compile:parts compile:sass watcher compile:js",
@@ -17,13 +17,8 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.23.6",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "cross-env": "^7.0.3",
     "node-sass": "^9.0.0",
-    "rollup": "^4.9.6",
-    "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-import-map": "^3.0.0",
-    "rollup-plugin-multi-input": "^1.4.1",
-    "rollup-terser": "^1.0.3",
     "terser-webpack-plugin": "^5.3.10",
     "webpack-bundle-analyzer": "^4.10.1",
     "webpack-cli": "^5.1.4"

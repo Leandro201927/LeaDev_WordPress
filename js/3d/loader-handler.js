@@ -24,10 +24,8 @@ registerComponent(() => {
 		const mainScript = document.createElement('script');
 		// mainScript.type = 'module'
 		// mainScript.src = `${templateUrl}/js/parts/${componentName}/script.js?key=${uniqueId}&templateUrl=${templateUrl}`;
-		mainScript.src = `${templateUrl}/js/parts/${componentName}/script_wbpck.min.js?key=${uniqueId}&templateUrl=${templateUrl}`;
+		mainScript.src = `${templateUrl}/js/parts/${componentName}/script.min.js?key=${uniqueId}&templateUrl=${templateUrl}`;
 		document.body.appendChild(mainScript);
-
-		loaderHandler.updateProgress(`llegue ${document.getElementById('test-melo').src}`)
 	}
 
 	// const script3 = document.createElement('script');
