@@ -52,6 +52,7 @@ try {
       else return 'mobile';
     }
     let actualScreenSize = getActualScreenSize()
+    let test;
     // console.log('actualscrensize', actualScreenSize)
 
     const increaseLoaderProgress = () => {
