@@ -53,7 +53,6 @@ try {
     }
     let actualScreenSize = getActualScreenSize()
     // console.log('actualscrensize', actualScreenSize)
-    loaderHandler.updateProgress('a vestrus')
 
     const increaseLoaderProgress = () => {
       progress += 1;
@@ -426,8 +425,6 @@ try {
     renderer.toneMapping = THREE.LinearToneMapping
     renderer.toneMappingExposure = 1.04
   
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(window.devicePixelRatio); // Limit DPR to a maximum of 2
     const pmremGenerator = new THREE.PMREMGenerator( renderer );
   
     /**
@@ -1064,7 +1061,7 @@ try {
       // ---------------------------------------------- Post Processing -------------------------------------------------------
     
       const composer = new EffectComposer(renderer);
-      composer.setPixelRatio( 1 ); // ensure pixel ratio is always 1 for performance reasons
+      composer.setPixelRatio( window.devicePixelRatio ); // ensure pixel ratio is always 1 for performance reasons
     
       // Create RenderPass
       const renderPass = new RenderPass(scene, camera1);
@@ -1600,7 +1597,7 @@ try {
       
         composer = new EffectComposer(renderer);
         composer.setSize(sizes.width, sizes.height)
-        composer.setPixelRatio( 1 ); // ensure pixel ratio is always 1 for performance reasons
+        composer.setPixelRatio( window.devicePixelRatio ); // ensure pixel ratio is always 1 for performance reasons
       
         // Create RenderPass
         const renderPass = new RenderPass(scene, camera2);
