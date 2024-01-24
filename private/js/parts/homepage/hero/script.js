@@ -488,7 +488,7 @@ try {
       /**
        * Environment
        */
-      textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.jpg`, function (texture) {
+      textureLoader.load(`${templateUrl}/assets/3d/homepage/kloppenheim_02_4k.webp`, function (texture) {
         texture.mapping = THREE.EquirectangularReflectionMapping;
         texture.colorSpace = THREE.SRGBColorSpace;
         envMap2 = texture;

@@ -6,4 +6,9 @@
   define('WP_DEBUG', false);
   define('WP_DEBUG_LOG', true);
   define('WP_DEBUG_DISPLAY', false);
+
+  function remove_block_css() {
+    wp_dequeue_style( 'wp-block-library' );
+  }
+  add_action( 'wp_enqueue_scripts', 'remove_block_css', 100 );
 ?>

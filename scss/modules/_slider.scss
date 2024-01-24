@@ -1,4 +1,4 @@
-$container-height: 330px;
+$container-height: 335px;
 
 .slider-container {
   display: flex;
@@ -60,9 +60,11 @@ $container-height: 330px;
       /* Hace que el color de relleno del texto sea transparente para que se vea el gradiente */
       -webkit-text-fill-color: transparent;
     }
-    span#scroll-down-arrow {
-      transform: rotate(-90deg);
+    #scroll-down-arrow {
+      transform: rotate(90deg);
       font-size: 12px;
+      align-self: center;
+      margin-top: 28px;
     }
   }
   .slider-sections {

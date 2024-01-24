@@ -18,9 +18,9 @@
             <div class="line-current-active-track"></div>
           </div>
           <p class="scroll-label">Scroll</p>
-          <span id="scroll-down-arrow" class="material-symbols-outlined">
-            arrow_back_ios
-          </span>
+          <svg id="scroll-down-arrow" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L6.35101 6.35101L1 11.702" stroke="white" stroke-width="1.34154"></path>
+          </svg>
         </div>
         <div class="slider-sections">
           <div class="slide slide-0">
