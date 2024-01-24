@@ -3,20 +3,33 @@
  * si se desea modificar alguna ruta, modificarla allá y ejecutar el
  * rollup para actualizar el transpilado.
  */
-import * as THREE from 'three';
-// import * as dat from 'lil-gui'
-import { GLTFLoader } from 'three/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/loaders/DRACOLoader';
-import { EffectComposer } from 'three/postprocessing/EffectComposer';
-import { RenderPass } from 'three/postprocessing/RenderPass';
-import { UnrealBloomPass } from 'three/postprocessing/UnrealBloomPass';
-import { ShaderPass } from 'three/postprocessing/ShaderPass';
-import { GammaCorrectionShader } from 'three/shaders/GammaCorrectionShader';
-import { RGBShiftShader } from 'three/shaders/RGBShiftShader';
-import { FXAAShader } from 'three/shaders/FXAAShader';
-// import { OrbitControls } from 'three/controls/OrbitControls';
-import { RoomEnvironment } from 'three/environment/RoomEnvironment';
-import * as TWEEN from 'tween';
+// import * as THREE from 'three';
+// // import * as dat from 'lil-gui'
+// import { GLTFLoader } from 'three/loaders/GLTFLoader';
+// import { DRACOLoader } from 'three/loaders/DRACOLoader';
+// import { EffectComposer } from 'three/postprocessing/EffectComposer';
+// import { RenderPass } from 'three/postprocessing/RenderPass';
+// import { UnrealBloomPass } from 'three/postprocessing/UnrealBloomPass';
+// import { ShaderPass } from 'three/postprocessing/ShaderPass';
+// import { GammaCorrectionShader } from 'three/shaders/GammaCorrectionShader';
+// import { RGBShiftShader } from 'three/shaders/RGBShiftShader';
+// import { FXAAShader } from 'three/shaders/FXAAShader';
+// // import { OrbitControls } from 'three/controls/OrbitControls';
+// import { RoomEnvironment } from 'three/environment/RoomEnvironment';
+// import * as TWEEN from 'tween';
+
+import * as THREE from 'three'
+import * as TWEEN from '@tweenjs/tween.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
+import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader'
+import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader'
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
 
 loaderHandler.updateProgress('llegue 1')
 
@@ -28,7 +41,7 @@ try {
      * 
      * @description Obtener el ID del key generado desde PHP extrayendo el src="" único de este script invocado.
      */
-    const srcScript = new URL(import.meta.url); // document.currentScript.src equivalent when using module scripts. (<script type="module">)
+    const srcScript = new URL(document.currentScript.src); // import.meta.url equivalent when using module scripts. (<script type="module">)
     const queryParams = new URLSearchParams(srcScript.search);
     const uniqueId = queryParams.get('key');
     const templateUrl = queryParams.get('templateUrl');

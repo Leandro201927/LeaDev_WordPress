@@ -24,6 +24,7 @@ export default {
   output: {
     dir: 'js', // directorio de salida
     format: 'esm',
+    // inlineDynamicImports: true,
     entryFileNames: chunkInfo => chunkInfo.name.replace('private/js/', '') + '.min.js', // nombre del archivo de salida (elimina el prefijo 'private/' de la ruta del archivo de salida)
     chunkFileNames: '[name]-[hash].min.js', // nombre del archivo para chunks (si los hay)
     sourcemap: false,
