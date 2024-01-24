@@ -11,8 +11,6 @@ import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
 
-loaderHandler.updateProgress('llegue 1')
-
 try {
   registerComponent(async () => {
 
@@ -44,8 +42,6 @@ try {
     const lookAt = new THREE.Vector3();
     let progress = 1, totalProgress = 6
 
-    loaderHandler.updateProgress('llegue 2')
-    
     /**
      * Screen
      */
