@@ -11,11 +11,8 @@ import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
 
-console.log('melo socio')
-
 try {
   registerComponent(async () => {
-
     /**
      * 1. Key
      * 
@@ -56,6 +53,7 @@ try {
     }
     let actualScreenSize = getActualScreenSize()
     // console.log('actualscrensize', actualScreenSize)
+    loaderHandler.updateProgress('a vestrus')
 
     const increaseLoaderProgress = () => {
       progress += 1;
