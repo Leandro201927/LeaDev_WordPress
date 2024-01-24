@@ -34,12 +34,6 @@
 
       gtag('config', 'G-VCBX0R523F');
     </script>
-
-    <!-- Sentry -->
-    <script
-      src="https://js.sentry-cdn.com/386c449fa536da74be96624722af5b42.min.js"
-      crossorigin="anonymous"
-    ></script>
   </head>
 
   <body>
@@ -47,6 +41,11 @@
       // Inspect remote devices with Eruda library
       // (function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
     </script>
+    <!-- Sentry -->
+    <script
+      src="https://js.sentry-cdn.com/386c449fa536da74be96624722af5b42.min.js"
+      crossorigin="anonymous"
+    ></script>
     <header>
       <div class="lock__ui">
         <a class="logo" href="<?php echo get_home_url(); ?>">
