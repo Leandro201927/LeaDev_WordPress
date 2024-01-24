@@ -696,7 +696,7 @@ div.background-loader {
         bottom: 0px;
         height: 50%;
         min-height: 380px;
-        align-self: end; } }
+        align-self: flex-end; } }
     .slider-container .slider-sections .slide {
       flex-direction: column; }
     .slider-container .slider-sections .slide:not(.show) {

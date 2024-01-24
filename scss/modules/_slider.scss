@@ -79,7 +79,7 @@ $container-height: 330px;
       bottom: 0px;
       height: 50%;
       min-height: 380px;
-      align-self: end;
+      align-self: flex-end; // DO NOT USE 'end' due some Safari devices compatibility.
       // min-height: max-content;
     }
     .slide {
