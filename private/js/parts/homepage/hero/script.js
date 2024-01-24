@@ -11,6 +11,8 @@ import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
 
+console.log('melo socio')
+
 try {
   registerComponent(async () => {
 
