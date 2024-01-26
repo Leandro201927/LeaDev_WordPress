@@ -158,7 +158,7 @@
             <div class="slider-image-supercontainer animate vertical-fade-reveal">
               <div class="slider-image-container slider-image-container-1 movier show">
                 <div class="image-container">
-                  <img class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.jpg" alt="">
+                  <img class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/movier-instalaciones-home.webp" alt="">
                 </div>
                 <div class="title-content">
                   <p>
@@ -177,7 +177,7 @@
               </div>
               <div class="slider-image-container slider-image-container-2 cproc">
                 <div class="image-container">
-                  <img id="cproc-img" class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.jpg" alt="">
+                  <img id="cproc-img" class="lazy" data-src="<?php bloginfo('template_url'); ?>/assets/img/homepage/cproc-dashboard.webp" alt="">
                 </div>
                 <div class="title-content">
                   <p>
@@ -209,6 +209,6 @@
 </section>
 <!-- < Script > -->
 <!-- <script type="module" src="<?php bloginfo('template_url'); ?>/js/3d/performance-monitor.js"></script> -->
-<script src="<?php bloginfo('template_url'); ?>/js/controllers/accordion-controller.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/controllers/slider-controller.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/3d/loader-handler.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>
+<!-- <script src="<?php bloginfo('template_url'); ?>/js/controllers/accordion-controller.js"></script> -->
+<!-- <script src="<?php bloginfo('template_url'); ?>/js/controllers/slider-controller.js"></script> -->
+<script src="<?php bloginfo('template_url'); ?>/js/parts/homepage/hero/script.min.js?key=<?php echo $component_key; ?>&model3d=homepage&templateUrl=<?php bloginfo('template_url');?>&componentName=homepage/hero"></script>

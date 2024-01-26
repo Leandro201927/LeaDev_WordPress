@@ -6,7 +6,7 @@
  * @class AccordionController
  * @typedef {AccordionController}
  */
-class AccordionController {
+export class AccordionController {
   
   /**
    * Creates an instance of AccordionController.

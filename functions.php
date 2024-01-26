@@ -11,4 +11,10 @@
     wp_dequeue_style( 'wp-block-library' );
   }
   add_action( 'wp_enqueue_scripts', 'remove_block_css', 100 );
+
+  // if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+  //   ob_start("ob_gzhandler");
+  // } else {
+  //   ob_start();
+  // }
 ?>

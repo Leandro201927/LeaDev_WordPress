@@ -8,7 +8,7 @@
 
     <!-- Script y Style globales -->
     <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet"/>
-    <script src="<?php bloginfo('template_url'); ?>/js/global-utils.js"></script>
+    <script src="<?php bloginfo('template_url'); ?>/js/index.min.js"></script>
 
     <!-- Script de librerías -->
     <?php
@@ -47,7 +47,7 @@
     ></script> -->
     <header>
       <div class="lock__ui">
-        <a class="logo" href="<?php echo get_home_url(); ?>">
+        <a class="logo" href="<?php echo get_home_url(); ?>" aria-label="Ir al inicio de LeaInnova">
           <svg width="369" height="49" viewBox="0 0 369 49" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M109.859 0L108.852 1.74256L106.548 5.75044L106.219 6.33129L106.548 6.91215L122.502 34.5414H107.846H107.168L106.839 35.1222L104.535 39.1495L103.528 40.8727H105.522L131.467 40.892L133.461 40.8727L132.454 39.1301L110.866 1.74256L109.859 0ZM105.58 7.41555L104.573 9.15811L82.9851 46.565L81.9783 48.2882H83.9919H88.6194H89.297L89.6262 47.7074L105.58 20.0781L112.918 32.7601L113.228 33.3409H113.906H118.533H120.547L119.54 31.6177L106.587 9.15811L105.58 7.41555ZM105.503 22.3628L104.515 24.1054L91.543 46.5456L90.5362 48.2882H92.5498H135.746H137.74L136.733 46.5456L134.429 42.5378L134.081 41.9569H133.422H101.514L108.833 29.275L109.162 28.6941L108.833 28.1133L106.51 24.1054L105.503 22.3628Z" fill="url(#paint0_linear_448_30)"/>
             <path d="M35.5324 37.098V48H0V0H11.714V37.098H35.5324ZM41.4675 0H77V10.902H53.1815V18.5882H72.3144V29.4902H53.1815V37.098H77V48H41.4675V0Z" fill="white"/>

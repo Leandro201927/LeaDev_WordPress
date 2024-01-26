@@ -5,7 +5,7 @@
  * @class SliderController
  * @typedef {SliderController}
  */
-class SliderController {
+export class SliderController {
   
   /**
    * Creates an instance of SliderController.
@@ -224,7 +224,7 @@ class SliderController {
  * @class SliderImageController
  * @typedef {SliderImageController}
  */
-class SliderImageController {
+export class SliderImageController {
   constructor(sliderElement) {
     this.sliderElement = sliderElement;
     this.nextButton = sliderElement.querySelector('button.next');
@@ -315,5 +315,3 @@ class SliderImageController {
     }
   }
 }
-
-

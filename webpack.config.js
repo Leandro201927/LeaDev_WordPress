@@ -9,7 +9,7 @@ module.exports = {
   mode: mode,
 
   // Puntos de entrada de tu aplicación
-  entry: glob.sync('./private/js/parts/**/*.js').reduce((entries, filePath) => {
+  entry: glob.sync('./private/js/**/*.js').reduce((entries, filePath) => {
     // Utiliza el nombre del archivo relativo como clave
     const newFilePath = filePath.replace('./private/js/', '');  
     entries[newFilePath] = filePath;
