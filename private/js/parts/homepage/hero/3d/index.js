@@ -82,7 +82,7 @@ export default async function Homepage3DScript() {
           y: 13.16525993347168,
           z: 13.140523910522461
         },
-        frustrumSizeCamera: 6, // @TODO
+        frustrumSizeCamera: 5.99,
       },
       desktopM : {
         position: {

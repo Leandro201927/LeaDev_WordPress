@@ -32,13 +32,13 @@
                 <span> Transforma tu </span>
               </span>
               <span class="animate vertical-reveal">
-                <span> presencia en línea </span>
+                <span> <span class="gradient-green-blue"> presencia </span> en línea </span>
               </span>
             </h1>
             <p class="description animate vertical-fade-reveal">
               Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
             </p>
-            <button class="fill primary animate vertical-fade-reveal">
+            <button class="fill primary animate vertical-fade-reveal" id="dialog-form-hubspot-trigger">
               Contáctanos
             </button>
           </div>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="title-subcontainer">
                           <h4 class="title">
-                            Páginas web en 3D
+                            Páginas web en <span class="green"> 3D </span>
                           </h4>
                           <div class="arrow-container">
                           <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,12 +73,12 @@
                       <p>
                         Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
                       </p>
-                      <button class="fill primary">
+                      <button class="fill primary" id="dialog-form-hubspot-trigger">
                         Solicitar servicio
                       </button>
-                      <button class="fill blank">
+                      <!-- <button class="fill blank">
                         Ver más
-                      </button>
+                      </button> -->
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="title-subcontainer">
                           <h4 class="title">
-                            Inteligencia artificial para marketing
+                          <span class="green"> Inteligencia artificial </span> para marketing
                           </h4>
                           <div class="arrow-container">
                           <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,9 +107,9 @@
                     </div>
                     <div class="complete">
                       <p>
-                        Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                        Podrás <span class="green"> reinventar tus estrategias </span> de marketing gracias a la potencia de la inteligencia artificial. Prepárate para una revolución en la forma en que te conectas con tu audiencia.
                       </p>
-                      <button class="fill primary">
+                      <button class="fill blank" id="dialog-form-underconstruction-trigger">
                         Notificarme
                       </button>
                     </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="title-subcontainer">
                           <h4 class="title">
-                            Automatizacion de redes sociales y contenido
+                          <span class="green"> Automatizacion </span> de redes sociales y contenido
                           </h4>
                           <div class="arrow-container">
                           <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,9 +140,9 @@
                     </div>
                     <div class="complete">
                       <p>
-                        Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                        Podrás simplificar tu vida digital con nuestra automatización de redes sociales y contenido. <span class="green"> Libera tiempo mientras mantenemos tu presencia online </span> dinámica y relevante.
                       </p>
-                      <button class="fill primary">
+                      <button class="fill blank" id="dialog-form-underconstruction-trigger">
                         Notificarme
                       </button>
                     </div>

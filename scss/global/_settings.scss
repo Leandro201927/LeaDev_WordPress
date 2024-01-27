@@ -7,6 +7,11 @@
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: 0;
+  /**
+   * @see https://stackoverflow.com/questions/25798357/using-translatey-on-thead-and-tbody-messes-up-z-index
+   * Fix z-fighting between z-index+fixed+translate vs z-index+fixed+non-translate
+   */
+  // transform-style: preserve-3d;
 }
 
 html {

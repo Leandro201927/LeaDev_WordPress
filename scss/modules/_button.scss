@@ -52,7 +52,7 @@ a.disabled, button.disabled {
   );
   @include button($options);
 }
-a.fill.primary, button.fill.primary {
+a.fill.primary, button.fill.primary, input[type=submit].fill.primary {
   position: relative;
   $options: (
     'type': 'fill',

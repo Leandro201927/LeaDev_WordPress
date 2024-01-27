@@ -13,7 +13,7 @@
     <!-- Script de librerías -->
     <?php
       if(is_page('blogs')) { ?>
-        <script src="<?php bloginfo('template_url'); ?>/js/lib/axios.min.js"></script>
+        <!-- <script src="<?php bloginfo('template_url'); ?>/js/lib/axios.min.js"></script> -->
       <?php
       }
     ?>
@@ -36,6 +36,31 @@
   </head>
 
   <body>
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdI3VwpAAAAACB6gDxDmPzz8SHlQA8tO5soMHwf"></script>
+    <style>
+      .grecaptcha-badge { 
+        visibility: hidden; 
+      }
+    </style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+      ym(96248819, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96248819" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <script>
       // Inspect remote devices with Eruda library
       // (function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
@@ -68,13 +93,13 @@
         <div class="nav-supercontainer">
           <nav class="nav-container">
             <ul>
-              <li><a href="#">Inicio</a></li>
-              <li><a href="#">Servicios</a></li> 
-              <li><a href="#">Acerca de</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="#" rel="nofollow">Inicio</a></li>
+              <li><a href="#" rel="nofollow">Servicios</a></li> 
+              <li><a href="#" rel="nofollow">Acerca de</a></li>
+              <li><a href="#" rel="nofollow">Blog</a></li>
             </ul>
           </nav>
-          <button class="fill primary">
+          <button class="fill primary" id="dialog-form-hubspot-trigger">
             Contáctanos
           </button>
         </div>

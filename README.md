@@ -55,6 +55,7 @@ registerComponent(() => {
   AddOutputFilterByType DEFLATE font/ttf
   AddOutputFilterByType DEFLATE image/svg+xml
   AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE image/webp
   AddOutputFilterByType DEFLATE text/css
   AddOutputFilterByType DEFLATE text/html
   AddOutputFilterByType DEFLATE text/javascript

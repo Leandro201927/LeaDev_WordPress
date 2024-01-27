@@ -67,6 +67,11 @@ span {
   &.green {
     color: var(--main-color);
   }
+  &.gradient-green-blue {
+    background: linear-gradient(90deg, #00FF8F 0%, #00A1FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   &.category{ 
     text-transform: uppercase;
     letter-spacing: 3px;
