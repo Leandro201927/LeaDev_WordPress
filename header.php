@@ -93,10 +93,10 @@
         <div class="nav-supercontainer">
           <nav class="nav-container">
             <ul>
-              <li><a href="#" rel="nofollow">Inicio</a></li>
-              <li><a href="#" rel="nofollow">Servicios</a></li> 
-              <li><a href="#" rel="nofollow">Acerca de</a></li>
-              <li><a href="#" rel="nofollow">Blog</a></li>
+              <li><a href="<?php echo get_home_url(); ?>" aria-label="Inicio de LeaInnova" style="font-weight: 700; color: var(--main-color);">Inicio</a></li>
+              <li><a href="<?php echo get_home_url(); ?>/proximamente" rel="nofollow">Servicios</a></li> 
+              <li><a href="<?php echo get_home_url(); ?>/proximamente" rel="nofollow">Acerca de</a></li>
+              <li><a href="<?php echo get_home_url(); ?>/proximamente" rel="nofollow">Blog</a></li>
             </ul>
           </nav>
           <button class="fill primary" id="dialog-form-hubspot-trigger">

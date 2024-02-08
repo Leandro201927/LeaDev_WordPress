@@ -71,7 +71,7 @@
                     </div>
                     <div class="complete">
                       <p>
-                        Nos destacamos por realizar páginas web en 3D de alta calidad para tu empresa o marca personal. Ac proin neque ut feugiat adipiscing in at ullamcorper integer vivamus alorem tincidunt posuere.
+                      Nos destacamos por realizar páginas web en 3D de alta calidad destacables para los buscadores, para tu empresa o marca personal. <span class="green"> Sé diferente a tu competencia, y escoge 3D. </span> ¡Contáctanos para una cotización gratis!
                       </p>
                       <button class="fill primary" id="dialog-form-hubspot-trigger">
                         Solicitar servicio
@@ -172,7 +172,7 @@
                   </div>
                 </div>
                 <div class="description">
-                <p> Ac proin 2 neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque</span>. </p>
+                <p> Para Movier, desarrollamos una página web innovadora en 3D que destaca por su diseño altamente competitivo y su rendimiento excepcional. Nuestra atención meticulosa a la optimización SEO garantiza una visibilidad óptima en los motores de búsqueda, asegurando que su presencia en línea sea tanto impactante como estratégica. </p>
                 </div>
               </div>
               <div class="slider-image-container slider-image-container-2 cproc">
