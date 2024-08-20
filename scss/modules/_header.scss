@@ -166,13 +166,20 @@ header {
     align-items: center;
     a.logo {
       padding: 20px 0;
-      svg {
+      img {
         width: 230px;
         height: auto;
         @media screen and (max-width: $desktop-extra-small) {
-          width: 170px;
+          width: 150px;
         }
       }
+      // svg {
+      //   width: 230px;
+      //   height: auto;
+      //   @media screen and (max-width: $desktop-extra-small) {
+      //     width: 170px;
+      //   }
+      // }
     }
     @include burger-menu();
     @media screen and (min-width: $desktop-extra-small) {

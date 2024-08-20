@@ -875,12 +875,12 @@ header {
    */ }
     header .lock__ui a.logo {
       padding: 20px 0; }
-      header .lock__ui a.logo svg {
+      header .lock__ui a.logo img {
         width: 230px;
         height: auto; }
         @media screen and (max-width: 1024px) {
-          header .lock__ui a.logo svg {
-            width: 170px; } }
+          header .lock__ui a.logo img {
+            width: 150px; } }
     header .lock__ui input[type=checkbox].menu-btn {
       display: none; }
       header .lock__ui input[type=checkbox].menu-btn:checked ~ div.nav-supercontainer {
