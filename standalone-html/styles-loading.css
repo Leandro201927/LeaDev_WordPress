@@ -1,0 +1,70 @@
+/* Estilos para el loading animation */
+.background-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-bg, #0B0B0C);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.penrose-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.penrose-loader svg {
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+.penrose-loader.left {
+    align-items: flex-start;
+}
+
+.penrose-loader.right {
+    align-items: flex-end;
+}
+
+.penrose-loader.center {
+    align-items: center;
+}
+
+#progress-label-loaderscreen {
+    color: var(--text-color, #FFFFFF);
+    font-family: var(--font-family, 'Inter', sans-serif);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(0.98);
+    }
+}
+
+/* Estilos para lazy loading */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeaDev - Transforma tu presencia en línea</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading animation -->
+    <div class="background-loader" id="loaderElement3d">
+      <div class="penrose-loader center">
+        <svg width="205" height="196" viewBox="0 0 205 196" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d_319_7)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M134.887 114.692L107.746 70H98.091H98.083L119.378 105.527C119.519 105.762 119.523 106.055 119.388 106.295C119.252 106.534 118.998 106.683 118.725 106.683H97.967L93.268 114.693L134.887 114.692Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M135 116.217H124.803H113.363H91.937C91.664 116.217 91.412 116.071 91.277 115.833C91.143 115.601 91.144 115.315 91.274 115.083L91.273 115.08L100.993 97.804L96.761 91.005L94.265 95.31L76.399 126.132H129.977L135 116.217Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M70 115.481L75.112 125.311L96.076 89.141C96.209 88.912 96.453 88.767 96.719 88.761C96.989 88.732 97.234 88.889 97.378 89.112L97.383 89.121L97.397 89.143L107.665 105.157H117.377L96.737 70.722L70 115.481Z" fill="white"/>
+          </g>
+          <defs>
+            <filter id="filter0_d_319_7" x="0.800003" y="0.800003" width="203.4" height="194.532" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset/>
+              <feGaussianBlur stdDeviation="34.6"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_319_7"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_319_7" result="shape"/>
+            </filter>
+          </defs>
+        </svg>
+        <div> <p id="progress-label-loaderscreen">Cargando entorno 3D: 0%</p> </div>
+      </div>
+    </div>
+    <section class="leadev-component-section part-homepage-hero" id="hero-section">
+        <div class="background-gradient-mobile"></div>
+        <canvas id="webgl1" class="webgl"></canvas>
+        <canvas id="webgl2" class="webgl"></canvas>
+        <div class="lock__ui">
+            <div class="left">
+                <div class="slider-container">
+                    <div class="slider-indicator animate horizontal-fade-reveal">
+                        <span id="raw-indicator" class="raw-indicator">01</span>
+                        <div class="line-container">
+                            <div class="track-line"></div>
+                            <div class="line-current-active-track"></div>
+                        </div>
+                        <p class="scroll-label">Scroll</p>
+                        <svg id="scroll-down-arrow" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6.35101 6.35101L1 11.702" stroke="white" stroke-width="1.34154"></path>
+                        </svg>
+                    </div>
+                    <div class="slider-sections">
+                        <div class="slide slide-0">
+                            <span class="category-parent animate vertical-reveal">
+                                <span class="category"> Soluciones Digitales </span>
+                            </span>
+                            <h1>
+                                <span class="animate vertical-reveal">
+                                    <span> Transforma tu </span>
+                                </span>
+                                <span class="animate vertical-reveal">
+                                    <span> <span class="gradient-green-blue"> presencia </span> en línea </span>
+                                </span>
+                            </h1>
+                            <p class="description animate vertical-fade-reveal">
+                                Desde la creación de páginas web especializadas en 3D, hasta la automatización de tu negocio con Inteligencia Artificial, en un sólo lugar.
+                            </p>
+                            <button class="fill primary animate vertical-fade-reveal" id="dialog-form-hubspot-trigger">
+                                Contáctanos
+                            </button>
+                        </div>
+                        <div class="slide slide-1">
+                            <span class="category-parent animate vertical-reveal">
+                                <span class="category"> Servicios </span>
+                            </span>
+                            <div class="accordions-supercontainer">
+                                <div class="accordion-container open animate vertical-fade-reveal">
+                                    <div class="illustration">
+                                        <img class="lazy" data-src="assets/img/homepage/www_internet-removebg-preview.webp" alt="">
+                                    </div>
+                                    <div class="accordion-info">
+                                        <div class="summary">
+                                            <div class="content-title">
+                                                <div class="tag available hide-expanded">
+                                                    <div class="circle-tag"></div>
+                                                    Disponible
+                                                </div>
+                                                <div class="title-subcontainer">
+                                                    <h4 class="title">
+                                                        Páginas web en <span class="green"> 3D </span>
+                                                    </h4>
+                                                    <div class="arrow-container">
+                                                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="complete">
+                                                <p>
+                                                    Nos destacamos por realizar páginas web en 3D de alta calidad destacables para los buscadores, para tu empresa o marca personal. <span class="green"> Sé diferente a tu competencia, y escoge 3D. </span> ¡Contáctanos para una cotización gratis!
+                                                </p>
+                                                <button class="fill primary" id="dialog-form-hubspot-trigger">
+                                                    Solicitar servicio
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-container animate vertical-fade-reveal">
+                                    <div class="illustration">
+                                        <img class="lazy" data-src="assets/img/homepage/ai_bot-removebg-preview.webp" alt="">
+                                    </div>
+                                    <div class="accordion-info">
+                                        <div class="summary">
+                                            <div class="content-title">
+                                                <div class="tag unavailable hide-expanded">
+                                                    <div class="circle-tag"></div>
+                                                    Próximamente
+                                                </div>
+                                                <div class="title-subcontainer">
+                                                    <h4 class="title">
+                                                        <span class="green"> Inteligencia artificial </span> para marketing
+                                                    </h4>
+                                                    <div class="arrow-container">
+                                                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="complete">
+                                                <p>
+                                                    Podrás <span class="green"> reinventar tus estrategias </span> de marketing gracias a la potencia de la inteligencia artificial. Prepárate para una revolución en la forma en que te conectas con tu audiencia.
+                                                </p>
+                                                <button class="fill blank" id="dialog-form-underconstruction-trigger">
+                                                    Notificarme
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-container animate vertical-fade-reveal">
+                                    <div class="illustration">
+                                        <img class="lazy" data-src="assets/img/homepage/megaphone-removebg-preview.webp" alt="">
+                                    </div>
+                                    <div class="accordion-info">
+                                        <div class="summary">
+                                            <div class="content-title">
+                                                <div class="tag unavailable hide-expanded">
+                                                    <div class="circle-tag"></div>
+                                                    Próximamente
+                                                </div>
+                                                <div class="title-subcontainer">
+                                                    <h4 class="title">
+                                                        <span class="green"> Automatizacion </span> de redes sociales y contenido
+                                                    </h4>
+                                                    <div class="arrow-container">
+                                                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M1.58301 1.5L7.99967 8.5L14.4163 1.5" stroke="#01B969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="complete">
+                                                <p>
+                                                    Podrás simplificar tu vida digital con nuestra automatización de redes sociales y contenido. <span class="green"> Libera tiempo mientras mantenemos tu presencia online </span> dinámica y relevante.
+                                                </p>
+                                                <button class="fill blank" id="dialog-form-underconstruction-trigger">
+                                                    Notificarme
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide slide-2">
+                            <span class="category-parent animate vertical-reveal">
+                                <span class="category"> Obras realizadas </span>
+                            </span>
+                            <div class="slider-image-supercontainer animate vertical-fade-reveal">
+                                <div class="slider-image-container slider-image-container-1 movier show">
+                                    <div class="image-container">
+                                        <img class="lazy" data-src="assets/img/homepage/movier-instalaciones-home.webp" alt="">
+                                    </div>
+                                    <div class="title-content">
+                                        <p>
+                                            Movier Instalaciones
+                                        </p>
+                                        <div class="tag fill primary">
+                                            3D
+                                        </div>
+                                        <div class="tag fill primary">
+                                            Automatización
+                                        </div>
+                                    </div>
+                                    <div class="description">
+                                        <p> Para Movier, desarrollamos una página web innovadora en 3D que destaca por su diseño altamente competitivo y su rendimiento excepcional. Nuestra atención meticulosa a la optimización SEO garantiza una visibilidad óptima en los motores de búsqueda, asegurando que su presencia en línea sea tanto impactante como estratégica. </p>
+                                    </div>
+                                </div>
+                                <div class="slider-image-container slider-image-container-2 cproc">
+                                    <div class="image-container">
+                                        <img id="cproc-img" class="lazy" data-src="assets/img/homepage/cproc-dashboard.webp" alt="">
+                                    </div>
+                                    <div class="title-content">
+                                        <p>
+                                            CPROC
+                                        </p>
+                                        <div class="tag fill primary">
+                                            Automatización
+                                        </div>
+                                        <div class="tag fill primary">
+                                            Nativa
+                                        </div>
+                                    </div>
+                                    <div class="description">
+                                        <p> Ac proin 2 neque ut feugiat adipiscing in at ullamcorper integer commodo nisl enim risus mollis mattis nascetur <span class="green"> ornare scelerisque</span>. </p>
+                                    </div>
+                                </div>
+                                <button class="next animate vertical-fade-reveal">
+                                    Siguiente
+                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6.35101 6.35101L1 11.702" stroke="white" stroke-width="1.34154"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.6.4/dist/tween.umd.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
